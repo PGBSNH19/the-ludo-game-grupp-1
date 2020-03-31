@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using EngineClasses;
-using Microsoft.Extensions.Configuration;
 
 namespace Ludo
 {
@@ -10,19 +8,14 @@ namespace Ludo
         static void Main(string[] args)
         {
             GameBoard gameBoard = new GameBoard();
-            int horizontal = gameBoard.Placements.GetUpperBound(0);
-            int vertical = gameBoard.Placements.GetUpperBound(0);
 
-            for (int i = 0; i <= horizontal; i++)
+            for (int i = 0; i < gameBoard.Get; i++)
             {
-                for (int j = 0; j <= vertical; j++)
+                for (int j = 0; j < length; j++)
                 {
-                    string res = gameBoard.Placements[i, j];
-                    Console.Write(res + " ");
+
                 }
-                Console.WriteLine();
             }
-            Console.ReadLine();
         }
     }
 }
