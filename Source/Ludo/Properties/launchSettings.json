@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Ludo": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SettingsEnviroment": "dev"
+      }
+    }
+  }
+}
