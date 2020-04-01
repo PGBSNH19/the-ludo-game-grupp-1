@@ -17,13 +17,29 @@ namespace EngineClasses
             this.GameLog = gameLog;
         }
 
+        public void PlayerSelect(string userName)
+        {
+            Session.CreatePlayer(userName);
+        }
+
+        public Player CurrentPlayerTurn()
+        {
+            return Session.CurrentPlayerTurn();
+        }
+
         public int RollDice()
         {
             int result;
             Random rnd = new Random();
 
-            result = rnd.Next(1, 6);
+            result = rnd.Next(1, 6 + 1);
             return result;
         }
+
+        public void Move(GamePiece gamepiece)
+        {
+
+        }
+
     }
 }

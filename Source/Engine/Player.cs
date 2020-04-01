@@ -12,9 +12,9 @@ namespace EngineClasses
         public int SessionId { get; private set; }
         public Session Session { get; private set; }
 
-        public Player()
+        public Player(string userName)
         {
-
+            this.UserName = userName;
         }
 
         public void AddToDb()

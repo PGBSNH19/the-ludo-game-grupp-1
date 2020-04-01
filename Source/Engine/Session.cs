@@ -16,7 +16,21 @@ namespace EngineClasses
 
         public Session()
         {
+            Player = new List<Player>();
+        }
 
+        public void CreatePlayer(string userName)
+        {
+            Player player = new Player(userName);
+            if (Player.Count < 4)
+            {
+                this.Player.Add(player);
+            }
+        }
+
+        public Player CurrentPlayerTurn()
+        {
+            return Player.ToList()[(Turns % Player.Count) - 1];
         }
 
         public void AddToDb()
