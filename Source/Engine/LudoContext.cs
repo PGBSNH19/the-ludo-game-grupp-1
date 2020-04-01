@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ludo
+namespace EngineClasses
 {
     public class LudoContext : DbContext
     {

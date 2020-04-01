@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Ludo
+namespace EngineClasses
 {
     public static class ConnectionSetup
     {

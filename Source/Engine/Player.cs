@@ -9,5 +9,15 @@ namespace EngineClasses
 
         public int SessionId { get; set; }
         public Session Session { get; set; }
+
+        public void AddPlayerToDb(Player Player)
+        {
+            using (var context = new LudoContext())
+            {
+                context.Player.Add(Player);
+                context.SaveChanges();
+            }
+        }
+
     }
 }
