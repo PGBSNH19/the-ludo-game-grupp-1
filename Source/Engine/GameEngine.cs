@@ -16,5 +16,14 @@ namespace EngineClasses
             this.GameBoard = gameBoard;
             this.GameLog = gameLog;
         }
+
+        public int RollDice()
+        {
+            int result;
+            Random rnd = new Random();
+
+            result = rnd.Next(1, 6);
+            return result;
+        }
     }
 }

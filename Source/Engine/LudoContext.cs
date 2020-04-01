@@ -16,5 +16,7 @@ namespace Ludo
         {
             optionsBuilder.UseSqlServer(ConnectionSetup.GetConnectionString());
         }
+
+
     }
 }
