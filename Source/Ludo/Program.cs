@@ -27,6 +27,14 @@ namespace Ludo
                 Console.WriteLine();
             }
 
+            Session session = new Session();
+            session.CreatePlayer("Mirko");
+            session.CreatePlayer("Aron");
+            session.CreatePlayer("Hampus");
+            session.CreatePlayer("Anas");
+
+            session.AddToDb();
+
 
         }
     }

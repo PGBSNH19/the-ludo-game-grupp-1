@@ -10,16 +10,24 @@ namespace EngineClasses
     public class GamePiece
     {
         [Key]
-        public int GamePieceId { get; private set; }
-        public int PlayerId { get; private set; }
-        public Player Player { get; private set; }
+        public int GamePieceId { get; private set; }        
         public string Color { get; private set; }
         public int YCoord { get; set; }
         public int XCoord { get; set; }
 
+        //Relationships
+        public int PlayerId { get; private set; }
+        public Player Player { get; private set; }
+
         public GamePiece()
         {
 
+        }
+
+        public void UpdatePosition(int x, int y)
+        {
+            this.XCoord = x;
+            this.YCoord = y;
         }
 
         public void AddToDb()

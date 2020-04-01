@@ -36,7 +36,7 @@ namespace EngineClasses
             return result;
         }
 
-        public void Move(GamePiece gamepiece)
+        public void Move(int xCoord, int yCoord)
         {
 
         }

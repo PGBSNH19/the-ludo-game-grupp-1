@@ -10,9 +10,11 @@ namespace EngineClasses
     public class Session
     {
         [Key]
-        public int SessionId { get; private set; }
-        public ICollection<Player> Player { get; private set; }
+        public int SessionId { get; private set; }        
         public int Turns { get; set; }
+
+        //Relationships
+        public ICollection<Player> Player { get; private set; }
 
         public Session()
         {
@@ -32,6 +34,16 @@ namespace EngineClasses
         {
             return Player.ToList()[(Turns % Player.Count) - 1];
         }
+
+        //public GamePiece SelectGamePiece(Player player, int pieceNum)
+        //{
+        //    player.
+        //}
+
+        //public void MoveGamePiece(Player player, int x, int y)
+        //{
+        //    player.UpdateGamePiecePosition(x, y);
+        //}
 
         public void AddToDb()
         {
