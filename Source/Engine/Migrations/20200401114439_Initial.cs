@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Ludo.Migrations
+namespace EngineClasses.Migrations
 {
     public partial class Initial : Migration
     {

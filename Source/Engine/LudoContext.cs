@@ -16,7 +16,5 @@ namespace EngineClasses
         {
             optionsBuilder.UseSqlServer(ConnectionSetup.GetConnectionString());
         }
-
-
     }
 }
