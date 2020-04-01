@@ -9,9 +9,8 @@ namespace EngineClasses
     public class GamePiece
     {
         [Key]
-        public int GamePieceID { get; set; }
-        [ForeignKey("PlayerID")]
-        public int PlayerID { get; set; }
+        public int GamePieceId { get; set; }
+        public int PlayerId { get; set; }
         public Player Player { get; set; }
         public string Color { get; set; }
         public int YCoord { get; set; }

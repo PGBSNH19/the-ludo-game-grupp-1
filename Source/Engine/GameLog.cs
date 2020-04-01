@@ -9,10 +9,8 @@ namespace EngineClasses
     public class GameLog
     {
         [Key]
-        public int GameLogID { get; set; }
-        [ForeignKey("WinnerPlayerID")]
-        public int WinnerPlayerID { get; set; }
-        public Player WinnerPlayer { get; set; }
+        public int GameLogId { get; set; }
+        public string WinnerPlayer{ get; set; }
         public DateTime Created { get; set; }
     }
 }

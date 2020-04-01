@@ -9,10 +9,8 @@ namespace EngineClasses
     public class Session
     {
         [Key]
-        public int SessionID { get; set; }
-        [ForeignKey("TurnPlayerID")]
-        public int TurnPlayerID { get; set; }
-        public Player TurnPlayer { get; set; }
+        public int SessionId { get; set; }
+        public ICollection<Player> Player { get; set; }
         public int Turns { get; set; }
     }
 }

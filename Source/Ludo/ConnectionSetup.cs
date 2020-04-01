@@ -9,7 +9,7 @@ namespace Ludo
     public static class ConnectionSetup
     {
         public static string GetConnectionString()
-        { 
+        {
             var environmentName = Environment.GetEnvironmentVariable("ConfigEnv");
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").AddJsonFile($"appsettings.{environmentName}.json", optional: true);
             var config = builder.Build();
