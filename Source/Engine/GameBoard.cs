@@ -8,7 +8,8 @@ namespace EngineClasses
         public string[,] Placements { get; private set; } = new string[11, 11];
         public Dictionary<string, int> Bases { get; private set; }
         public Dictionary<string, int> Goal { get; private set; }
-
+        public List<GameSquare> StartingSquares { get; set; }
+        public List<GameSquare> BoardRoute { get; set; }
         public GameBoard()
         {
             Placements = new string[,] { 
