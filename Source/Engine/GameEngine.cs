@@ -44,23 +44,23 @@ namespace EngineClasses
 
         public GamePiece SelectGamePiece(Player currentPlayer, int index)
         {
-            return currentPlayer.GamePiece.ToList()[index];
-            
+            return currentPlayer.GamePiece.ToList()[index];            
         }
 
-        public void Move(int xCoord, int yCoord, Player player)
+        public void MoveGamePiece(GamePiece gamePiece, int xCoord, int yCoord)
         {
-            player.UpdateGamePiecePosition(player.GamePiece.Where(p => p.IsAtGoal == false).FirstOrDefault(),xCoord ,yCoord);
+            gamePiece.XCoord = xCoord;
+            gamePiece.YCoord = yCoord;
         }
         
         public void NextTurn(int index)
         {
             Session.Turns++;
-            Session.AddToDb();
+            //Session.AddToDb();
             Player player = CurrentPlayerTurn();
             int dice = RollDice();
             GamePiece piece = SelectGamePiece(player, index);
-            Move(piece.XCoord, dice, player);
+            MoveGamePiece(piece, piece.XCoord, dice);
         }
     }
 }

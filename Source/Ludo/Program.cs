@@ -13,6 +13,7 @@ namespace Ludo
             var myString = ConnectionSetup.GetConnectionString();
             Console.WriteLine(myString);
 
+            
             GameBoard gameBoard = new GameBoard();
             int horizontal = gameBoard.Placements.GetUpperBound(0);
             int vertical = gameBoard.Placements.GetUpperBound(0);
@@ -33,8 +34,9 @@ namespace Ludo
             session.CreatePlayer("Hampus");
             session.CreatePlayer("Anas");
 
-            session.AddToDb();
+            GameEngine gEngine = new GameEngine(session, gameBoard, new GameLog());
 
+            gEngine.NextTurn(1);
 
         }
     }
