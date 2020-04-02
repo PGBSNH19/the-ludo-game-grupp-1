@@ -23,10 +23,19 @@ namespace EngineClasses
 
         public void CreatePlayer(string userName)
         {
-            Player player = new Player(userName);
             if (Player.Count < 4)
             {
+                Player player = new Player(userName);
+                CreateGamePieces(player);
                 this.Player.Add(player);
+            }
+        }
+
+        private void CreateGamePieces(Player player)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                player.GamePiece.Add(new GamePiece(true, false));
             }
         }
 
@@ -34,6 +43,8 @@ namespace EngineClasses
         {
             return Player.ToList()[(Turns % Player.Count) - 1];
         }
+
+
 
         public void AddToDb()
         {

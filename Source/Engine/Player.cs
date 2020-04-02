@@ -22,16 +22,8 @@ namespace EngineClasses
         {
             this.UserName = userName;
             GamePiece = new List<GamePiece>();
-            CreateGamePieces();
         }
 
-        private void CreateGamePieces()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                this.GamePiece.Add(new GamePiece(true, false));
-            }               
-        }
 
         public int RollDice()
         {
