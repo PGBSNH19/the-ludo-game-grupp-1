@@ -35,16 +35,6 @@ namespace EngineClasses
             return Player.ToList()[(Turns % Player.Count) - 1];
         }
 
-        //public GamePiece SelectGamePiece(Player player, int pieceNum)
-        //{
-        //    player.
-        //}
-
-        //public void MoveGamePiece(Player player, int x, int y)
-        //{
-        //    player.UpdateGamePiecePosition(x, y);
-        //}
-
         public void AddToDb()
         {
             using (var context = new LudoContext())

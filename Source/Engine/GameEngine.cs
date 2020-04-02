@@ -42,18 +42,25 @@ namespace EngineClasses
             return result;
         }
 
+        public GamePiece SelectGamePiece(Player currentPlayer, int index)
+        {
+            return currentPlayer.GamePiece.ToList()[index];
+            
+        }
+
         public void Move(int xCoord, int yCoord, Player player)
         {
             player.UpdateGamePiecePosition(player.GamePiece.Where(p => p.IsAtGoal == false).FirstOrDefault(),xCoord ,yCoord);
         }
         
-        public void NextTurn()
+        public void NextTurn(int index)
         {
             Session.Turns++;
             Session.AddToDb();
             Player player = CurrentPlayerTurn();
             int dice = RollDice();
-            Move();
+            GamePiece piece = SelectGamePiece(player, index);
+            Move(piece.XCoord, dice, player);
         }
     }
 }
