@@ -11,10 +11,10 @@ namespace LudoTests
         [TestMethod]
         public void RollDiceTest_RollDiceRandomNumber_ReturnOneToSix()
         {
-            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            Player player = new Player("TestMan");
             int result = 0;
 
-            result = engine.RollDice();
+            result = player.RollDice();
 
             Assert.IsTrue(result > 0 && result < 7);
             Debug.Print(result.ToString());

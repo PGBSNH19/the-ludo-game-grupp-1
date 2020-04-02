@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -32,7 +33,21 @@ namespace EngineClasses
             }               
         }
 
-        public void UpdateGamePiecePosition(GamePiece gamePiece, int x, int y)
+        public int RollDice()
+        {
+            int result;
+            Random rnd = new Random();
+
+            result = rnd.Next(1, 6 + 1);
+            return result;
+        }
+
+        public GamePiece SelectGamePiece(int index)
+        {
+            return GamePiece.ToList()[index];
+        }
+
+        public void MoveGamePiece(GamePiece gamePiece, int x, int y)
         {
             gamePiece.UpdatePosition(x, y);
         }

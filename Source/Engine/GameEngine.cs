@@ -33,19 +33,7 @@ namespace EngineClasses
             return Session.CurrentPlayerTurn();
         }
 
-        public int RollDice()
-        {
-            int result;
-            Random rnd = new Random();
-
-            result = rnd.Next(1, 6 + 1);
-            return result;
-        }
-
-        public GamePiece SelectGamePiece(Player currentPlayer, int index)
-        {
-            return currentPlayer.GamePiece.ToList()[index];            
-        }
+        
 
         public void MoveGamePiece(GamePiece gamePiece, int xCoord, int yCoord)
         {
@@ -58,8 +46,8 @@ namespace EngineClasses
             Session.Turns++;
             //Session.AddToDb();
             Player player = CurrentPlayerTurn();
-            int dice = RollDice();
-            GamePiece piece = SelectGamePiece(player, index);
+            int dice = player.RollDice();
+            GamePiece piece = player.SelectGamePiece(index);
             MoveGamePiece(piece, piece.XCoord, dice);
         }
     }
