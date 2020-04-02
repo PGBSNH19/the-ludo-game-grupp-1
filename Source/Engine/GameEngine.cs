@@ -49,6 +49,13 @@ namespace EngineClasses
             int dice = player.RollDice();
             GamePiece piece = player.SelectGamePiece(index);
             MoveGamePiece(piece, piece.XCoord, dice);
+            
+            if (player.GamePiece.Where(gp => gp.IsAtGoal == true).Count() == 4)
+            {
+                GameLog = new GameLog(player.UserName);
+                GameLog.AddToDb();
+                Environment.Exit(0);
+            }
         }
     }
 }

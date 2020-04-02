@@ -14,6 +14,12 @@ namespace EngineClasses
         public string WinnerPlayer{ get; private set; }
         public DateTime Created { get; private set; }
 
+        public GameLog(string winnerPlayer)
+        {
+            this.WinnerPlayer = winnerPlayer;
+            this.Created = DateTime.UtcNow;
+        }
+
         public GameLog()
         {
 
