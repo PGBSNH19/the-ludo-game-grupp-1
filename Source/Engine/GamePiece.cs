@@ -11,17 +11,19 @@ namespace EngineClasses
     {
         [Key]
         public int GamePieceId { get; private set; }        
-        public string Color { get; private set; }
         public int YCoord { get; set; }
         public int XCoord { get; set; }
+        public bool IsAtBase { get; set; }
+        public bool IsAtGoal { get; set; }
 
         //Relationships
         public int PlayerId { get; private set; }
         public Player Player { get; private set; }
 
-        public GamePiece()
+        public GamePiece(bool isAtBase, bool isAtGoal)
         {
-
+            this.IsAtBase = isAtBase;
+            this.IsAtGoal = isAtGoal;
         }
 
         public void UpdatePosition(int x, int y)

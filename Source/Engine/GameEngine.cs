@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EngineClasses
@@ -17,9 +18,14 @@ namespace EngineClasses
             this.GameLog = gameLog;
         }
 
-        public void PlayerSelect(string userName)
+        public void CreatePlayer(string userName)
         {
             Session.CreatePlayer(userName);
+        }
+
+        public void PlayerSelect()
+        {
+
         }
 
         public Player CurrentPlayerTurn()
@@ -36,10 +42,18 @@ namespace EngineClasses
             return result;
         }
 
-        public void Move(int xCoord, int yCoord)
+        public void Move(int xCoord, int yCoord, Player player)
         {
-
+            player.UpdateGamePiecePosition(player.GamePiece.Where(p => p.IsAtGoal == false).FirstOrDefault(),xCoord ,yCoord);
         }
-
+        
+        public void NextTurn()
+        {
+            Session.Turns++;
+            Session.AddToDb();
+            Player player = CurrentPlayerTurn();
+            int dice = RollDice();
+            Move();
+        }
     }
 }

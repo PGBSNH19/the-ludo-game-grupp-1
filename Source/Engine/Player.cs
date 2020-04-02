@@ -10,6 +10,7 @@ namespace EngineClasses
         [Key]
         public int PlayerId { get; private set; }
         public string UserName { get; private set; }
+        public string Color { get; private set; }
 
         //Relationships
         public int SessionId { get; private set; }
@@ -27,7 +28,7 @@ namespace EngineClasses
         {
             for (int i = 0; i < 4; i++)
             {
-                this.GamePiece.Add(new GamePiece());
+                this.GamePiece.Add(new GamePiece(true, false));
             }               
         }
 
