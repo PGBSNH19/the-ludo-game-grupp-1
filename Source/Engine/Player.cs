@@ -39,9 +39,9 @@ namespace EngineClasses
             return GamePiece.ToList()[index];
         }
 
-        public void MoveGamePiece(GamePiece gamePiece, int x, int y)
+        public void MoveGamePiece(int index, int x, int y)
         {
-            gamePiece.UpdatePosition(x, y);
+            SelectGamePiece(index).UpdatePosition(x, y);
         }
 
         public void AddToDb()

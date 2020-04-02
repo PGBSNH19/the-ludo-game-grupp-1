@@ -23,9 +23,9 @@ namespace EngineClasses
             Session.CreatePlayer(userName);
         }
 
-        public void PlayerSelect()
+        public Player PlayerSelect(int index)
         {
-
+            return Session.Player.ToList()[index];
         }
 
         public Player CurrentPlayerTurn()

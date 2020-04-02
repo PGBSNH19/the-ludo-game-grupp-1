@@ -41,7 +41,7 @@ namespace EngineClasses
 
         public Player CurrentPlayerTurn()
         {
-            return Player.ToList()[(Turns % Player.Count) - 1];
+            return Player.ToList()[(Turns % Player.Count)];
         }
 
 

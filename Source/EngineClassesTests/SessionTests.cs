@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace EngineClassesTests
+namespace EngineClasses.Tests
 {
     [TestClass]
     public class SessionTests
