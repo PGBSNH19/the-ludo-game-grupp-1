@@ -42,11 +42,7 @@ namespace EngineClasses
             }
             else
             {
-<<<<<<< Updated upstream
                 NextTurn(1);
-=======
-                
->>>>>>> Stashed changes
             }
         }
         
