@@ -32,6 +32,17 @@ namespace EngineClasses
         {
 
             return StartingSquares.Where(g => g.Color == gamePiece.Player.Color).FirstOrDefault();
-        } 
+        }
+        
+        public bool ValidateNextSquare(GamePiece gamePiece)
+        {
+            GameSquare gameSquare = BoardRoute.Where(b => b.XCoordinate == gamePiece.XCoord && b.YCoordinate == gamePiece.YCoord).First()
+            if(gameSquare.Color != null)
+            {
+                
+                return 
+            }
+            
+        }
     }
 }
