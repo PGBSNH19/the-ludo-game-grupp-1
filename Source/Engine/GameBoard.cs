@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EngineClasses
 {
@@ -26,5 +27,11 @@ namespace EngineClasses
                 { "x","x","x","x","a","a","a","x","x","x","x"} 
             };
         }
+
+        public GameSquare ValidateStartingSquare(GamePiece gamePiece)
+        {
+
+            return StartingSquares.Where(g => g.Color == gamePiece.Player.Color).FirstOrDefault();
+        } 
     }
 }

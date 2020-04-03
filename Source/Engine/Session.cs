@@ -44,6 +44,10 @@ namespace EngineClasses
             return Player.ToList()[(Turns % Player.Count)];
         }
 
+        public void MoveGamePiece(Player player, GamePiece gamePiece, int xcoord, int ycoord)
+        {
+            //player.MoveGamePiece
+        }
 
 
         public void AddToDb()

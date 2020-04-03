@@ -26,12 +26,6 @@ namespace EngineClasses
             this.IsAtGoal = isAtGoal;
         }
 
-        public void UpdatePosition(int x, int y)
-        {
-            this.XCoord = x;
-            this.YCoord = y;
-        }
-
         public void AddToDb()
         {
             using (var context = new LudoContext())

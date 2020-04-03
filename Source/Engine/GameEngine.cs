@@ -34,11 +34,16 @@ namespace EngineClasses
         }
 
         
-
-        public void MoveGamePiece(GamePiece gamePiece, int xCoord, int yCoord)
+        public void MoveGamePiece(GamePiece gamePiece, int dice)
         {
-            gamePiece.XCoord = xCoord;
-            gamePiece.YCoord = yCoord;
+            if (gamePiece.IsAtBase)
+            {
+                GameBoard.ValidateStartingSquare(gamePiece);
+            }
+            else
+            {
+                NextTurn();
+            }
         }
         
         public void NextTurn(int index)
@@ -48,7 +53,7 @@ namespace EngineClasses
             Player player = CurrentPlayerTurn();
             int dice = player.RollDice();
             GamePiece piece = player.SelectGamePiece(index);
-            MoveGamePiece(piece, piece.XCoord, dice);
+            MoveGamePiece(piece, dice);
             
             if (player.GamePiece.Where(gp => gp.IsAtGoal == true).Count() == 4)
             {
