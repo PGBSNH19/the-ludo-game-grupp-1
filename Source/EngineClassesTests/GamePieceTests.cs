@@ -10,14 +10,15 @@ namespace EngineClasses.Tests
     public class GamePieceTests
     {
         [TestMethod()]
-        public void UpdatePositionTest_ChangeGamePiecesCoords_CoordsChangedToSpecification()
+        public void UpdateCoordsTest_ChangeGamePiecesCoords_CoordsChangedToSpecification()
         {
             GamePiece gp = new GamePiece(true, false);
             int x = 4;
             int y = 8;
             string expectation = $"{x}{y}";
 
-            gp.UpdatePosition(x, y);
+            gp.XCoord = x;
+            gp.YCoord = y;
 
             Assert.AreEqual(expectation, $"{gp.XCoord}{gp.YCoord}");
         }
