@@ -15,7 +15,8 @@ namespace EngineClasses.Tests
         {
             Session s1 = new Session();
 
-            s1.CreatePlayer("Testman");
+
+            s1.CreatePlayer("Testman","Green");
 
             Assert.AreEqual(4, s1.Player.ToList().First().GamePiece.Count());
         }
@@ -25,8 +26,9 @@ namespace EngineClasses.Tests
         {
             Session s1 = new Session();
             string userName = "Testman";
+            string color = "Green";
 
-            s1.CreatePlayer(userName);
+            s1.CreatePlayer(userName,color);
 
             Assert.AreEqual(userName, s1.Player.ToList().First().UserName);
         }

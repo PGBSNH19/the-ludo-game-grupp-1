@@ -13,14 +13,14 @@ namespace EngineClasses.Tests
         public void UpdateCoordsTest_ChangeGamePiecesCoords_CoordsChangedToSpecification()
         {
             GamePiece gp = new GamePiece(true, false);
-            int x = 4;
-            int y = 8;
-            string expectation = $"{x}{y}";
+            int gameSquareId = 4;
+           
+            string expectation = $"{gameSquareId}";
 
-            gp.XCoord = x;
-            gp.YCoord = y;
+            gp.GameSquareId = gameSquareId;
+           
 
-            Assert.AreEqual(expectation, $"{gp.XCoord}{gp.YCoord}");
+            Assert.AreEqual(expectation, $"{gp.GameSquareId}");
         }
     }
 }

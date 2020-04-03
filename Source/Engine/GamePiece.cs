@@ -13,10 +13,14 @@ namespace EngineClasses
         public int GamePieceId { get; private set; }        
         public bool IsAtBase { get; set; }
         public bool IsAtGoal { get; set; }
+       
 
         //Relationships
         public int PlayerId { get; private set; }
         public Player Player { get; private set; }
+        public int  GameSquareId { get; set; }
+        public GameSquare GameSquare { get; set; }
+
 
         public GamePiece(bool isAtBase, bool isAtGoal)
         {
