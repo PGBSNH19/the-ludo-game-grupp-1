@@ -17,8 +17,7 @@ namespace EngineClasses.Tests
             int y = 8;
             string expectation = $"{x}{y}";
 
-            gp.XCoord = x;
-            gp.YCoord = y;
+            gp.UpdatePosition(x, y);
 
             Assert.AreEqual(expectation, $"{gp.XCoord}{gp.YCoord}");
         }
