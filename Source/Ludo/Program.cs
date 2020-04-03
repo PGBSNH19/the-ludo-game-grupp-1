@@ -40,7 +40,8 @@ namespace Ludo
 
             gEngine.NextTurn(1);
 
-            //Test1DGameBoard();
+            Test1DGameBoard();
+
         }
 
         public static void Test1DGameBoard()

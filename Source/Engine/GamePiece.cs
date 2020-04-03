@@ -11,8 +11,6 @@ namespace EngineClasses
     {
         [Key]
         public int GamePieceId { get; private set; }        
-        public int YCoord { get; set; }
-        public int XCoord { get; set; }
         public bool IsAtBase { get; set; }
         public bool IsAtGoal { get; set; }
 
