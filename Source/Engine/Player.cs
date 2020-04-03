@@ -18,9 +18,10 @@ namespace EngineClasses
         public Session Session { get; private set; }
         public ICollection<GamePiece> GamePiece { get; private set; }
 
-        public Player(string userName)
+        public Player(string userName, string color)
         {
             this.UserName = userName;
+            this.Color = color;
             GamePiece = new List<GamePiece>();
         }
 

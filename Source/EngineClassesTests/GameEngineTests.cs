@@ -16,8 +16,9 @@ namespace EngineClasses.Tests
         {
             GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
             string userName = "Testman";
+            string color = "Red";
 
-            g1.CreatePlayer(userName);
+            g1.CreatePlayer(userName, color);
 
             Assert.AreEqual(4, g1.Session.Player.ToList().First().GamePiece.Count());
         }
@@ -27,8 +28,9 @@ namespace EngineClasses.Tests
         {
             GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
             string userName = "Testman";
+            string color = "Red";
 
-            g1.CreatePlayer(userName);
+            g1.CreatePlayer(userName, color);
 
             Assert.AreEqual(userName, g1.Session.Player.ToList()[0].UserName);
         }
@@ -38,10 +40,12 @@ namespace EngineClasses.Tests
         {
             GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
             string p1 = "p1";
+            string p1Color = "Red";
             string p2 = "p2";
+            string p2Color = "Yellow";
 
-            g1.CreatePlayer(p1);
-            g1.CreatePlayer(p2);
+            g1.CreatePlayer(p1, p1Color);
+            g1.CreatePlayer(p2, p2Color);
             g1.NextTurn(1);
             Player result = g1.CurrentPlayerTurn();
 

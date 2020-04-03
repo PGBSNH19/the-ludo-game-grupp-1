@@ -18,9 +18,9 @@ namespace EngineClasses
             this.GameLog = gameLog;
         }
 
-        public void CreatePlayer(string userName)
+        public void CreatePlayer(string userName, string color)
         {
-            Session.CreatePlayer(userName);
+            Session.CreatePlayer(userName, color);
         }
 
         public Player PlayerSelect(int index)

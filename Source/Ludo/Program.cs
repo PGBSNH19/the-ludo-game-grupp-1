@@ -29,10 +29,10 @@ namespace Ludo
             }
 
             Session session = new Session();
-            session.CreatePlayer("Mirko");
-            session.CreatePlayer("Aron");
-            session.CreatePlayer("Hampus");
-            session.CreatePlayer("Anas");
+            session.CreatePlayer("Mirko", "Red");
+            session.CreatePlayer("Aron", "Yellow");
+            session.CreatePlayer("Hampus", "Green");
+            session.CreatePlayer("Anas", "Blue");
 
             GameEngine gEngine = new GameEngine(session, gameBoard, new GameLog());
 

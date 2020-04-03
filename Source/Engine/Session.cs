@@ -21,11 +21,11 @@ namespace EngineClasses
             Player = new List<Player>();
         }
 
-        public void CreatePlayer(string userName)
+        public void CreatePlayer(string userName, string color)
         {
             if (Player.Count < 4)
             {
-                Player player = new Player(userName);
+                Player player = new Player(userName, color);
                 CreateGamePieces(player);
                 this.Player.Add(player);
             }
