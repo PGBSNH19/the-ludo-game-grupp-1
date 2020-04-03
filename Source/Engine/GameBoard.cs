@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EngineClasses
 {
@@ -12,22 +13,22 @@ namespace EngineClasses
         public GameBoard()
         {
             this.BoardRoute = AddGameSquares();
+            AddToDb(this.BoardRoute);
 
 
 
-
-            Placements = new string[,] { 
-                { "x","x","x","x","a","a","a","x","x","x","x"}, 
-                { "x","x","x","x","a","r","a","x","x","x","x"}, 
-                { "x","x","x","x","a","r","a","x","x","x","x"}, 
-                { "x","x","x","x","a","r","a","x","x","x","x"}, 
-                { "a","a","a","a","a","r","a","a","a","a","a"}, 
-                { "a","b","b","b","b","G","y","y","y","y","a"}, 
+            Placements = new string[,] {
+                { "x","x","x","x","a","a","a","x","x","x","x"},
+                { "x","x","x","x","a","r","a","x","x","x","x"},
+                { "x","x","x","x","a","r","a","x","x","x","x"},
+                { "x","x","x","x","a","r","a","x","x","x","x"},
+                { "a","a","a","a","a","r","a","a","a","a","a"},
+                { "a","b","b","b","b","G","y","y","y","y","a"},
                 { "a","a","a","a","a","g","a","a","a","a","a"},
-                { "x","x","x","x","a","g","a","x","x","x","x"}, 
-                { "x","x","x","x","a","g","a","x","x","x","x"}, 
-                { "x","x","x","x","a","g","a","x","x","x","x"}, 
-                { "x","x","x","x","a","a","a","x","x","x","x"} 
+                { "x","x","x","x","a","g","a","x","x","x","x"},
+                { "x","x","x","x","a","g","a","x","x","x","x"},
+                { "x","x","x","x","a","g","a","x","x","x","x"},
+                { "x","x","x","x","a","a","a","x","x","x","x"}
             };
         }
         private List<GameSquare> AddGameSquares()
@@ -37,7 +38,7 @@ namespace EngineClasses
             bool EndSquare = true;
 
             boardRoute.Add(new GameSquare("green", StartingSquare, false));
-            boardRoute.Add(new GameSquare( "green", false, false));
+            boardRoute.Add(new GameSquare("green", false, false));
             boardRoute.Add(new GameSquare("green", false, false));
             boardRoute.Add(new GameSquare("green", false, false));
             boardRoute.Add(new GameSquare("green", false, false));
@@ -64,11 +65,11 @@ namespace EngineClasses
             boardRoute.Add(new GameSquare("white", false, false));
             boardRoute.Add(new GameSquare("white", false, false));
             boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare( "white", false, false));
-            boardRoute.Add(new GameSquare( "white", false, false));
             boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare( "white", false, false));
-            boardRoute.Add(new GameSquare( "white", false, false));
+            boardRoute.Add(new GameSquare("white", false, false));
+            boardRoute.Add(new GameSquare("white", false, false));
+            boardRoute.Add(new GameSquare("white", false, false));
+            boardRoute.Add(new GameSquare("white", false, false));
 
             boardRoute.Add(new GameSquare("red", false, false));
             boardRoute.Add(new GameSquare("red", false, false));
@@ -92,7 +93,7 @@ namespace EngineClasses
             boardRoute.Add(new GameSquare("yellow", false, false));
             boardRoute.Add(new GameSquare("yellow", false, false));
             boardRoute.Add(new GameSquare("yellow", false, EndSquare));
-            boardRoute.Add(new GameSquare( "yellow", StartingSquare, true));
+            boardRoute.Add(new GameSquare("yellow", StartingSquare, true));
 
             boardRoute.Add(new GameSquare("white", false, false));
             boardRoute.Add(new GameSquare("white", false, false));
@@ -111,39 +112,58 @@ namespace EngineClasses
 
             return BoardRoute.Where(b => b.Color == gamePiece.Player.Color && b.StartingSquare).FirstOrDefault();
         }
-        
+
         public GameSquare ValidateCurrentSquare(GamePiece gamePiece)
         {
-            return BoardRoute.Where(b => b.GameSquareID == gamePiece.GameSquareId ).First();
+            return BoardRoute.Where(b => b.GameSquareId == gamePiece.GameSquareId).FirstOrDefault();
         }
-        
+
         public void ContinueRoute(GamePiece gamePiece, int dice)
         {
-            GameSquare gs = ValidateCurrentSquare(gamePiece);
-            int index = gs.GameSquareID;
+
+            GameSquare gs = ValidateStartingSquare(gamePiece);
+
+                int index = gs.GameSquareId;
+         
 
             for (int i = index; i < dice + index; i++)
             {
-                if(BoardRoute[i + 1] == null)
+                if (BoardRoute[i + 1] == null)
                 {
                     i = 0;
                 }
                 if (BoardRoute[i].Color != null)
                 {
-                    if(BoardRoute[i].Color == gamePiece.Player.Color)
+                    if (BoardRoute[i].Color == gamePiece.Player.Color)
                     {
-                        gamePiece.GameSquareId = BoardRoute[i].GameSquareID;
-                        
+                        gamePiece.GameSquareId = BoardRoute[i].GameSquareId;
+
                     }
                     else
                     {
                         i = index;
                     }
                 }
-                
-            }
-            
 
+            }
+
+
+        }
+
+        public void AddToDb(List<GameSquare> gameSquares)
+        {
+
+            using (var context = new LudoContext())
+            {
+
+                foreach (var s in gameSquares)
+                {
+                    context.GameSquare.Add(s);
+                }
+
+
+                context.SaveChanges();
+            }
         }
     }
 }

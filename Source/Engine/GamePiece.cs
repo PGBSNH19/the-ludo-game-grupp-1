@@ -18,7 +18,7 @@ namespace EngineClasses
         //Relationships
         public int PlayerId { get; private set; }
         public Player Player { get; private set; }
-        public int  GameSquareId { get; set; }
+        public int?  GameSquareId { get; set; }
         public GameSquare GameSquare { get; set; }
 
 

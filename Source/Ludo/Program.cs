@@ -13,27 +13,27 @@ namespace Ludo
         {
               
               GameBoard game = new GameBoard();
-           
-
-           // GameEngine game = new GameEngine();
-
-            //var myString = ConnectionSetup.GetConnectionString();
-            //Console.WriteLine(myString);
 
 
-            //GameBoard gameBoard = new GameBoard();
-            //int horizontal = gameBoard.Placements.GetUpperBound(0);
-            //int vertical = gameBoard.Placements.GetUpperBound(0);
+            GameEngine game = new GameEngine();
 
-            //for (int i = 0; i <= horizontal; i++)
-            //{
-            //    for (int j = 0; j <= vertical; j++)
-            //    {
-            //        string res = gameBoard.Placements[i, j];
-            //        Console.Write(res + " ");
-            //    }
-            //    Console.WriteLine();
-            //}
+            var myString = ConnectionSetup.GetConnectionString();
+            Console.WriteLine(myString);
+
+
+            GameBoard gameBoard = new GameBoard();
+            int horizontal = gameBoard.Placements.GetUpperBound(0);
+            int vertical = gameBoard.Placements.GetUpperBound(0);
+
+            for (int i = 0; i <= horizontal; i++)
+            {
+                for (int j = 0; j <= vertical; j++)
+                {
+                    string res = gameBoard.Placements[i, j];
+                    Console.Write(res + " ");
+                }
+                Console.WriteLine();
+            }
 
             Session session = new Session();
             session.CreatePlayer("Mirko", "Red");
@@ -41,9 +41,11 @@ namespace Ludo
             session.CreatePlayer("Hampus", "Green");
             session.CreatePlayer("Anas", "Blue");
 
+            
+            
             GameEngine gEngine = new GameEngine(session, game, new GameLog());
-            gEngine.GameBoard.ContinueRoute(session.Player.Where(b => b.UserName == "Mirko").First().GamePiece.First(),5);
-            //gEngine.NextTurn(1);
+            gEngine.NextTurn(1);
+            
 
             //Test1DGameBoard();
 

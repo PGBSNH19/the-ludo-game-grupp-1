@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EngineClasses
 {
@@ -13,11 +15,12 @@ namespace EngineClasses
 
         public GameEngine(Session session, GameBoard gameBoard, GameLog gameLog)
         {
-            this.Session = session;
+            
+            this.Session = LoadSessionFromDb();
             this.GameBoard = gameBoard;
             this.GameLog = gameLog;
         }
-
+        
         public void CreatePlayer(string userName, string color)
         {
             Session.CreatePlayer(userName, color);
@@ -46,14 +49,15 @@ namespace EngineClasses
             }
         }
         
+        
         public void NextTurn(int index)
         {
             Session.Turns++;
-            //Session.AddToDb();
+            
             Player player = CurrentPlayerTurn();
             int dice = player.RollDice();
             GamePiece piece = player.SelectGamePiece(index);
-            MoveGamePiece(piece, dice);
+            GameBoard.ContinueRoute(piece,dice);
             
             if (player.GamePiece.Where(gp => gp.IsAtGoal == true).Count() == 4)
             {
@@ -61,6 +65,23 @@ namespace EngineClasses
                 GameLog.AddToDb();
                 Environment.Exit(0);
             }
+        }
+        public Session LoadSessionFromDb()
+        {
+            Session session = null;
+            using (var context = new LudoContext())
+            {
+
+                session = context.Session
+                        .Include(s => s.Player)
+                        .ThenInclude(p => p.GamePiece)
+                        .FirstOrDefault();
+
+
+                context.SaveChanges();
+            }
+
+            return session;
         }
     }
 }

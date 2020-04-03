@@ -12,7 +12,8 @@ namespace EngineClasses
         public DbSet<Player> Player { get; set; }
         public DbSet<GamePiece> GamePiece { get; set; }
         public DbSet<GameLog> GameLog { get; set; }
-        
+
+        public DbSet<GameSquare> GameSquare { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(ConnectionSetup.GetConnectionString());

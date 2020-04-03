@@ -8,7 +8,7 @@ namespace EngineClasses
     public class GameSquare
     {
        [Key]
-        public int GameSquareID { get; set; } 
+        public int GameSquareId { get; set; } 
 
         public string Color { get; set; }
         public bool StartingSquare { get; set; }
