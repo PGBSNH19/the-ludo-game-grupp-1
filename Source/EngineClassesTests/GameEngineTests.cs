@@ -47,18 +47,5 @@ namespace EngineClasses.Tests
 
             Assert.AreEqual(p2, result.UserName);
         }
-
-        [TestMethod()]
-        public void MoveGamePieceTest_UpdateGamePieceCoords_GamePieceCoordsUpdated()
-        {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
-            string p1 = "p1";
-
-            g1.CreatePlayer(p1);
-            g1.PlayerSelect(0).MoveGamePiece(0, 2, 5);
-
-            Assert.AreEqual(2, g1.PlayerSelect(0).SelectGamePiece(0).XCoord);
-            Assert.AreEqual(5, g1.PlayerSelect(0).SelectGamePiece(0).YCoord);
-        }
     }
 }

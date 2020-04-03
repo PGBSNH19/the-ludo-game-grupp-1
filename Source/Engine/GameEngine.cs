@@ -42,7 +42,7 @@ namespace EngineClasses
             }
             else
             {
-                NextTurn();
+                NextTurn(1);
             }
         }
         
