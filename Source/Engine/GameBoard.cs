@@ -39,6 +39,14 @@ namespace EngineClasses
             return BoardRoute.Where(b => b.XCoordinate == gamePiece.XCoord && b.YCoordinate == gamePiece.YCoord).First();
         }
 
+        public void ContinueRoute(GamePiece gamePiece, int dice)
+        {
+            
 
+            foreach(var sq in BoardRoute)
+            {
+                
+            }
+        }
     }
 }
