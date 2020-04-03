@@ -42,7 +42,11 @@ namespace EngineClasses
             }
             else
             {
+<<<<<<< HEAD
                 NextTurn(1);
+=======
+                NextTurn(1);    
+>>>>>>> solvmergeconflict
             }
         }
         
