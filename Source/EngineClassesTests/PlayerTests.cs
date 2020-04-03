@@ -14,7 +14,7 @@ namespace EngineClasses.Tests
         public void SelectGamePieceTest_PickOutTheGamePieceYouWant_ReturnGamePieceBasedOnIndex()
         {
             string userName = "test";
-            Player p1 = new Player(userName);
+            Player p1 = new Player(userName, "Red");
             p1.GamePiece.Add(new GamePiece(true, false));
             p1.GamePiece.Add(new GamePiece(true, false));
             p1.GamePiece.Add(new GamePiece(false, false));
@@ -27,7 +27,7 @@ namespace EngineClasses.Tests
         [TestMethod]
         public void RollDiceTest_RollDiceRandomNumber_ReturnOneToSix()
         {
-            Player player = new Player("TestMan");
+            Player player = new Player("TestMan", "Red");
             List<int> results = new List<int>();
 
             for (int i = 0; i < 100; i++)
@@ -43,7 +43,7 @@ namespace EngineClasses.Tests
         public void TestAddToDb_InsertNewRowToDb_AddedTrue()
         {
             LudoContext context = new LudoContext();
-            Player player = new Player("Hampus");
+            Player player = new Player("Hampus", "Red");
             //player.AddToDb();
             Player playerFromDb = context.Player.Where(p => p.UserName == player.UserName).FirstOrDefault();
 
