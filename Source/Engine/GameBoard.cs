@@ -12,10 +12,19 @@ namespace EngineClasses
         public List<GameSquare> BoardRoute { get; set; }
         public GameBoard()
         {
-            this.BoardRoute = AddGameSquares();
+            this.BoardRoute.AddRange(AddPlayerSection("Red"));
+            this.BoardRoute.AddRange(AddSharedSection());
+
+            this.BoardRoute.AddRange(AddPlayerSection("Blue"));
+            this.BoardRoute.AddRange(AddSharedSection());
+
+            this.BoardRoute.AddRange(AddPlayerSection("Yellow"));
+            this.BoardRoute.AddRange(AddSharedSection());
+
+            this.BoardRoute.AddRange(AddPlayerSection("Green"));
+            this.BoardRoute.AddRange(AddSharedSection());
+
             AddToDb(this.BoardRoute);
-
-
 
             Placements = new string[,] {
                 { "x","x","x","x","a","a","a","x","x","x","x"},
@@ -31,6 +40,32 @@ namespace EngineClasses
                 { "x","x","x","x","a","a","a","x","x","x","x"}
             };
         }
+
+        public List<GameSquare> AddPlayerSection(string color)
+        {
+            List<GameSquare> section = new List<GameSquare>();
+            section.Add(new GameSquare(color, true, false));
+            for (int i = 0; i < 4; i++)
+            {
+                section.Add(new GameSquare(color, false, false));
+            }
+            section.Add(new GameSquare(color, false, true));
+
+            return section;
+        }
+
+        public List<GameSquare> AddSharedSection()
+        {
+            List<GameSquare> section = new List<GameSquare>();
+            for (int i = 0; i < 9; i++)
+            {
+                section.Add(new GameSquare("white", false, false));
+            }
+
+            return section;
+        }
+
+
         private List<GameSquare> AddGameSquares()
         {
             List<GameSquare> boardRoute = new List<GameSquare>();
