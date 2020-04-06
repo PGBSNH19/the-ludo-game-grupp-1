@@ -45,27 +45,10 @@ namespace EngineClasses
             }
             else
             {
-                NextTurn(1);
+                
             }
         }
         
-        
-        public void NextTurn(int index)
-        {
-            Session.Turns++;
-            
-            Player player = CurrentPlayerTurn();
-            int dice = player.RollDice();
-            GamePiece piece = player.SelectGamePiece(index);
-            GameBoard.ContinueRoute(piece,dice);
-            
-            if (player.GamePiece.Where(gp => gp.IsAtGoal == true).Count() == 4)
-            {
-                GameLog = new GameLog(player.UserName);
-                GameLog.AddToDb();
-                Environment.Exit(0);
-            }
-        }
         public Session LoadSessionFromDb()
         {
             Session session = null;

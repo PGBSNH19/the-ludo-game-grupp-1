@@ -11,20 +11,44 @@ namespace Ludo
     {
         static void Main(string[] args)
         {
+            // Skapar en session och lägger till spelare
             Session session = new Session();
             session.CreatePlayer("Mirko", "Red");
             session.CreatePlayer("Aron", "Yellow");
             session.CreatePlayer("Hampus", "Green");
             session.CreatePlayer("Anas", "Blue");
 
+            // Skapar ett nytt spel
             GameEngine gameEngine = new GameEngine(session, new GameBoard(), new GameLog());
-            foreach (var item in gameEngine.GameBoard.BoardRoute)
-            {
-                Console.WriteLine(item.GameSquareId);
-            }
 
-            var currentPlayer = gameEngine.CurrentPlayerTurn();
-            Console.WriteLine(currentPlayer); 
+            // Returnerar spelare vars tur det är
+            Player currentPlayer = gameEngine.CurrentPlayerTurn();
+            // Slår tärning och returnerar ett heltal
+            int dice = currentPlayer.RollDice();
+            List<GamePiece> pieces = new List<GamePiece>();
+            if (dice == 6)
+            {
+                pieces = currentPlayer.GamePiece.Where(g => g.IsAtBase == true).ToList();
+            }
+            pieces.AddRange(currentPlayer.GamePiece.Where(g => g.IsAtBase == false && g.IsAtGoal == false).ToList());
+
+        }
+
+        public void NextTurn(int index)
+        {
+            
+
+            //Player player = CurrentPlayerTurn();
+            //int dice = player.RollDice();
+            //GamePiece piece = player.SelectGamePiece(index);
+            //GameBoard.ContinueRoute(piece, dice);
+
+            //if (player.GamePiece.Where(gp => gp.IsAtGoal == true).Count() == 4)
+            //{
+            //    GameLog = new GameLog(player.UserName);
+            //    GameLog.AddToDb();
+            //    Environment.Exit(0);
+            //}
         }
 
         public static void Test1DGameBoard()
@@ -49,7 +73,7 @@ namespace Ludo
 
 
             for (int i = 0; i < 6; i++)
-            { 
+            {
                 if (board[players["r"] + 1].Contains('a') ||
                     board[players["r"] + 1].Contains('r'))
                 {
