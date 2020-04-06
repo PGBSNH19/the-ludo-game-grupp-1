@@ -23,15 +23,30 @@ namespace Ludo
 
             // Returnerar spelare vars tur det är
             Player currentPlayer = gameEngine.CurrentPlayerTurn();
+
             // Slår tärning och returnerar ett heltal
             int dice = currentPlayer.RollDice();
+            int testDice = 6;
+
+            // List movable game pieces
             List<GamePiece> pieces = new List<GamePiece>();
-            if (dice == 6)
+            if (testDice == 6)
             {
                 pieces = currentPlayer.GamePiece.Where(g => g.IsAtBase == true).ToList();
             }
+
             pieces.AddRange(currentPlayer.GamePiece.Where(g => g.IsAtBase == false && g.IsAtGoal == false).ToList());
 
+            foreach (var item in pieces)
+            {
+                Console.WriteLine(item.GamePieceId);
+            }
+
+            // Välj pjäs från listan
+            int chosenGamePiece = int.Parse(Console.ReadLine()); //pieces[int.Parse(Console.ReadLine())];
+
+            //Flytta vald pjäs
+            
         }
 
         public void NextTurn(int index)

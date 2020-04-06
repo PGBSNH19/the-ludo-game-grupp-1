@@ -15,7 +15,7 @@ namespace EngineClasses
         public int Turns { get; set; }
 
         //Relationships
-        public ICollection<Player> Player { get; private set; }
+        public List<Player> Player { get; private set; }
 
         public Session()
         {
@@ -36,7 +36,7 @@ namespace EngineClasses
         {
             for (int i = 0; i < 4; i++)
             {
-                player.GamePiece.Add(new GamePiece(true, false));
+                player.GamePiece.Add(new GamePiece(player, true, false));
             }
         }
 
@@ -44,12 +44,6 @@ namespace EngineClasses
         {
             return Player.ToList()[(Turns % Player.Count)];
         }
-
-        public void MoveGamePiece(Player player, GamePiece gamePiece)
-        {
-            
-        }
-
 
         public void AddToDb()
         {

@@ -50,52 +50,42 @@ namespace EngineClasses
             return section;
         }
 
-        public GameSquare ValidateStartingSquare(GamePiece gamePiece)
+        public GameSquare ValidateStartingSquare(Player player)
         {
-
-            return BoardRoute.Where(b => b.Color == gamePiece.Player.Color && b.StartingSquare).FirstOrDefault();
+            return BoardRoute.Where(b => b.Color == player.Color && b.StartingSquare).FirstOrDefault();
         }
 
         public GameSquare ValidateCurrentSquare(GamePiece gamePiece)
         {
-            return BoardRoute.Where(b => b.GameSquareId == gamePiece.GameSquareId).FirstOrDefault();
+            return BoardRoute.Where(b => b.GameSquareNumber == gamePiece.Position).FirstOrDefault();
         }
 
-        public void ContinueRoute(GamePiece gamePiece, int dice)
+        public GameSquare ValidateNextSquare(GamePiece gamePiece)
         {
-            if (gamePiece.IsAtBase && dice < 6)
+            return BoardRoute.Where(b => b.GameSquareNumber == gamePiece.Position + 1).FirstOrDefault();
+        }
+
+        public GameSquare FindNextValidSquare(GamePiece gamePiece)
+        {
+            int i = 1;
+
+            while (BoardRoute[gamePiece.Position.Value + i].Color != gamePiece.Player.Color ||
+                    BoardRoute[gamePiece.Position.Value + i].Color != "White")
             {
-                return;
+                i++;
             }
 
-            GameSquare gs = ValidateStartingSquare(gamePiece);
-
-            for (int i = 0; i < dice; i++)
-            {
-                if (gs.GameSquareId + 1 >= BoardRoute.Count)
-                {
-                    gamePiece.GameSquare = BoardRoute[0];
-                    gamePiece.GameSquareId = BoardRoute[0].GameSquareId;
-                }
-                else
-                {
-                    gamePiece.GameSquare = BoardRoute[ValidateCurrentSquare(gamePiece).GameSquareId + 1];
-                    gamePiece.GameSquareId = BoardRoute[ValidateCurrentSquare(gamePiece).GameSquareId + 1].GameSquareId;
-                }
-            }
+            return BoardRoute[gamePiece.Position.Value + i];
         }
 
         public void AddToDb(List<GameSquare> gameSquares)
         {
-
             using (var context = new LudoContext())
             {
-
                 foreach (var s in gameSquares)
                 {
                     context.GameSquare.Add(s);
                 }
-
 
                 context.SaveChanges();
             }

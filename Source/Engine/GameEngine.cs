@@ -28,7 +28,7 @@ namespace EngineClasses
 
         public Player PlayerSelect(int index)
         {
-            return Session.Player.ToList()[index];
+            return Session.Player[index];
         }
 
         public Player CurrentPlayerTurn()
@@ -36,16 +36,27 @@ namespace EngineClasses
             return Session.CurrentPlayerTurn();
         }
 
-        
-        public void MoveGamePiece(GamePiece gamePiece, int dice)
+        public void MoveGamePiece(GamePiece gamePiece, int steps)
         {
-            if (gamePiece.IsAtBase)
+            if (!gamePiece.IsAtGoal)
             {
-                GameBoard.ValidateStartingSquare(gamePiece);
-            }
-            else
-            {
-                
+                if (gamePiece.IsAtBase && steps >= 6)
+                {
+                    gamePiece.Position = GameBoard.ValidateStartingSquare(gamePiece.Player).GameSquareNumber;
+                    gamePiece.IsAtBase = false;
+                }
+                else
+                {
+                    for (int i = 0; i < steps; i++)
+                    {
+                        gamePiece.Position = GameBoard.FindNextValidSquare(gamePiece).GameSquareNumber;
+                        if (GameBoard.ValidateNextSquare(gamePiece).EndSquare ||
+                            i == steps - 1)
+                        {
+                            gamePiece.IsAtGoal = true;
+                        }
+                    }
+                }
             }
         }
         

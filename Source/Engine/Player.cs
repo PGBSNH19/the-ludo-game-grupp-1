@@ -16,7 +16,7 @@ namespace EngineClasses
         //Relationships
         public int SessionId { get; private set; }
         public Session Session { get; private set; }
-        public ICollection<GamePiece> GamePiece { get; private set; }
+        public List<GamePiece> GamePiece { get; private set; }
 
         public Player(string userName, string color)
         {

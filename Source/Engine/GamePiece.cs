@@ -13,17 +13,17 @@ namespace EngineClasses
         public int GamePieceId { get; private set; }        
         public bool IsAtBase { get; set; }
         public bool IsAtGoal { get; set; }
-       
+        
 
         //Relationships
         public int PlayerId { get; private set; }
         public Player Player { get; private set; }
-        public int?  GameSquareId { get; set; }
-        public GameSquare GameSquare { get; set; }
+        public int? Position { get; set; }
 
 
-        public GamePiece(bool isAtBase, bool isAtGoal)
+        public GamePiece(Player player, bool isAtBase, bool isAtGoal)
         {
+            this.Player = player;
             this.IsAtBase = isAtBase;
             this.IsAtGoal = isAtGoal;
         }
