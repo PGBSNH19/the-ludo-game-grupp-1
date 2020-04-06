@@ -16,7 +16,7 @@ namespace EngineClasses
         public GameEngine(Session session, GameBoard gameBoard, GameLog gameLog)
         {
             
-            this.Session = LoadSessionFromDb();
+            this.Session = session;
             this.GameBoard = gameBoard;
             this.GameLog = gameLog;
         }

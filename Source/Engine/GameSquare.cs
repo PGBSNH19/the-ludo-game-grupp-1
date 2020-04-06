@@ -15,10 +15,9 @@ namespace EngineClasses
         public bool EndSquare { get; set; }
         
 
-        public GameSquare( string color, bool startingSquare, bool endSquare)
+        public GameSquare(int gameSquareId, string color, bool startingSquare, bool endSquare)
         {
-
-            
+            this.GameSquareId = gameSquareId;
             this.Color = color;
             this.StartingSquare = startingSquare;
             this.EndSquare = endSquare;

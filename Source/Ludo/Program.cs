@@ -11,44 +11,20 @@ namespace Ludo
     {
         static void Main(string[] args)
         {
-              
-              GameBoard game = new GameBoard();
-
-
-            GameEngine game = new GameEngine();
-
-            var myString = ConnectionSetup.GetConnectionString();
-            Console.WriteLine(myString);
-
-
-            GameBoard gameBoard = new GameBoard();
-            int horizontal = gameBoard.Placements.GetUpperBound(0);
-            int vertical = gameBoard.Placements.GetUpperBound(0);
-
-            for (int i = 0; i <= horizontal; i++)
-            {
-                for (int j = 0; j <= vertical; j++)
-                {
-                    string res = gameBoard.Placements[i, j];
-                    Console.Write(res + " ");
-                }
-                Console.WriteLine();
-            }
-
             Session session = new Session();
             session.CreatePlayer("Mirko", "Red");
             session.CreatePlayer("Aron", "Yellow");
             session.CreatePlayer("Hampus", "Green");
             session.CreatePlayer("Anas", "Blue");
 
-            
-            
-            GameEngine gEngine = new GameEngine(session, game, new GameLog());
-            gEngine.NextTurn(1);
-            
+            GameEngine gameEngine = new GameEngine(session, new GameBoard(), new GameLog());
+            foreach (var item in gameEngine.GameBoard.BoardRoute)
+            {
+                Console.WriteLine(item.GameSquareId);
+            }
 
-            //Test1DGameBoard();
-
+            var currentPlayer = gameEngine.CurrentPlayerTurn();
+            Console.WriteLine(currentPlayer); 
         }
 
         public static void Test1DGameBoard()

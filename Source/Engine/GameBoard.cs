@@ -7,11 +7,12 @@ namespace EngineClasses
 {
     public class GameBoard
     {
-        public string[,] Placements { get; private set; } = new string[11, 11];
         public Dictionary<string, int> Bases { get; private set; }
         public List<GameSquare> BoardRoute { get; set; }
         public GameBoard()
         {
+            this.BoardRoute = new List<GameSquare>();
+
             this.BoardRoute.AddRange(AddPlayerSection("Red"));
             this.BoardRoute.AddRange(AddSharedSection());
 
@@ -23,33 +24,17 @@ namespace EngineClasses
 
             this.BoardRoute.AddRange(AddPlayerSection("Green"));
             this.BoardRoute.AddRange(AddSharedSection());
-
-            AddToDb(this.BoardRoute);
-
-            Placements = new string[,] {
-                { "x","x","x","x","a","a","a","x","x","x","x"},
-                { "x","x","x","x","a","r","a","x","x","x","x"},
-                { "x","x","x","x","a","r","a","x","x","x","x"},
-                { "x","x","x","x","a","r","a","x","x","x","x"},
-                { "a","a","a","a","a","r","a","a","a","a","a"},
-                { "a","b","b","b","b","G","y","y","y","y","a"},
-                { "a","a","a","a","a","g","a","a","a","a","a"},
-                { "x","x","x","x","a","g","a","x","x","x","x"},
-                { "x","x","x","x","a","g","a","x","x","x","x"},
-                { "x","x","x","x","a","g","a","x","x","x","x"},
-                { "x","x","x","x","a","a","a","x","x","x","x"}
-            };
         }
 
         public List<GameSquare> AddPlayerSection(string color)
         {
             List<GameSquare> section = new List<GameSquare>();
-            section.Add(new GameSquare(color, true, false));
+            section.Add(new GameSquare(this.BoardRoute.Count + section.Count, color, true, false));
             for (int i = 0; i < 4; i++)
             {
-                section.Add(new GameSquare(color, false, false));
+                section.Add(new GameSquare(this.BoardRoute.Count + section.Count, color, false, false));
             }
-            section.Add(new GameSquare(color, false, true));
+            section.Add(new GameSquare(this.BoardRoute.Count + section.Count, color, false, true));
 
             return section;
         }
@@ -59,89 +44,12 @@ namespace EngineClasses
             List<GameSquare> section = new List<GameSquare>();
             for (int i = 0; i < 9; i++)
             {
-                section.Add(new GameSquare("white", false, false));
+                section.Add(new GameSquare(this.BoardRoute.Count + section.Count, "white", false, false));
             }
 
             return section;
         }
 
-
-        private List<GameSquare> AddGameSquares()
-        {
-            List<GameSquare> boardRoute = new List<GameSquare>();
-            bool StartingSquare = true;
-            bool EndSquare = true;
-
-            boardRoute.Add(new GameSquare("green", StartingSquare, false));
-            boardRoute.Add(new GameSquare("green", false, false));
-            boardRoute.Add(new GameSquare("green", false, false));
-            boardRoute.Add(new GameSquare("green", false, false));
-            boardRoute.Add(new GameSquare("green", false, false));
-            boardRoute.Add(new GameSquare("green", false, EndSquare));
-
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-
-            boardRoute.Add(new GameSquare("blue", false, false));
-            boardRoute.Add(new GameSquare("blue", false, false));
-            boardRoute.Add(new GameSquare("blue", false, false));
-            boardRoute.Add(new GameSquare("blue", false, false));
-            boardRoute.Add(new GameSquare("blue", false, EndSquare));
-            boardRoute.Add(new GameSquare("blue", StartingSquare, true));
-
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-
-            boardRoute.Add(new GameSquare("red", false, false));
-            boardRoute.Add(new GameSquare("red", false, false));
-            boardRoute.Add(new GameSquare("red", false, false));
-            boardRoute.Add(new GameSquare("red", false, false));
-            boardRoute.Add(new GameSquare("red", false, EndSquare));
-            boardRoute.Add(new GameSquare("red", StartingSquare, true));
-
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-
-            boardRoute.Add(new GameSquare("yellow", false, false));
-            boardRoute.Add(new GameSquare("yellow", false, false));
-            boardRoute.Add(new GameSquare("yellow", false, false));
-            boardRoute.Add(new GameSquare("yellow", false, false));
-            boardRoute.Add(new GameSquare("yellow", false, EndSquare));
-            boardRoute.Add(new GameSquare("yellow", StartingSquare, true));
-
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-            boardRoute.Add(new GameSquare("white", false, false));
-
-            return boardRoute;
-        }
         public GameSquare ValidateStartingSquare(GamePiece gamePiece)
         {
 
@@ -155,34 +63,26 @@ namespace EngineClasses
 
         public void ContinueRoute(GamePiece gamePiece, int dice)
         {
+            if (gamePiece.IsAtBase && dice < 6)
+            {
+                return;
+            }
 
             GameSquare gs = ValidateStartingSquare(gamePiece);
 
-                int index = gs.GameSquareId;
-         
-
-            for (int i = index; i < dice + index; i++)
+            for (int i = 0; i < dice; i++)
             {
-                if (BoardRoute[i + 1] == null)
+                if (gs.GameSquareId + 1 >= BoardRoute.Count)
                 {
-                    i = 0;
+                    gamePiece.GameSquare = BoardRoute[0];
+                    gamePiece.GameSquareId = BoardRoute[0].GameSquareId;
                 }
-                if (BoardRoute[i].Color != null)
+                else
                 {
-                    if (BoardRoute[i].Color == gamePiece.Player.Color)
-                    {
-                        gamePiece.GameSquareId = BoardRoute[i].GameSquareId;
-
-                    }
-                    else
-                    {
-                        i = index;
-                    }
+                    gamePiece.GameSquare = BoardRoute[ValidateCurrentSquare(gamePiece).GameSquareId + 1];
+                    gamePiece.GameSquareId = BoardRoute[ValidateCurrentSquare(gamePiece).GameSquareId + 1].GameSquareId;
                 }
-
             }
-
-
         }
 
         public void AddToDb(List<GameSquare> gameSquares)
