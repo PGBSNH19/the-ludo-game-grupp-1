@@ -144,8 +144,6 @@ namespace EngineClasses
                         .Include(s => s.Player)
                         .ThenInclude(p => p.GamePiece)
                         .FirstOrDefault();
-
-
                 context.SaveChanges();
             }
 

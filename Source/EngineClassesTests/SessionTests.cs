@@ -91,5 +91,14 @@ namespace EngineClasses.Tests
             Assert.AreEqual(engine.Session.Player[1], result);
             Assert.AreNotEqual(engine.Session.Player[0], result);
         }
+
+        [TestMethod()]
+        public void SelectGamePieceTest_WithCorrectIndex_ReturnIndex0()
+        {
+            Player player = new Player("Testman", "Red");
+            GamePiece gamePiece = player.SelectGamePiece(1);
+            
+            Assert.AreEqual(player.GamePiece[1], gamePiece);
+        }
     }
 }

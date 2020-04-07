@@ -26,7 +26,7 @@ namespace EngineClasses
         }
 
         /// <summary>
-        /// Places gamePiece in squares list of game pieces and sets all pieces of different colors to base.
+        /// Places gamePiece in squares' list of game pieces and sets all pieces of different colors to base.
         /// </summary>
         /// <param name="gamePiece"></param>
         public void PlaceGamePiece(GamePiece gamePiece)

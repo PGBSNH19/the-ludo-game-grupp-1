@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EngineClasses;
 
 namespace LudoGUI
 {
@@ -20,6 +21,7 @@ namespace LudoGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public GameEngine gameEngine;
         public MainWindow()
         {
             InitializeComponent();
@@ -27,11 +29,15 @@ namespace LudoGUI
         }
         private void Start()
         {
-            CreateGUI();
+            gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            CreateGUI(gameEngine.GameBoard);
 
+            gameEngine.CreatePlayer("Mirko", "Red");
+            gameEngine.CreatePlayer("Anas", "Blue");
+            
         }
 
-        public void CreateGUI()
+        public void CreateGUI(GameBoard gameBoard)
         {
             Grid grid = (Grid)Content;
 
@@ -69,11 +75,12 @@ namespace LudoGUI
                     };
                     if (row == 1 && column == 1 || (row == 2 && column == 2) || (row == 1 && column == 2) || (row == 2 && column == 1) || (row == 4 && column == 0) || (row == 5 && column >= 0 && column < 5))
                     {
-                        button.Background = Brushes.Blue;
+                        button.Background = Brushes.Red;
                     }
                     else if (row == 1 && column == 8 || (row == 1 && column == 9) || (row == 2 && column == 8) || (row == 2 && column == 9) || (row == 0 && column == 6) || (row < 5 && column == 5))
                     {
-                        button.Background = Brushes.Red;
+                        button.Background = Brushes.Blue;
+                        button.Content = 
                     }
                     else if (row == 8 && column == 1 || (row == 8 && column == 2) || (row == 9 && column == 1) || (row == 9 && column == 2) || (row == 10 && column == 4) || (row < 11 && row > 5 && column == 5))
                     {
