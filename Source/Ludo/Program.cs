@@ -25,7 +25,7 @@ namespace Ludo
             Player currentPlayer = gameEngine.CurrentPlayerTurn();
 
             // Slår tärning och returnerar ett heltal
-            int dice = currentPlayer.RollDice();
+            int dice = session.RollDice();
             int testDice = 6;
 
             // List movable game pieces

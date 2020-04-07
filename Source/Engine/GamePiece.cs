@@ -10,7 +10,8 @@ namespace EngineClasses
     public class GamePiece
     {
         [Key]
-        public int GamePieceId { get; private set; }        
+        public int GamePieceId { get; private set; }
+        public int GamePieceNumber { get; set; }
         public bool IsAtBase { get; set; }
         public bool IsAtGoal { get; set; }
         
@@ -21,9 +22,10 @@ namespace EngineClasses
         public int? Position { get; set; }
 
 
-        public GamePiece(Player player, bool isAtBase, bool isAtGoal)
+        public GamePiece(Player player,int gamePieceNumber, bool isAtBase, bool isAtGoal)
         {
             this.Player = player;
+            this.GamePieceNumber = gamePieceNumber;
             this.IsAtBase = isAtBase;
             this.IsAtGoal = isAtGoal;
         }

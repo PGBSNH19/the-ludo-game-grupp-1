@@ -25,19 +25,9 @@ namespace EngineClasses
             GamePiece = new List<GamePiece>();
         }
 
-
-        public int RollDice()
-        {
-            int result;
-            Random rnd = new Random();
-
-            result = rnd.Next(1, 6 + 1);
-            return result;
-        }
-
         public GamePiece SelectGamePiece(int index)
         {
-            return GamePiece.ToList()[index];
+            return GamePiece[index];
         }
 
 

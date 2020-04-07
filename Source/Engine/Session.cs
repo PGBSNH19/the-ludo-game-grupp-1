@@ -11,7 +11,7 @@ namespace EngineClasses
     public class Session
     {
         [Key]
-        public int SessionId { get; private set; }        
+        public int SessionId { get; private set; }
         public int Turns { get; set; }
 
         //Relationships
@@ -36,13 +36,27 @@ namespace EngineClasses
         {
             for (int i = 0; i < 4; i++)
             {
-                player.GamePiece.Add(new GamePiece(player, true, false));
+                player.GamePiece.Add(new GamePiece(player, i + 1, true, false));
             }
         }
 
         public Player CurrentPlayerTurn()
         {
             return Player.ToList()[(Turns % Player.Count)];
+        }
+
+        public GamePiece SelectGamePiece(Player player, int index)
+        {
+            return player.SelectGamePiece(index);
+        }
+
+        public int RollDice()
+        {
+            int result;
+            Random rnd = new Random();
+
+            result = rnd.Next(1, 6 + 1);
+            return result;
         }
 
         public void AddToDb()
@@ -76,6 +90,6 @@ namespace EngineClasses
             }
         }
 
-        
+
     }
 }

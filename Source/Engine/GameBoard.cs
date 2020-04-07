@@ -50,21 +50,22 @@ namespace EngineClasses
             return section;
         }
 
-        public GameSquare ValidateStartingSquare(Player player)
+        public GameSquare GetStartingSquare(Player player)
         {
             return BoardRoute.Where(b => b.Color == player.Color && b.StartingSquare).FirstOrDefault();
         }
 
-        public GameSquare ValidateCurrentSquare(GamePiece gamePiece)
+        public GameSquare GetCurrentSquare(GamePiece gamePiece)
         {
             return BoardRoute.Where(b => b.GameSquareNumber == gamePiece.Position).FirstOrDefault();
         }
 
-        public GameSquare ValidateNextSquare(GamePiece gamePiece)
+        public GameSquare GetNextSquare(GamePiece gamePiece)
         {
             return BoardRoute.Where(b => b.GameSquareNumber == gamePiece.Position + 1).FirstOrDefault();
         }
 
+        
         public GameSquare FindNextValidSquare(GamePiece gamePiece)
         {
             int i = 1;
