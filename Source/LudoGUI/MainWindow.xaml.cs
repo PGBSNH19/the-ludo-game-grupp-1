@@ -65,22 +65,23 @@ namespace LudoGUI
             stackPanel.Children.Add(user1);
             stackPanel.Children.Add(tb1);
 
+
+
             for (int row = 0; row < 11; row++)
             {
                 for (int column = 0; column < 11; column++)
                 {
                     Button button = new Button
                     {
-                        Content = row + "." + column,
+                        Content = column + "." + row,
                     };
                     if (row == 1 && column == 1 || (row == 2 && column == 2) || (row == 1 && column == 2) || (row == 2 && column == 1) || (row == 4 && column == 0) || (row == 5 && column >= 0 && column < 5))
                     {
-                        button.Background = Brushes.Red;
+                        button.Background = Brushes.Blue;
                     }
                     else if (row == 1 && column == 8 || (row == 1 && column == 9) || (row == 2 && column == 8) || (row == 2 && column == 9) || (row == 0 && column == 6) || (row < 5 && column == 5))
                     {
-                        button.Background = Brushes.Blue;
-                        button.Content = 
+                        button.Background = Brushes.Red;
                     }
                     else if (row == 8 && column == 1 || (row == 8 && column == 2) || (row == 9 && column == 1) || (row == 9 && column == 2) || (row == 10 && column == 4) || (row < 11 && row > 5 && column == 5))
                     {
@@ -106,11 +107,17 @@ namespace LudoGUI
                     grid.Children.Add(button);
                     Grid.SetRow(button, row);
                     Grid.SetColumn(button, column);
+                    
 
                     button.Click += HandleButtonClick;
 
                 }
             }
+
+            var element = grid.Children.Cast<UIElement>().
+            FirstOrDefault(e => Grid.GetColumn(e) == 6 && Grid.GetRow(e) == 0);
+
+             
         }
 
         private void HandleButtonClick(object sender, RoutedEventArgs e)
