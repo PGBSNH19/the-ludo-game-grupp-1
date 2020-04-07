@@ -44,7 +44,7 @@ namespace EngineClasses
             List<GameSquare> section = new List<GameSquare>();
             for (int i = 0; i < 9; i++)
             {
-                section.Add(new GameSquare(this.BoardRoute.Count + section.Count, "white", false, false));
+                section.Add(new GameSquare(this.BoardRoute.Count + section.Count, "White", false, false));
             }
 
             return section;
@@ -97,7 +97,7 @@ namespace EngineClasses
 
             return BoardRoute[gamePiece.Position.Value + i];
         }
-
+        
         public void AddToDb(List<GameSquare> gameSquares)
         {
             using (var context = new LudoContext())
