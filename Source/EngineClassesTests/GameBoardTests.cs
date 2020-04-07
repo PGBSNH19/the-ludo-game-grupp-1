@@ -11,19 +11,14 @@ namespace EngineClasses.Tests
     public class GameBoardTests
     {
         [TestMethod()]
-        public void ValidateStartingSquareTest_CreateGamePiecesAndGetTheirStartingSquares_CheckThatStartingSquareColorMatchesGamePieceColor()
+        public void GetStartingSquareTest_CreateGamePiecesAndGetTheirStartingSquares_CheckThatStartingSquareColorMatchesPlayerColor()
         {
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
-            player.GamePiece.Add(new GamePiece(true, false));
-            player.GamePiece.Add(new GamePiece(true, false));
-            player.GamePiece.Add(new GamePiece(true, false));
-            player.GamePiece.Add(new GamePiece(true, false));
-            int gamePieceIndex = 0;
 
-            var result = board.ValidateStartingSquare(player.GamePiece.ToList()[gamePieceIndex]);
+            var result = board.GetStartingSquare(player);
 
-            Assert.Fail();
+            Assert.AreEqual(board.BoardRoute.Where(s => s.Color == player.Color && s.StartingSquare).First(), result);
         }
     }
 }

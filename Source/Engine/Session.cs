@@ -19,7 +19,8 @@ namespace EngineClasses
 
         public Session()
         {
-            Player = new List<Player>();
+            this.Player = new List<Player>();
+            this.Turns = 0;
         }
 
         public void CreatePlayer(string userName, string color)
@@ -27,20 +28,11 @@ namespace EngineClasses
             if (Player.Count < 4)
             {
                 Player player = new Player(userName, color);
-                CreateGamePieces(player);
                 this.Player.Add(player);
             }
-        }
+        }        
 
-        private void CreateGamePieces(Player player)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                player.GamePiece.Add(new GamePiece(player, i + 1, true, false));
-            }
-        }
-
-        public Player CurrentPlayerTurn()
+        public Player GetCurrentPlayer()
         {
             return Player.ToList()[(Turns % Player.Count)];
         }
@@ -89,7 +81,5 @@ namespace EngineClasses
                 context.SaveChanges();
             }
         }
-
-
     }
 }

@@ -22,7 +22,13 @@ namespace EngineClasses
         {
             this.UserName = userName;
             this.Color = color;
-            GamePiece = new List<GamePiece>();
+
+            //Populate gamepiece list
+            this.GamePiece = new List<GamePiece>();
+            for (int i = 0; i < 4; i++)
+            {
+                this.GamePiece.Add(new GamePiece(this, i + 1, true, false));
+            }
         }
 
         public GamePiece SelectGamePiece(int index)

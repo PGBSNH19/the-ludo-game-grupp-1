@@ -34,22 +34,5 @@ namespace EngineClasses.Tests
 
             Assert.AreEqual(userName, g1.Session.Player.ToList()[0].UserName);
         }
-
-        [TestMethod()]
-        public void CurrentPlayerTurnTest_CheckIfNextPlayerTurn_NextPlayerInTurn()
-        {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
-            string p1 = "p1";
-            string p1Color = "Red";
-            string p2 = "p2";
-            string p2Color = "Yellow";
-
-            g1.CreatePlayer(p1, p1Color);
-            g1.CreatePlayer(p2, p2Color);
-            g1.NextTurn(1);
-            Player result = g1.CurrentPlayerTurn();
-
-            Assert.AreEqual(p2, result.UserName);
-        }
     }
 }

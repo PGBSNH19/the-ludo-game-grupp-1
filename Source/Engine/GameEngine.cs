@@ -47,7 +47,7 @@ namespace EngineClasses
         /// <returns></returns>
         public Player CurrentPlayerTurn()
         {
-            return Session.CurrentPlayerTurn();
+            return Session.GetCurrentPlayer();
         }
 
         /// <summary>
