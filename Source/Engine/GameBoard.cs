@@ -26,7 +26,7 @@ namespace EngineClasses
             this.BoardRoute.AddRange(AddSharedSection());
         }
 
-        public List<GameSquare> AddPlayerSection(string color)
+        private List<GameSquare> AddPlayerSection(string color)
         {
             List<GameSquare> section = new List<GameSquare>();
             section.Add(new GameSquare(this.BoardRoute.Count + section.Count, color, true, false));
@@ -39,7 +39,7 @@ namespace EngineClasses
             return section;
         }
 
-        public List<GameSquare> AddSharedSection()
+        private List<GameSquare> AddSharedSection()
         {
             List<GameSquare> section = new List<GameSquare>();
             for (int i = 0; i < 9; i++)
@@ -50,22 +50,41 @@ namespace EngineClasses
             return section;
         }
 
+        /// <summary>
+        /// Return starting square based on player color.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public GameSquare GetStartingSquare(Player player)
         {
             return BoardRoute.Where(b => b.Color == player.Color && b.StartingSquare).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Returns gamesquare based on game pieces position (int).
+        /// </summary>
+        /// <param name="gamePiece"></param>
+        /// <returns></returns>
         public GameSquare GetCurrentSquare(GamePiece gamePiece)
         {
             return BoardRoute.Where(b => b.GameSquareNumber == gamePiece.Position).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Returns the square after the square the game piece is currently at.
+        /// </summary>
+        /// <param name="gamePiece"></param>
+        /// <returns></returns>
         public GameSquare GetNextSquare(GamePiece gamePiece)
         {
             return BoardRoute.Where(b => b.GameSquareNumber == gamePiece.Position + 1).FirstOrDefault();
         }
 
-        
+        /// <summary>
+        /// Returns the next square the game piece can legally stand on according to game rules.
+        /// </summary>
+        /// <param name="gamePiece"></param>
+        /// <returns></returns>
         public GameSquare FindNextValidSquare(GamePiece gamePiece)
         {
             int i = 1;

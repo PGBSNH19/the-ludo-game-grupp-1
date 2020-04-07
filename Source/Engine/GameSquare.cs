@@ -25,7 +25,11 @@ namespace EngineClasses
             this.GamePieces = new List<GamePiece>();
         }
 
-        public void AddGamePiece(GamePiece gamePiece)
+        /// <summary>
+        /// Places gamePiece in squares list of game pieces and sets all pieces of different colors to base.
+        /// </summary>
+        /// <param name="gamePiece"></param>
+        public void PlaceGamePiece(GamePiece gamePiece)
         {
             GamePieces = GamePieces
                 .Where(gp => gp.Player.Color != gamePiece.Player.Color)
@@ -33,6 +37,5 @@ namespace EngineClasses
                 .ToList();
             GamePieces.RemoveAll(gp => gp.Player.Color != gamePiece.Player.Color);
         }
-
     }
 }
