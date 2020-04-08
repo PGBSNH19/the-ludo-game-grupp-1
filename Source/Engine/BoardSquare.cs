@@ -31,12 +31,17 @@ namespace EngineClasses
         /// <param name="gamePiece"></param>
         public List<GamePiece> PlaceGamePiece(GamePiece gamePiece)
         {
-            GamePieces = GamePieces
-                .Where(gp => gp.Player.Color != gamePiece.Player.Color)
-                .Select(gp => { gp.IsAtBase = true; gp.BoardSquareNumber = null; return gp; } )
-                .ToList();
-            GamePieces.RemoveAll(gp => gp.Player.Color != gamePiece.Player.Color);
-            return GamePieces;
+            this.GamePieces.Add(gamePiece);
+            return this.GamePieces;
+        }
+
+        public void ValidateIfGameSquareIsFree()
+        {
+            //GamePieces = GamePieces
+            //    .Where(gp => gp.Player.Color != gamePiece.Player.Color)
+            //    .Select(gp => { gp.IsAtBase = true; gp.BoardSquareNumber = null; return gp; })
+            //    .ToList();
+            //GamePieces.RemoveAll(gp => gp.Player.Color != gamePiece.Player.Color);
         }
     }
 }

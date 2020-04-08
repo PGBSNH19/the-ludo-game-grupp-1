@@ -25,6 +25,10 @@ namespace EngineClasses
 
             //Populate gamepiece list
             this.GamePiece = new List<GamePiece>();
+            if(GamePiece.Count <= 4)
+            {
+                return;
+            }
             for (int i = 0; i < 4; i++)
             {
                 this.GamePiece.Add(new GamePiece(i + 1));

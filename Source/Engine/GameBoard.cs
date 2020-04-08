@@ -67,7 +67,7 @@ namespace EngineClasses
         /// <returns></returns>
         public BoardSquare GetCurrentSquare(GamePiece gamePiece)
         {
-            return Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber).FirstOrDefault();
+            return Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).FirstOrDefault();
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace EngineClasses
         /// <returns></returns>
         public BoardSquare GetNextSquare(GamePiece gamePiece)
         {
-            return Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber + 1).FirstOrDefault();
+            return Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value + 1).FirstOrDefault();
         }
 
         /// <summary>
@@ -103,9 +103,10 @@ namespace EngineClasses
         /// Places gamePiece in squares' list of game pieces and sets all pieces of different colors to base.
         /// </summary>
         /// <param name="gamePiece"></param>
-        public List<GamePiece> PlaceGamePiece(GamePiece gamePiece)
+        public void PlaceGamePiece(GamePiece gamePiece)
         {
-            return Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber).First().PlaceGamePiece(gamePiece);
+            BoardSquare boardSquare = Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).First();
+            boardSquare.GamePieces.Add(gamePiece);
         }
 
     }
