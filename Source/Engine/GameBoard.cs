@@ -28,12 +28,12 @@ namespace EngineClasses
 
         private List<BoardSquare> AddPlayerSection(string color)
         {
-            List<BoardSquare> section = new List<BoardSquare>();
-            section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
+            List<BoardSquare> section = new List<BoardSquare>();            
             for (int i = 0; i < 4; i++)
             {
                 section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, false));
             }
+            section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
             section.Add(new BoardSquare(this.Board.Count + section.Count, color, true, false));
 
             return section;
