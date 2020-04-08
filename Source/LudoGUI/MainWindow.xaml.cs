@@ -22,8 +22,16 @@ namespace LudoGUI
     public partial class MainWindow : Window
     {
         public GameEngine gameEngine;
-        public Grid grid;
+        public Grid gameBoardGrid;
         public Button button;
+        public TextBox enterNameBox;
+        public Label diceResult;
+        public Label playerColor;
+        public Button startGame;
+        public Button rollDice;
+        public StackPanel navStackPanel;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +40,8 @@ namespace LudoGUI
         private void Start()
         {
             gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog());
-            CreateGUI(gameEngine.GameBoard);
+            CreateGameBoardGUI(gameEngine.GameBoard);
+            CreateStartGameGUI();
             UpdateGameBoard(gameEngine.GameBoard);
 
             gameEngine.CreatePlayer("Mirko", "Red");
@@ -45,40 +54,72 @@ namespace LudoGUI
             Dictionary<string, int> gameBoard2D = GetGameBoard2DRepresentation(gameBoard);
             foreach (KeyValuePair<string, int> square in gameBoard2D)
             {
-                grid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = gameBoard.BoardRoute[square.Value].GameSquareNumber;
+                gameBoardGrid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = gameBoard.BoardRoute[square.Value].GameSquareNumber;
             }
         }
 
-        public void CreateGUI(GameBoard gameBoard)
+        public void CreateStartGameGUI()
         {
-            
-            grid = (Grid)Content;
-
-            for (int i = 0; i < 11; i++)
+            navStackPanel = new StackPanel
             {
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
-                grid.RowDefinitions.Add(new RowDefinition());
-            }
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
-            StackPanel stackPanel = new StackPanel
-            {
-                Background = Brushes.LightPink,
+                Background = Brushes.AliceBlue
             };
-            grid.Children.Add(stackPanel);
-            Grid.SetColumn(stackPanel, 11);
+            gameBoardGrid.Children.Add(navStackPanel);
+            Grid.SetColumn(navStackPanel, 11);
 
-            Label user1 = new Label
+            Label enterNameInstruction = new Label
             {
                 Content = "Skriv in ditt användarnamn!",
                 FontSize = 30,
                 Height = 1000,
-                Width = 500,
+                Width = 500
             };
-            TextBlock tb1 = new TextBlock();
+            navStackPanel.Children.Add(enterNameInstruction);
 
-            stackPanel.Children.Add(user1);
-            stackPanel.Children.Add(tb1);
+            TextBox temp;
+            for (int i = 0; i < 4; i++)
+            {
+                enterNameBox = new TextBox();
+                enterNameBox.Tag = i;
+                navStackPanel.Children.Add(enterNameBox);
+            }
+
+            startGame = new Button
+            {
+                Content = "Start Game!"
+            };
+            navStackPanel.Children.Add(startGame);
+            startGame.Click += StartGame_Click;
+        }
+
+        private void StartGame_Click(object sender, RoutedEventArgs e)
+        {
+            navStackPanel.Children.Clear();
+            CreateGameNavGUI();
+        }
+
+        public TextBox CreateUserNameTextBox(int playerNumber)
+        {
+            enterNameBox = new TextBox();
+            enterNameBox.Tag = playerNumber;
+            return enterNameBox;
+        }
+
+        public void CreateGameNavGUI()
+        {
+            MessageBox.Show("Hej Mirko!");
+        }
+
+        public void CreateGameBoardGUI(GameBoard gameBoard)
+        {            
+            gameBoardGrid = (Grid)Content;
+
+            for (int i = 0; i < 11; i++)
+            {
+                gameBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                gameBoardGrid.RowDefinitions.Add(new RowDefinition());
+            }
+            gameBoardGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             for (int row = 0; row < 11; row++)
             {
@@ -117,7 +158,7 @@ namespace LudoGUI
                     {
                         button.Background = Brushes.Black;
                     }
-                    grid.Children.Add(button);
+                    gameBoardGrid.Children.Add(button);
                     Grid.SetRow(button, row);
                     Grid.SetColumn(button, column);
                 }
