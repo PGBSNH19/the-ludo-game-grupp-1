@@ -22,14 +22,17 @@ namespace LudoGUI
     public partial class MainWindow : Window
     {
         public GameEngine gameEngine;
+        public Grid mainGrid;
         public Grid gameBoardGrid;
+        public StackPanel navStackPanel;
+        public StackPanel startGamePanel;
         public Button button;
         public TextBox enterNameBox;
         public Label diceResult;
         public Label playerColor;
         public Button startGame;
         public Button rollDice;
-        public StackPanel navStackPanel;
+        
 
 
         public MainWindow()
@@ -40,13 +43,23 @@ namespace LudoGUI
         private void Start()
         {
             gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            mainGrid = new Grid();
+            mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            mainGrid.RowDefinitions.Add(new RowDefinition());
+
             CreateGameBoardGUI(gameEngine.GameBoard);
+            mainGrid.Children.Add(gameBoardGrid);
+            Grid.SetColumn(gameBoardGrid, 0);
             CreateStartGameGUI();
-            UpdateGameBoard(gameEngine.GameBoard);
+            mainGrid.Children.Add(startGamePanel);
+            Grid.SetColumn(startGamePanel, 1);
+            CreateStartGameGUI();
+            //UpdateGameBoard(gameEngine.GameBoard);
 
             gameEngine.CreatePlayer("Mirko", "Red");
             gameEngine.CreatePlayer("Anas", "Blue");
-            
+
         }
 
         private void UpdateGameBoard(GameBoard gameBoard)
@@ -60,12 +73,11 @@ namespace LudoGUI
 
         public void CreateStartGameGUI()
         {
-            navStackPanel = new StackPanel
+            startGamePanel = new StackPanel
             {
                 Background = Brushes.AliceBlue
             };
-            gameBoardGrid.Children.Add(navStackPanel);
-            Grid.SetColumn(navStackPanel, 11);
+            gameBoardGrid.Children.Add(startGamePanel);
 
             Label enterNameInstruction = new Label
             {
@@ -74,27 +86,26 @@ namespace LudoGUI
                 Height = 1000,
                 Width = 500
             };
-            navStackPanel.Children.Add(enterNameInstruction);
+            startGamePanel.Children.Add(enterNameInstruction);
 
-            TextBox temp;
             for (int i = 0; i < 4; i++)
             {
                 enterNameBox = new TextBox();
                 enterNameBox.Tag = i;
-                navStackPanel.Children.Add(enterNameBox);
+                startGamePanel.Children.Add(enterNameBox);
             }
 
             startGame = new Button
             {
                 Content = "Start Game!"
             };
-            navStackPanel.Children.Add(startGame);
+            startGamePanel.Children.Add(startGame);
             startGame.Click += StartGame_Click;
         }
 
         private void StartGame_Click(object sender, RoutedEventArgs e)
         {
-            navStackPanel.Children.Clear();
+            startGamePanel.Children.Clear();
             CreateGameNavGUI();
         }
 
@@ -119,7 +130,6 @@ namespace LudoGUI
                 gameBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
                 gameBoardGrid.RowDefinitions.Add(new RowDefinition());
             }
-            gameBoardGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             for (int row = 0; row < 11; row++)
             {
