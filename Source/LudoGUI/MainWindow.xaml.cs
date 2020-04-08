@@ -25,12 +25,13 @@ namespace LudoGUI
         public Grid mainGrid;
         public Grid gameBoardGrid;
         public StackPanel menuGamePanel;
-        public Button button;
+        public Button gameSquareButton;
         public TextBox enterNameBox;
         public Label diceResult;
         public Label playerColor;
         public Button startGame;
         public Button rollDice;
+        Dictionary<string, int> gameBoard2D;
 
         public MainWindow()
         {
@@ -45,6 +46,9 @@ namespace LudoGUI
 
             //Set up new Game Engine
             gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+
+            //Set up game board 2D translation
+            gameBoard2D = GetGameBoard2DRepresentation(gameEngine.GameBoard);
 
             //Create main window grid
             mainGrid = (Grid)Content;
@@ -65,28 +69,7 @@ namespace LudoGUI
             Grid.SetColumn(menuGamePanel, 1);
         }
 
-        private void UpdateGameBoard(GameBoard gameBoard)
-        {
-            Dictionary<string, int> gameBoard2D = GetGameBoard2DRepresentation(gameBoard);
-            foreach (KeyValuePair<string, int> square in gameBoard2D)
-            {
-                gameBoardGrid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = gameBoard.Board[square.Value].BoardSquareNumber;
-            }
-
-            foreach (Label label in menuGamePanel.Children.OfType<Label>())
-            {
-                if (label.Content.ToString() == gameEngine.CurrentPlayerTurn().UserName)
-                {
-                    label.BorderBrush = Brushes.Black;
-                    label.BorderThickness = new Thickness(3);
-                }
-                else
-                {
-                    label.BorderBrush = Brushes.Transparent;
-                    label.BorderThickness = new Thickness(0);
-                }
-            }
-        }
+        
 
         public void CreateStartGameGUI()
         {
@@ -130,7 +113,8 @@ namespace LudoGUI
 
             menuGamePanel.Children.Clear();
             CreateGameNavGUI(boxCount);
-            UpdateGameBoard(gameEngine.GameBoard);
+
+            UpdateGameBoard();
         }
 
         public void CreateGameNavGUI(int players)
@@ -174,6 +158,7 @@ namespace LudoGUI
         {
             int roll = gameEngine.RollDice();            
             diceResult.Content = roll.ToString();
+            rollDice.IsEnabled = false;
         }
 
         public void CreateGameBoardGUI(GameBoard gameBoard)
@@ -190,54 +175,80 @@ namespace LudoGUI
             {
                 for (int column = 0; column < 11; column++)
                 {
-                    button = new Button
+                    gameSquareButton = new Button
                     {
                         Height = 50,
                         Width = 50,
                         Margin = new Thickness(0),
                     };
-                    button.Tag = $"{column}.{row}";
-                    button.Click += Button_Click;
+                    gameSquareButton.Tag = $"{column}.{row}";
+                    gameSquareButton.Click += gameSquareButton_Click;
 
                     if (row == 1 && column == 1 || (row == 2 && column == 2) || (row == 1 && column == 2) || (row == 2 && column == 1) || (row == 4 && column == 0) || (row == 5 && column >= 0 && column < 5))
                     {
-                        button.Background = Brushes.Blue;
+                        gameSquareButton.Background = Brushes.Blue;
                     }
                     else if (row == 1 && column == 8 || (row == 1 && column == 9) || (row == 2 && column == 8) || (row == 2 && column == 9) || (row == 0 && column == 6) || (row < 5 && column == 5))
                     {
-                        button.Background = Brushes.Red;
+                        gameSquareButton.Background = Brushes.Red;
                     }
                     else if (row == 8 && column == 1 || (row == 8 && column == 2) || (row == 9 && column == 1) || (row == 9 && column == 2) || (row == 10 && column == 4) || (row < 11 && row > 5 && column == 5))
                     {
-                        button.Background = Brushes.Green;
+                        gameSquareButton.Background = Brushes.Green;
                     }
                     else if (row == 8 && column == 8 || (row == 8 && column == 9) || (row == 9 && column == 8) || (row == 9 && column == 9) || (row == 6 && column == 10) || (row == 5 && column > 5))
                     {
-                        button.Background = Brushes.Yellow;
+                        gameSquareButton.Background = Brushes.Yellow;
                     }
                     else if (row == 5 && column == 5)
                     {
-                        button.Background = Brushes.Gold;
-                        button.Content = "GOAL";
+                        gameSquareButton.Background = Brushes.Gold;
+                        gameSquareButton.Content = "GOAL";
                     }
                     else if (row == 4 && column > 0 || (column < 5 && column > 5) || (row == 6 && column >= 0) || (column < 5 && column > 5) || (column == 4 && row >= 0 && row <= 10) || (column == 6 && row >= 0 && row <= 10))
                     {
-                        button.Background = Brushes.White;
+                        gameSquareButton.Background = Brushes.White;
                     }
                     else
                     {
-                        button.Background = Brushes.Black;
+                        gameSquareButton.Background = Brushes.Black;
                     }
-                    gameBoardGrid.Children.Add(button);
-                    Grid.SetRow(button, row);
-                    Grid.SetColumn(button, column);
+                    gameBoardGrid.Children.Add(gameSquareButton);
+                    Grid.SetRow(gameSquareButton, row);
+                    Grid.SetColumn(gameSquareButton, column);
                 }
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void gameSquareButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show((sender as Button).Tag.ToString());
+            //Check if buttons tag is translateable according to gameBoard2D
+            if (gameBoard2D.ContainsKey((sender as Button).Tag.ToString()))
+            {
+                int squareTranslation = gameBoard2D[(sender as Button).Tag.ToString()];
+
+                //Get list of all pieces occupying square
+                List<GamePiece> piecesOnSquare =
+                gameEngine
+                .CurrentPlayerTurn()
+                .GamePiece
+                .Where(gp => gp.BoardSquareNumber != null && gp.BoardSquareNumber.Value != squareTranslation)
+                .ToList();
+
+                //Move first piece in list if there are any on square
+                if (piecesOnSquare.Count > 0)
+                {
+                    gameEngine.MoveGamePiece(piecesOnSquare[0], int.Parse(diceResult.Content.ToString()));
+
+                    //Enable rolling dice
+                    rollDice.IsEnabled = true;
+
+                    //Set to next turn
+                    gameEngine.Session.Turns++;
+
+                    UpdateGameBoard();
+                }
+            }
         }
 
         public Dictionary<string, int> GetGameBoard2DRepresentation(GameBoard gameBoard)
@@ -311,6 +322,37 @@ namespace LudoGUI
             GameBoard2DTranslation.Add("5.5", gameBoard.Board[50].BoardSquareNumber);
 
             return GameBoard2DTranslation;
+        }
+
+        private void UpdateGameBoard()
+        {
+            //Update square content
+            foreach (KeyValuePair<string, int> square in gameBoard2D)
+            {
+                if (gameEngine.GameBoard.Board[square.Value].GamePieces.Any())
+                {
+                    gameBoardGrid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = gameEngine.GameBoard.Board[square.Value].GamePieces[0].Player.UserName;
+                }
+                else
+                {
+                    gameBoardGrid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = square.Value;
+                }
+            }
+
+            //Mark current player
+            foreach (Label label in menuGamePanel.Children.OfType<Label>())
+            {
+                if (label.Content.ToString() == gameEngine.CurrentPlayerTurn().UserName)
+                {
+                    label.BorderBrush = Brushes.Black;
+                    label.BorderThickness = new Thickness(3);
+                }
+                else
+                {
+                    label.BorderBrush = Brushes.Transparent;
+                    label.BorderThickness = new Thickness(0);
+                }
+            }
         }
     }
 }

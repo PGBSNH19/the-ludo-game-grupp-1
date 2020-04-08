@@ -11,6 +11,9 @@ namespace LudoGUI
         {
             Player currentPlayer = gameEngine.CurrentPlayerTurn();
 
+
+
+            gameEngine.Session.Turns++;
         }
     }
 }
