@@ -136,6 +136,21 @@ namespace EngineClasses
             return Session.SelectGamePiece(player, index);
         }
 
+        /// <summary>
+        /// Returns all GamePieces in session
+        /// </summary>
+        /// <returns></returns>
+        public List<GamePiece> GetAllGamePieces()
+        {
+            List<GamePiece> gamePieces = new List<GamePiece>();
+            foreach (Player player in Session.Player)
+            {
+                gamePieces.AddRange(player.GamePiece);
+            }
+
+            return gamePieces;
+        }
+
         public Session LoadSession()
         {
             return Session.LoadSessionAsync().Result;

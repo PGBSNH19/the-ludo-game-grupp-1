@@ -56,17 +56,18 @@ namespace LudoGUI
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             mainGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-            //Build visual assets
+            //Build game board visual and start menu
             CreateGameBoardGUI(gameEngine.GameBoard);
             CreateStartGameGUI();
 
-            //Add Game Board visuals
+            //Add Game Board visual
             mainGrid.Children.Add(gameBoardGrid);
             Grid.SetColumn(gameBoardGrid, 0);
 
             //Add Start Game menu            
             mainGrid.Children.Add(menuGamePanel);
-            Grid.SetColumn(menuGamePanel, 1);
+            Grid.SetColumn(menuGamePanel, 1);            
+
         }
 
         
@@ -232,7 +233,7 @@ namespace LudoGUI
                 gameEngine
                 .CurrentPlayerTurn()
                 .GamePiece
-                .Where(gp => gp.BoardSquareNumber != null && gp.BoardSquareNumber.Value != squareTranslation)
+                .Where(gp => gp.BoardSquareNumber != null && gp.BoardSquareNumber.Value == squareTranslation)
                 .ToList();
 
                 //Move first piece in list if there are any on square
@@ -326,6 +327,16 @@ namespace LudoGUI
 
         private void UpdateGameBoard()
         {
+            //Since bases not yet implemented
+            foreach (GamePiece gamePiece in gameEngine.GetAllGamePieces())
+            {
+                if (gamePiece.IsAtBase)
+                {
+                    gamePiece.BoardSquareNumber = gameEngine.GameBoard.GetStartingSquare(gamePiece.Player).BoardSquareNumber;
+                    gameEngine.GameBoard.PlaceGamePiece(gamePiece);                    
+                }
+            }
+
             //Update square content
             foreach (KeyValuePair<string, int> square in gameBoard2D)
             {

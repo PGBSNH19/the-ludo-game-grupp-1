@@ -29,12 +29,12 @@ namespace EngineClasses
         private List<BoardSquare> AddPlayerSection(string color)
         {
             List<BoardSquare> section = new List<BoardSquare>();
-            section.Add(new BoardSquare(this.Board.Count + section.Count, color, true, false));
+            section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
             for (int i = 0; i < 4; i++)
             {
                 section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, false));
             }
-            section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
+            section.Add(new BoardSquare(this.Board.Count + section.Count, color, true, false));
 
             return section;
         }
@@ -89,8 +89,8 @@ namespace EngineClasses
         {
             int i = 1;
 
-            while (Board[gamePiece.BoardSquareNumber.Value + i].Color != gamePiece.Player.Color ||
-                    Board[gamePiece.BoardSquareNumber.Value + i].Color != "White")
+            while (this.Board[gamePiece.BoardSquareNumber.Value + i].Color != gamePiece.Player.Color &&
+                    this.Board[gamePiece.BoardSquareNumber.Value + i].Color != "White")
             {
                 i++;
             }
@@ -108,6 +108,5 @@ namespace EngineClasses
             BoardSquare boardSquare = Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).First();
             boardSquare.GamePieces.Add(gamePiece);
         }
-
     }
 }
