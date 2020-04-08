@@ -63,9 +63,6 @@ namespace LudoGUI
             //Add Start Game menu            
             mainGrid.Children.Add(menuGamePanel);
             Grid.SetColumn(menuGamePanel, 1);
-
-            //Update Game Board visuals
-            UpdateGameBoard(gameEngine.GameBoard);
         }
 
         private void UpdateGameBoard(GameBoard gameBoard)
@@ -74,6 +71,20 @@ namespace LudoGUI
             foreach (KeyValuePair<string, int> square in gameBoard2D)
             {
                 gameBoardGrid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = gameBoard.Board[square.Value].BoardSquareNumber;
+            }
+
+            foreach (Label label in menuGamePanel.Children.OfType<Label>())
+            {
+                if (label.Content.ToString() == gameEngine.CurrentPlayerTurn().UserName)
+                {
+                    label.BorderBrush = Brushes.Black;
+                    label.BorderThickness = new Thickness(3);
+                }
+                else
+                {
+                    label.BorderBrush = Brushes.Transparent;
+                    label.BorderThickness = new Thickness(0);
+                }
             }
         }
 
@@ -119,6 +130,7 @@ namespace LudoGUI
 
             menuGamePanel.Children.Clear();
             CreateGameNavGUI(boxCount);
+            UpdateGameBoard(gameEngine.GameBoard);
         }
 
         public void CreateGameNavGUI(int players)
