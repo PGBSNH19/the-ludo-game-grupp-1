@@ -8,43 +8,43 @@ namespace EngineClasses
     public class GameBoard
     {
         public Dictionary<string, int> Bases { get; private set; }
-        public List<GameSquare> BoardRoute { get; set; }
+        public List<BoardSquare> Board { get; set; }
         public GameBoard()
         {
-            this.BoardRoute = new List<GameSquare>();
+            this.Board = new List<BoardSquare>();
 
-            this.BoardRoute.AddRange(AddPlayerSection("Red"));
-            this.BoardRoute.AddRange(AddSharedSection());
+            this.Board.AddRange(AddPlayerSection("Red"));
+            this.Board.AddRange(AddSharedSection());
 
-            this.BoardRoute.AddRange(AddPlayerSection("Blue"));
-            this.BoardRoute.AddRange(AddSharedSection());
+            this.Board.AddRange(AddPlayerSection("Blue"));
+            this.Board.AddRange(AddSharedSection());
 
-            this.BoardRoute.AddRange(AddPlayerSection("Yellow"));
-            this.BoardRoute.AddRange(AddSharedSection());
+            this.Board.AddRange(AddPlayerSection("Yellow"));
+            this.Board.AddRange(AddSharedSection());
 
-            this.BoardRoute.AddRange(AddPlayerSection("Green"));
-            this.BoardRoute.AddRange(AddSharedSection());
+            this.Board.AddRange(AddPlayerSection("Green"));
+            this.Board.AddRange(AddSharedSection());
         }
 
-        private List<GameSquare> AddPlayerSection(string color)
+        private List<BoardSquare> AddPlayerSection(string color)
         {
-            List<GameSquare> section = new List<GameSquare>();
-            section.Add(new GameSquare(this.BoardRoute.Count + section.Count, color, true, false));
+            List<BoardSquare> section = new List<BoardSquare>();
+            section.Add(new BoardSquare(this.Board.Count + section.Count, color, true, false));
             for (int i = 0; i < 4; i++)
             {
-                section.Add(new GameSquare(this.BoardRoute.Count + section.Count, color, false, false));
+                section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, false));
             }
-            section.Add(new GameSquare(this.BoardRoute.Count + section.Count, color, false, true));
+            section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
 
             return section;
         }
 
-        private List<GameSquare> AddSharedSection()
+        private List<BoardSquare> AddSharedSection()
         {
-            List<GameSquare> section = new List<GameSquare>();
+            List<BoardSquare> section = new List<BoardSquare>();
             for (int i = 0; i < 9; i++)
             {
-                section.Add(new GameSquare(this.BoardRoute.Count + section.Count, "White", false, false));
+                section.Add(new BoardSquare(this.Board.Count + section.Count, "White", false, false));
             }
 
             return section;
@@ -55,9 +55,9 @@ namespace EngineClasses
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public GameSquare GetStartingSquare(Player player)
+        public BoardSquare GetStartingSquare(Player player)
         {
-            return BoardRoute.Where(b => b.Color == player.Color && b.StartingSquare).FirstOrDefault();
+            return Board.Where(b => b.Color == player.Color && b.StartingSquare).FirstOrDefault();
         }
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace EngineClasses
         /// </summary>
         /// <param name="gamePiece"></param>
         /// <returns></returns>
-        public GameSquare GetCurrentSquare(GamePiece gamePiece)
+        public BoardSquare GetCurrentSquare(GamePiece gamePiece)
         {
-            return BoardRoute.Where(b => b.GameSquareNumber == gamePiece.Position).FirstOrDefault();
+            return Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber).FirstOrDefault();
         }
 
         /// <summary>
@@ -75,9 +75,9 @@ namespace EngineClasses
         /// </summary>
         /// <param name="gamePiece"></param>
         /// <returns></returns>
-        public GameSquare GetNextSquare(GamePiece gamePiece)
+        public BoardSquare GetNextSquare(GamePiece gamePiece)
         {
-            return BoardRoute.Where(b => b.GameSquareNumber == gamePiece.Position + 1).FirstOrDefault();
+            return Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber + 1).FirstOrDefault();
         }
 
         /// <summary>
@@ -85,30 +85,28 @@ namespace EngineClasses
         /// </summary>
         /// <param name="gamePiece"></param>
         /// <returns></returns>
-        public GameSquare FindNextValidSquare(GamePiece gamePiece)
+        public BoardSquare FindNextValidSquare(GamePiece gamePiece)
         {
             int i = 1;
 
-            while (BoardRoute[gamePiece.Position.Value + i].Color != gamePiece.Player.Color ||
-                    BoardRoute[gamePiece.Position.Value + i].Color != "White")
+            while (Board[gamePiece.BoardSquareNumber.Value + i].Color != gamePiece.Player.Color ||
+                    Board[gamePiece.BoardSquareNumber.Value + i].Color != "White")
             {
                 i++;
             }
 
-            return BoardRoute[gamePiece.Position.Value + i];
+            return Board[gamePiece.BoardSquareNumber.Value + i];
         }
-        
-        public void AddToDb(List<GameSquare> gameSquares)
-        {
-            using (var context = new LudoContext())
-            {
-                foreach (var s in gameSquares)
-                {
-                    context.GameSquare.Add(s);
-                }
 
-                context.SaveChanges();
-            }
+
+        /// <summary>
+        /// Places gamePiece in squares' list of game pieces and sets all pieces of different colors to base.
+        /// </summary>
+        /// <param name="gamePiece"></param>
+        public List<GamePiece> PlaceGamePiece(GamePiece gamePiece)
+        {
+            return Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber).First().PlaceGamePiece(gamePiece);
         }
+
     }
 }

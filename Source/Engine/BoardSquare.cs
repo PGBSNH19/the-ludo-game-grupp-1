@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace EngineClasses
 {
-    public class GameSquare
+    public class BoardSquare
     {
-        public int GameSquareNumber { get; set; }
+        public int BoardSquareNumber { get; set; }
         public string Color { get; set; }
         public bool StartingSquare { get; set; }
         public bool EndSquare { get; set; }
@@ -16,9 +16,9 @@ namespace EngineClasses
         public List<GamePiece> GamePieces { get; private set; }
         
 
-        public GameSquare(int gameSquareNumber, string color, bool startingSquare, bool endSquare)
+        public BoardSquare(int boardSquareNumber, string color, bool startingSquare, bool endSquare)
         {
-            this.GameSquareNumber = gameSquareNumber;
+            this.BoardSquareNumber = boardSquareNumber;
             this.Color = color;
             this.StartingSquare = startingSquare;
             this.EndSquare = endSquare;
@@ -29,13 +29,14 @@ namespace EngineClasses
         /// Places gamePiece in squares' list of game pieces and sets all pieces of different colors to base.
         /// </summary>
         /// <param name="gamePiece"></param>
-        public void PlaceGamePiece(GamePiece gamePiece)
+        public List<GamePiece> PlaceGamePiece(GamePiece gamePiece)
         {
             GamePieces = GamePieces
                 .Where(gp => gp.Player.Color != gamePiece.Player.Color)
-                .Select(gp => { gp.IsAtBase = true; gp.Position = null; return gp; } )
+                .Select(gp => { gp.IsAtBase = true; gp.BoardSquareNumber = null; return gp; } )
                 .ToList();
             GamePieces.RemoveAll(gp => gp.Player.Color != gamePiece.Player.Color);
+            return GamePieces;
         }
     }
 }

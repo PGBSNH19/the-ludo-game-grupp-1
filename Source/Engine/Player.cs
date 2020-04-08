@@ -27,7 +27,7 @@ namespace EngineClasses
             this.GamePiece = new List<GamePiece>();
             for (int i = 0; i < 4; i++)
             {
-                this.GamePiece.Add(new GamePiece(this, i + 1, true, false));
+                this.GamePiece.Add(new GamePiece(i + 1));
             }
         }
 

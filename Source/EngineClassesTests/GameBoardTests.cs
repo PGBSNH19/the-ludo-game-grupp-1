@@ -19,7 +19,7 @@ namespace EngineClasses.Tests
 
             var result = board.GetStartingSquare(player);
 
-            Assert.AreEqual(board.BoardRoute.Where(s => s.Color == player.Color && s.StartingSquare).First(), result);
+            Assert.AreEqual(board.Board.Where(s => s.Color == player.Color && s.StartingSquare).First(), result);
         }
 
         [TestMethod()]
@@ -28,9 +28,9 @@ namespace EngineClasses.Tests
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
 
-            player.GamePiece[1].Position = 3;
+            player.GamePiece[1].BoardSquareNumber = 3;
             var result = board.GetCurrentSquare(player.GamePiece[1]);
-            Assert.AreEqual(board.BoardRoute.Where(gp => gp.GameSquareNumber == 3).First(), result);
+            Assert.AreEqual(board.Board.Where(gp => gp.BoardSquareNumber == 3).First(), result);
 
         }
 
@@ -40,9 +40,9 @@ namespace EngineClasses.Tests
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
 
-            player.GamePiece[1].Position = 3;
+            player.GamePiece[1].BoardSquareNumber = 3;
             var result = board.GetNextSquare(player.GamePiece[1]);
-            Assert.AreEqual(board.BoardRoute.Where(gp => gp.GameSquareNumber == 3 + 1).First(), result);
+            Assert.AreEqual(board.Board.Where(gp => gp.BoardSquareNumber == 3 + 1).First(), result);
         }
 
         [TestMethod()]
@@ -51,7 +51,7 @@ namespace EngineClasses.Tests
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
 
-            player.GamePiece[1].Position = 0;
+            player.GamePiece[1].BoardSquareNumber = 0;
             
             var result = board.FindNextValidSquare(player.GamePiece[1]);
             Debug.WriteLine(result);

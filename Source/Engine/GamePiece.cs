@@ -19,15 +19,14 @@ namespace EngineClasses
         //Relationships
         public int PlayerId { get; private set; }
         public Player Player { get; private set; }
-        public int? Position { get; set; }
+        public int? BoardSquareNumber { get; set; }
 
 
-        public GamePiece(Player player,int gamePieceNumber, bool isAtBase, bool isAtGoal)
+        public GamePiece(int gamePieceNumber)
         {
-            this.Player = player;
             this.GamePieceNumber = gamePieceNumber;
-            this.IsAtBase = isAtBase;
-            this.IsAtGoal = isAtGoal;
+            this.IsAtBase = true;
+            this.IsAtGoal = false;
         }
 
         public void AddToDb()
@@ -38,6 +37,7 @@ namespace EngineClasses
                 if (context.GamePiece.Any(gp => gp.GamePieceId == this.GamePieceId))
                 {
                     context.GamePiece.Update(this);
+                    
                 }
                 else
                 {

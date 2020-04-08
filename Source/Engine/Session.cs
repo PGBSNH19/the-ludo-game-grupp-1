@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EngineClasses
 {
@@ -29,6 +30,10 @@ namespace EngineClasses
             {
                 Player player = new Player(userName, color);
                 this.Player.Add(player);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("You cant add more than 4 players.");
             }
         }        
 
@@ -67,6 +72,21 @@ namespace EngineClasses
 
                 context.SaveChanges();
             }
+        }
+        public async Task<Session> LoadSessionAsync()
+        {
+            Session session = null;
+            using (var context = new LudoContext())
+            {
+
+                session = await context.Session
+                        .Include(s => s.Player)
+                        .ThenInclude(p => p.GamePiece)
+                        .FirstOrDefaultAsync();
+                context.SaveChanges();
+            }
+
+            return session;
         }
 
         public void RemoveFromDb()

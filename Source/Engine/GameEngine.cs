@@ -21,6 +21,7 @@ namespace EngineClasses
             this.GameLog = gameLog;
         }
 
+        
         /// <summary>
         /// Create a new player and add it to session.
         /// </summary>
@@ -41,6 +42,7 @@ namespace EngineClasses
             return Session.Player[index];
         }
 
+        
         /// <summary>
         /// Returns current player whos turn it is.
         /// </summary>
@@ -61,8 +63,8 @@ namespace EngineClasses
             {
                 if (gamePiece.IsAtBase && steps >= 6)
                 {
-                    GameSquare startSquare = GameBoard.GetStartingSquare(gamePiece.Player);
-                    gamePiece.Position = startSquare.GameSquareNumber;
+                    BoardSquare startSquare = GameBoard.GetStartingSquare(gamePiece.Player);
+                    gamePiece.BoardSquareNumber = startSquare.BoardSquareNumber;
                     startSquare.PlaceGamePiece(gamePiece);
                     gamePiece.IsAtBase = false;
                 }
@@ -70,7 +72,7 @@ namespace EngineClasses
                 {
                     for (int i = 0; i < steps; i++)
                     {
-                        gamePiece.Position = GameBoard.FindNextValidSquare(gamePiece).GameSquareNumber;
+                        gamePiece.BoardSquareNumber = GameBoard.FindNextValidSquare(gamePiece).BoardSquareNumber;
                         if (GameBoard.GetNextSquare(gamePiece).EndSquare ||
                             i == steps - 1)
                         {
@@ -78,7 +80,7 @@ namespace EngineClasses
                         }
                     }
 
-                    GameSquare currentSquare = GameBoard.GetCurrentSquare(gamePiece);              
+                    BoardSquare currentSquare = GameBoard.GetCurrentSquare(gamePiece);              
                     currentSquare.PlaceGamePiece(gamePiece);
                 }
             }
@@ -89,7 +91,7 @@ namespace EngineClasses
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public bool CheckIfWon(Player player)
+        public bool IsWinner(Player player)
         {
             return player.GamePiece.All(gp => gp.IsAtGoal == true);
         } 
@@ -134,20 +136,26 @@ namespace EngineClasses
             return Session.SelectGamePiece(player, index);
         }
 
-        public Session LoadSessionFromDb()
+        public Session LoadSession()
         {
-            Session session = null;
-            using (var context = new LudoContext())
+            return Session.LoadSessionAsync().Result;
+        }
+
+        public void PlayCurrentSession()
+        {
+            this.Session = LoadSession();
+            PlaceGamePieces(Session.Player);
+        }
+
+        public void PlaceGamePieces(List<Player> players)
+        {
+            for(int i = 0; i < players.Count; i++)
             {
-
-                session = context.Session
-                        .Include(s => s.Player)
-                        .ThenInclude(p => p.GamePiece)
-                        .FirstOrDefault();
-                context.SaveChanges();
+                for(int j = 0; j < players[i].GamePiece.Count; j++)
+                {
+                    GameBoard.PlaceGamePiece(players[i].GamePiece[j]);
+                }
             }
-
-            return session;
         }
     }
 }
