@@ -73,11 +73,7 @@ namespace LudoGUI
             Dictionary<string, int> gameBoard2D = GetGameBoard2DRepresentation(gameBoard);
             foreach (KeyValuePair<string, int> square in gameBoard2D)
             {
-<<<<<<< HEAD
-                gameBoardGrid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = gameBoard.BoardRoute[square.Value].GameSquareNumber;
-=======
                 grid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = gameBoard.Board[square.Value].BoardSquareNumber;
->>>>>>> @robotdostopif, added and changed methods in GameEngine and also tidied up code
             }
         }
 
