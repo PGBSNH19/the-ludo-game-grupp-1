@@ -32,7 +32,8 @@ namespace Ludo
             GameLoop gameLoop = new GameLoop(gameEngine);
 
             string menuChoice = "";
-            while (menuChoice != "exit")
+            bool menuIsRunning = true;
+            while (menuIsRunning)
             {
                 
                 menuChoice = ShowMenu("LudoGame", menuOptions);
@@ -43,10 +44,12 @@ namespace Ludo
                         int players = int.Parse(ShowMenu("PlayerSelect", numberOfPlayers));  
                         gameLoop.PlayerSelect(players);
                         gameLoop.StartLoopThread();
+                        menuIsRunning = false;
                         break;
                     case "load game":
                         gameLoop.LoadGame();
                         gameLoop.StartLoopThread();
+                        menuIsRunning = false;
                         break;
                     case "save game":
                         break;

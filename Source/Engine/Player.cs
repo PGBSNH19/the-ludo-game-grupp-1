@@ -18,16 +18,24 @@ namespace EngineClasses
         public Session Session { get; private set; }
         public List<GamePiece> GamePiece { get; private set; }
 
+
         public Player(string userName, string color)
         {
             this.UserName = userName;
             this.Color = color;
 
-            //Populate gamepiece list
             this.GamePiece = new List<GamePiece>();
-            for (int i = 0; i < 4; i++)
+            
+        }
+
+        public void AddGamePieces()
+        {
+            if (GamePiece.Count <= 4)
             {
-                this.GamePiece.Add(new GamePiece(this, i + 1));
+                for (int i = 0; i < 4; i++)
+                {
+                    this.GamePiece.Add(new GamePiece(this, i + 1));
+                }
             }
         }
 

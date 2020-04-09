@@ -29,6 +29,7 @@ namespace EngineClasses
             if (Player.Count < 4)
             {
                 Player player = new Player(userName, color);
+                player.AddGamePieces();
                 this.Player.Add(player);
             }
             else
@@ -37,6 +38,7 @@ namespace EngineClasses
             }
         }        
 
+<<<<<<< HEAD
         public Player GetCurrentPlayer()
         {
             return Player.ToList()[(Turns % Player.Count)];
@@ -46,6 +48,12 @@ namespace EngineClasses
         {
             return player.SelectGamePiece(index);
         }
+=======
+        public Player GetCurrentPlayer() => Player.ToList()[(Turns % Player.Count)];
+        
+        public GamePiece SelectGamePiece(Player player, int index) => player.SelectGamePiece(index);
+        
+>>>>>>> @robotdostopif, now LoadSession and SaveSession works fine
 
         public int RollDice()
         {
