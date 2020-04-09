@@ -35,37 +35,5 @@ namespace EngineClasses
         {
             return GamePiece[index];
         }
-
-
-        public void AddToDb()
-        {
-            using (var context = new LudoContext())
-            {
-                //If exists do update instead
-                if (context.Player.Any(p => p.PlayerId == this.PlayerId))
-                {
-                    context.Player.Update(this);
-                }
-                else
-                {
-                    context.Player.Add(this);
-                }
-
-                context.SaveChanges();
-            }
-        }
-
-        public void RemoveFromDb()
-        {
-            using (var context = new LudoContext())
-            {
-                if (context.Player.Any(p => p.PlayerId == this.PlayerId))
-                {
-                    context.Player.Remove(this);
-                }
-
-                context.SaveChanges();
-            }
-        }
     }
 }

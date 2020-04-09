@@ -30,36 +30,10 @@ namespace EngineClasses
             this.IsAtGoal = false;
         }
 
-        public void AddToDb()
+        public void SetAtBase()
         {
-            using (var context = new LudoContext())
-            {
-                //If exists do update instead
-                if (context.GamePiece.Any(gp => gp.GamePieceId == this.GamePieceId))
-                {
-                    context.GamePiece.Update(this);
-                    
-                }
-                else
-                {
-                    context.GamePiece.Add(this);
-                }
-                
-                context.SaveChanges();
-            }
-        }
-
-        public void RemoveFromDb()
-        {
-            using (var context = new LudoContext())
-            {
-                if (context.GamePiece.Any(gp => gp.GamePieceId == this.GamePieceId))
-                {
-                    context.GamePiece.Remove(this);
-                }
-
-                context.SaveChanges();
-            }
+            this.IsAtBase = true;
+            this.BoardSquareNumber = null;
         }
     }
 }

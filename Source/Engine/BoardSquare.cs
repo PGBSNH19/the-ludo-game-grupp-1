@@ -30,6 +30,12 @@ namespace EngineClasses
         /// <param name="gamePiece"></param>
         public void PlaceGamePiece(GamePiece gamePiece)
         {
+            foreach (var p in this.GamePieces.Where(gp => gp.Player.Color != gamePiece.Player.Color))
+            {
+                p.SetAtBase();
+            }
+
+            this.GamePieces.RemoveAll(gp => gp.Player.Color != gamePiece.Player.Color);
             this.GamePieces.Add(gamePiece);
         }
 
@@ -37,7 +43,7 @@ namespace EngineClasses
         {
             GamePieces = GamePieces
                 .Where(gp => gp.Player.Color != gamePiece.Player.Color)
-                .Select(gp => { gp.IsAtBase = true; gp.BoardSquareNumber = null; return gp; } )
+                .Select(gp => { gp.IsAtBase = true; gp.BoardSquareNumber = null; return gp; })
                 .ToList();
             GamePieces.RemoveAll(gp => gp.Player.Color != gamePiece.Player.Color);
             GamePieces.Add(gamePiece);
