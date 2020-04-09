@@ -70,11 +70,14 @@ namespace EngineClasses
                 }
                 else
                 {
+                    //For test only
+                    gamePiece.IsAtBase = false;
                     for (int i = 0; i < steps; i++)
                     {
+                        //Fixa så att index inte kan gå out of range
                         gamePiece.BoardSquareNumber = GameBoard.FindNextValidSquare(gamePiece).BoardSquareNumber;
-                        if (GameBoard.GetNextSquare(gamePiece).EndSquare ||
-                            i == steps - 1)
+                        if (i == steps - 1 && GameBoard.GetNextSquare(gamePiece).EndSquare 
+                            )
                         {
                             gamePiece.IsAtGoal = true;
                         }

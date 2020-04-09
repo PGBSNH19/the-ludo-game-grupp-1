@@ -256,71 +256,71 @@ namespace LudoGUI
         {
             Dictionary<string, int> GameBoard2DTranslation = new Dictionary<string, int>();
             //Red squares
-            GameBoard2DTranslation.Add("6.0", gameBoard.Board[5].BoardSquareNumber);
             GameBoard2DTranslation.Add("5.1", gameBoard.Board[0].BoardSquareNumber);
             GameBoard2DTranslation.Add("5.2", gameBoard.Board[1].BoardSquareNumber);
             GameBoard2DTranslation.Add("5.3", gameBoard.Board[2].BoardSquareNumber);
             GameBoard2DTranslation.Add("5.4", gameBoard.Board[3].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.0", gameBoard.Board[4].BoardSquareNumber);
             //White section NE
-            GameBoard2DTranslation.Add("6.1", gameBoard.Board[6].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.2", gameBoard.Board[7].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.3", gameBoard.Board[8].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.4", gameBoard.Board[9].BoardSquareNumber);
-            GameBoard2DTranslation.Add("7.4", gameBoard.Board[10].BoardSquareNumber);
-            GameBoard2DTranslation.Add("8.4", gameBoard.Board[11].BoardSquareNumber);
-            GameBoard2DTranslation.Add("9.4", gameBoard.Board[12].BoardSquareNumber);
-            GameBoard2DTranslation.Add("10.4", gameBoard.Board[13].BoardSquareNumber);
-            GameBoard2DTranslation.Add("10.5", gameBoard.Board[14].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.1", gameBoard.Board[5].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.2", gameBoard.Board[6].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.3", gameBoard.Board[7].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.4", gameBoard.Board[8].BoardSquareNumber);
+            GameBoard2DTranslation.Add("7.4", gameBoard.Board[9].BoardSquareNumber);
+            GameBoard2DTranslation.Add("8.4", gameBoard.Board[10].BoardSquareNumber);
+            GameBoard2DTranslation.Add("9.4", gameBoard.Board[11].BoardSquareNumber);
+            GameBoard2DTranslation.Add("10.4", gameBoard.Board[12].BoardSquareNumber);
+            GameBoard2DTranslation.Add("10.5", gameBoard.Board[13].BoardSquareNumber);
             //Yellow squares
-            GameBoard2DTranslation.Add("10.6", gameBoard.Board[20].BoardSquareNumber);
-            GameBoard2DTranslation.Add("9.5", gameBoard.Board[15].BoardSquareNumber);
-            GameBoard2DTranslation.Add("8.5", gameBoard.Board[16].BoardSquareNumber);
-            GameBoard2DTranslation.Add("7.5", gameBoard.Board[17].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.5", gameBoard.Board[18].BoardSquareNumber);
+            GameBoard2DTranslation.Add("9.5", gameBoard.Board[14].BoardSquareNumber);
+            GameBoard2DTranslation.Add("8.5", gameBoard.Board[15].BoardSquareNumber);
+            GameBoard2DTranslation.Add("7.5", gameBoard.Board[16].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.5", gameBoard.Board[17].BoardSquareNumber);
+            GameBoard2DTranslation.Add("10.6", gameBoard.Board[18].BoardSquareNumber);
             //White section SE
-            GameBoard2DTranslation.Add("9.6", gameBoard.Board[21].BoardSquareNumber);
-            GameBoard2DTranslation.Add("8.6", gameBoard.Board[22].BoardSquareNumber);
-            GameBoard2DTranslation.Add("7.6", gameBoard.Board[23].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.6", gameBoard.Board[24].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.7", gameBoard.Board[25].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.8", gameBoard.Board[26].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.9", gameBoard.Board[27].BoardSquareNumber);
-            GameBoard2DTranslation.Add("6.10", gameBoard.Board[28].BoardSquareNumber);
-            GameBoard2DTranslation.Add("5.10", gameBoard.Board[29].BoardSquareNumber);
+            GameBoard2DTranslation.Add("9.6", gameBoard.Board[19].BoardSquareNumber);
+            GameBoard2DTranslation.Add("8.6", gameBoard.Board[20].BoardSquareNumber);
+            GameBoard2DTranslation.Add("7.6", gameBoard.Board[21].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.6", gameBoard.Board[22].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.7", gameBoard.Board[23].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.8", gameBoard.Board[24].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.9", gameBoard.Board[25].BoardSquareNumber);
+            GameBoard2DTranslation.Add("6.10", gameBoard.Board[26].BoardSquareNumber);
+            GameBoard2DTranslation.Add("5.10", gameBoard.Board[27].BoardSquareNumber);
             //Green section
-            GameBoard2DTranslation.Add("4.10", gameBoard.Board[35].BoardSquareNumber);
-            GameBoard2DTranslation.Add("5.9", gameBoard.Board[30].BoardSquareNumber);
-            GameBoard2DTranslation.Add("5.8", gameBoard.Board[31].BoardSquareNumber);
-            GameBoard2DTranslation.Add("5.7", gameBoard.Board[32].BoardSquareNumber);
-            GameBoard2DTranslation.Add("5.6", gameBoard.Board[33].BoardSquareNumber);
+            GameBoard2DTranslation.Add("5.9", gameBoard.Board[28].BoardSquareNumber);
+            GameBoard2DTranslation.Add("5.8", gameBoard.Board[29].BoardSquareNumber);
+            GameBoard2DTranslation.Add("5.7", gameBoard.Board[30].BoardSquareNumber);
+            GameBoard2DTranslation.Add("5.6", gameBoard.Board[31].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.10", gameBoard.Board[32].BoardSquareNumber);
             //White section SW
-            GameBoard2DTranslation.Add("4.9", gameBoard.Board[36].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.8", gameBoard.Board[37].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.7", gameBoard.Board[38].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.6", gameBoard.Board[39].BoardSquareNumber);
-            GameBoard2DTranslation.Add("3.6", gameBoard.Board[40].BoardSquareNumber);
-            GameBoard2DTranslation.Add("2.6", gameBoard.Board[41].BoardSquareNumber);
-            GameBoard2DTranslation.Add("1.6", gameBoard.Board[42].BoardSquareNumber);
-            GameBoard2DTranslation.Add("0.6", gameBoard.Board[43].BoardSquareNumber);
-            GameBoard2DTranslation.Add("0.5", gameBoard.Board[44].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.9", gameBoard.Board[33].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.8", gameBoard.Board[34].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.7", gameBoard.Board[35].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.6", gameBoard.Board[36].BoardSquareNumber);
+            GameBoard2DTranslation.Add("3.6", gameBoard.Board[37].BoardSquareNumber);
+            GameBoard2DTranslation.Add("2.6", gameBoard.Board[38].BoardSquareNumber);
+            GameBoard2DTranslation.Add("1.6", gameBoard.Board[39].BoardSquareNumber);
+            GameBoard2DTranslation.Add("0.6", gameBoard.Board[40].BoardSquareNumber);
+            GameBoard2DTranslation.Add("0.5", gameBoard.Board[41].BoardSquareNumber);
             //Blue section
-            GameBoard2DTranslation.Add("0.4", gameBoard.Board[50].BoardSquareNumber);
-            GameBoard2DTranslation.Add("1.5", gameBoard.Board[45].BoardSquareNumber);
-            GameBoard2DTranslation.Add("2.5", gameBoard.Board[46].BoardSquareNumber);
-            GameBoard2DTranslation.Add("3.5", gameBoard.Board[47].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.5", gameBoard.Board[48].BoardSquareNumber);
+            GameBoard2DTranslation.Add("1.5", gameBoard.Board[42].BoardSquareNumber);
+            GameBoard2DTranslation.Add("2.5", gameBoard.Board[43].BoardSquareNumber);
+            GameBoard2DTranslation.Add("3.5", gameBoard.Board[44].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.5", gameBoard.Board[45].BoardSquareNumber);
+            GameBoard2DTranslation.Add("0.4", gameBoard.Board[46].BoardSquareNumber);
             //White section NW
-            GameBoard2DTranslation.Add("1.4", gameBoard.Board[51].BoardSquareNumber);
-            GameBoard2DTranslation.Add("2.4", gameBoard.Board[52].BoardSquareNumber);
-            GameBoard2DTranslation.Add("3.4", gameBoard.Board[53].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.4", gameBoard.Board[54].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.3", gameBoard.Board[55].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.2", gameBoard.Board[56].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.1", gameBoard.Board[57].BoardSquareNumber);
-            GameBoard2DTranslation.Add("4.0", gameBoard.Board[58].BoardSquareNumber);
-            GameBoard2DTranslation.Add("5.0", gameBoard.Board[59].BoardSquareNumber);
+            GameBoard2DTranslation.Add("1.4", gameBoard.Board[47].BoardSquareNumber);
+            GameBoard2DTranslation.Add("2.4", gameBoard.Board[48].BoardSquareNumber);
+            GameBoard2DTranslation.Add("3.4", gameBoard.Board[49].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.4", gameBoard.Board[50].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.3", gameBoard.Board[51].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.2", gameBoard.Board[52].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.1", gameBoard.Board[53].BoardSquareNumber);
+            GameBoard2DTranslation.Add("4.0", gameBoard.Board[54].BoardSquareNumber);
+            GameBoard2DTranslation.Add("5.0", gameBoard.Board[55].BoardSquareNumber);
             //Goal
-            GameBoard2DTranslation.Add("5.5", gameBoard.Board[4].BoardSquareNumber);
+            GameBoard2DTranslation.Add("5.5", gameBoard.Board[56].BoardSquareNumber);
 
             return GameBoard2DTranslation;
         }

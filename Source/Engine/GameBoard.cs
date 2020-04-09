@@ -24,17 +24,19 @@ namespace EngineClasses
 
             this.Board.AddRange(AddPlayerSection("Green"));
             this.Board.AddRange(AddSharedSection());
+            this.Board.Add(new BoardSquare(this.Board.Count, "White", false, true));
         }
 
         private List<BoardSquare> AddPlayerSection(string color)
         {
-            List<BoardSquare> section = new List<BoardSquare>();            
+            List<BoardSquare> section = new List<BoardSquare>();
+            
             for (int i = 0; i < 4; i++)
             {
                 section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, false));
             }
-            section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
             section.Add(new BoardSquare(this.Board.Count + section.Count, color, true, false));
+            
 
             return section;
         }
@@ -89,9 +91,16 @@ namespace EngineClasses
         {
             int i = 1;
 
+            // Behöver kunna validera början av listan om nästa BoardSquare är null
+            
             while (this.Board[gamePiece.BoardSquareNumber.Value + i].Color != gamePiece.Player.Color &&
                     this.Board[gamePiece.BoardSquareNumber.Value + i].Color != "White")
             {
+                if (this.Board[gamePiece.BoardSquareNumber.Value + i] == null)
+                {
+                    i = 1;
+                    gamePiece.BoardSquareNumber = -1;
+                }
                 i++;
             }
 
