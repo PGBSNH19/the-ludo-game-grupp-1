@@ -13,7 +13,7 @@ namespace Ludo
         private int diceResult;
         private Player currentPlayer;
         public bool IsRunning { get; private set; }
-
+        private string[] colors = { "Red", "Blue", "Green", "Yellow" };
         public GameLoop(GameEngine gameEngine)
         {
             this.gameEngine = gameEngine;
@@ -22,8 +22,9 @@ namespace Ludo
 
         public void StartLoopThread()
         {
-            Thread Loop = new Thread(StartLoop);
-            Loop.Start();
+            IsRunning = true;
+            Thread gameLoop = new Thread(StartLoop);
+            gameLoop.Start();
         }
 
         public void StopLoopThread()
@@ -39,16 +40,8 @@ namespace Ludo
                 //Find player whos turn it is
                 currentPlayer = gameEngine.CurrentPlayerTurn();
 
-                //Roll dice
-                if (currentPlayer.UserName == "Ture")
-                {
-                    diceResult = 0; //gameEngine.RollDice();
-                }
-                else
-                {
-                    diceResult = 1;
-                }
 
+                diceResult = gameEngine.RollDice();
                 //Get moveable gamepieces and move first piece in list
                 if (gameEngine.MovableGamePieces(currentPlayer, diceResult).Any())
                 {
@@ -56,12 +49,28 @@ namespace Ludo
                 }
 
                 UpdateConsole(gameEngine, diceResult);
-
+                if(gameEngine.IsWinner(currentPlayer))
+                {
+                    Console.WriteLine(currentPlayer.UserName + " is winner!!");
+                    IsRunning = false;
+                }
                 gameEngine.Session.Turns++;
                 Thread.Sleep(100);
+                SaveGame();
             }
         }
 
+        public void PlayerSelect(int players)
+        {
+            int i = 0;
+            while(i < players)
+            {
+                Console.WriteLine("Add username to player" + (i + 1));
+                gameEngine.CreatePlayer(Console.ReadLine(), colors[i]);
+                i++;
+            }
+            
+        }
         private static void UpdateConsole(GameEngine gameEngine, int diceResult)
         {
             Console.Clear();
@@ -126,6 +135,16 @@ namespace Ludo
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.BackgroundColor = ConsoleColor.Black;
             }
+        }
+
+        public void SaveGame()
+        {
+            gameEngine.Session.AddToDb();
+        }
+
+        public void LoadGame()
+        {
+            gameEngine.PlayCurrentSession();
         }
     }
 }

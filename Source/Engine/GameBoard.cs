@@ -119,8 +119,11 @@ namespace EngineClasses
         /// <param name="gamePiece"></param>
         public void PlaceGamePiece(GamePiece gamePiece)
         {
-            BoardSquare boardSquare = Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).First();
-            boardSquare.GamePieces.Add(gamePiece);
+            if(Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber).Any())
+            {
+                BoardSquare boardSquare = Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).FirstOrDefault();
+                boardSquare.GamePieces.Add(gamePiece);
+            }
         }
     }
 }

@@ -158,6 +158,7 @@ namespace EngineClasses
 
         public Session LoadSession()
         {
+            
             return Session.LoadSessionAsync().Result;
         }
 
