@@ -18,9 +18,15 @@ namespace Ludo
             GameEngine gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog());
 
             gameEngine.Session.CreatePlayer("Mirko", "Red");
-            gameEngine.Session.CreatePlayer("Hans", "Blue");
+            //gameEngine.Session.CreatePlayer("Hans", "Blue");
             gameEngine.Session.CreatePlayer("Ture", "Green");
-            gameEngine.Session.CreatePlayer("Berit", "Yellow");
+            //gameEngine.Session.CreatePlayer("Berit", "Yellow");
+
+            foreach (Player player in gameEngine.Session.Player)
+            {
+                gameEngine.MoveGamePiece(gameEngine.MovableGamePieces(gameEngine.CurrentPlayerTurn(), 6)[0], 6);
+                gameEngine.Session.Turns++;
+            }
 
             Player currentPlayer;
             while (true)
@@ -29,7 +35,7 @@ namespace Ludo
                 currentPlayer = gameEngine.CurrentPlayerTurn();
 
                 //Roll dice
-                diceResult = gameEngine.RollDice();
+                diceResult = 1; //gameEngine.RollDice();
 
                 //Get moveable gamepieces and move first piece in list
                 if (gameEngine.MovableGamePieces(currentPlayer, diceResult).Any())
@@ -40,7 +46,7 @@ namespace Ludo
                 UpdateConsole(gameEngine, diceResult);
 
                 gameEngine.Session.Turns++;
-                Thread.Sleep(500);
+                Thread.Sleep(100);
             }
         }
         
@@ -96,7 +102,7 @@ namespace Ludo
                 {
                     Console.Write("S");
                 }
-                else if (square.StartingSquare)
+                else if (square.EndSquare)
                 {
                     Console.Write("E");
                 }

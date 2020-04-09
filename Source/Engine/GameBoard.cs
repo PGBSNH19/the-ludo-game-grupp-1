@@ -24,7 +24,6 @@ namespace EngineClasses
 
             this.Board.AddRange(AddPlayerSection("Green"));
             this.Board.AddRange(AddSharedSection());
-            this.Board.Add(new BoardSquare(this.Board.Count, "White", false, true));
         }
 
         private List<BoardSquare> AddPlayerSection(string color)
@@ -35,6 +34,7 @@ namespace EngineClasses
             {
                 section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, false));
             }
+            section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
             section.Add(new BoardSquare(this.Board.Count + section.Count, color, true, false));
             
 

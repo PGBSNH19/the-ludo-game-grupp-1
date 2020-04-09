@@ -76,14 +76,17 @@ namespace EngineClasses
                     {                        
                         gamePiece.BoardSquareNumber = GameBoard.FindNextValidSquare(gamePiece).BoardSquareNumber;
 
-                        //if (i == steps - 1 && GameBoard.GetNextSquare(gamePiece).EndSquare)
-                        //{
-                        //    gamePiece.IsAtGoal = true;
-                        //}
+                        if (GameBoard.Board[gamePiece.BoardSquareNumber.Value].EndSquare)
+                        {
+                            gamePiece.IsAtGoal = true;
+                        }
                     }
 
-                    BoardSquare currentSquare = GameBoard.GetCurrentSquare(gamePiece);              
-                    currentSquare.PlaceGamePiece(gamePiece);
+                    if (!gamePiece.IsAtGoal)
+                    {
+                        BoardSquare currentSquare = GameBoard.GetCurrentSquare(gamePiece);
+                        currentSquare.PlaceGamePiece(gamePiece);
+                    }                    
                 }
             }
         }
