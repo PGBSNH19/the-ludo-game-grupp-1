@@ -38,22 +38,11 @@ namespace EngineClasses
             }
         }        
 
-<<<<<<< HEAD
-        public Player GetCurrentPlayer()
-        {
-            return Player.ToList()[(Turns % Player.Count)];
-        }
 
-        public GamePiece SelectPlayerGamePiece(Player player, int index)
-        {
-            return player.SelectGamePiece(index);
-        }
-=======
         public Player GetCurrentPlayer() => Player.ToList()[(Turns % Player.Count)];
         
         public GamePiece SelectGamePiece(Player player, int index) => player.SelectGamePiece(index);
         
->>>>>>> @robotdostopif, now LoadSession and SaveSession works fine
 
         public int RollDice()
         {
