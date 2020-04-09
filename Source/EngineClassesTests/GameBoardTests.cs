@@ -47,7 +47,5 @@ namespace EngineClasses.Tests
 
             Assert.AreEqual(board.Board[boardNumber + 1], result);
         }
-
-
     }
 }

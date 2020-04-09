@@ -42,7 +42,7 @@ namespace EngineClasses
             return Player.ToList()[(Turns % Player.Count)];
         }
 
-        public GamePiece SelectGamePiece(Player player, int index)
+        public GamePiece SelectPlayerGamePiece(Player player, int index)
         {
             return player.SelectGamePiece(index);
         }

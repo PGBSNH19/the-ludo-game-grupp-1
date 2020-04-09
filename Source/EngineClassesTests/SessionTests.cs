@@ -93,12 +93,15 @@ namespace EngineClasses.Tests
         }
 
         [TestMethod()]
-        public void SelectGamePieceTest_WithCorrectIndex_ReturnIndex0()
+        public void SelectPlayerGamePieceTest_WithCorrectIndex_ReturnIndex1()
         {
-            Player player = new Player("Testman", "Red");
-            GamePiece gamePiece = player.SelectGamePiece(1);
-            
-            Assert.AreEqual(player.GamePiece[1], gamePiece);
+            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            engine.Session.CreatePlayer("Testman1", "Red");
+            engine.Session.CreatePlayer("Testman2", "Yellow");
+
+            GamePiece gamePiece = engine.Session.SelectPlayerGamePiece(engine.Session.Player[0], 1);
+
+            Assert.AreEqual(engine.Session.Player[0].GamePiece[1], gamePiece);
         }
     }
 }
