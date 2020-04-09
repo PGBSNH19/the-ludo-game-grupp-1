@@ -14,7 +14,6 @@ namespace EngineClasses
         public bool EndSquare { get; set; }
 
         public List<GamePiece> GamePieces { get; private set; }
-        
 
         public BoardSquare(int boardSquareNumber, string color, bool startingSquare, bool endSquare)
         {

@@ -107,7 +107,6 @@ namespace EngineClasses
             return Board[gamePiece.BoardSquareNumber.Value + i];
         }
 
-
         /// <summary>
         /// Places gamePiece in squares' list of game pieces and sets all pieces of different colors to base.
         /// </summary>
