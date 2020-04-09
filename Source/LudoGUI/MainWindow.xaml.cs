@@ -231,7 +231,7 @@ namespace LudoGUI
                 //Get list of all pieces occupying square
                 List<GamePiece> piecesOnSquare =
                 gameEngine
-                .CurrentPlayerTurn()
+                .CurrentPlayer()
                 .GamePiece
                 .Where(gp => gp.BoardSquareNumber != null && gp.BoardSquareNumber.Value == squareTranslation)
                 .ToList();
@@ -326,16 +326,7 @@ namespace LudoGUI
         }
 
         private void UpdateGameBoard()
-        {
-            //Since bases not yet implemented
-            foreach (GamePiece gamePiece in gameEngine.GetAllGamePieces())
-            {
-                if (gamePiece.IsAtBase)
-                {
-                    gamePiece.BoardSquareNumber = gameEngine.GameBoard.GetStartingSquare(gamePiece.Player).BoardSquareNumber;
-                    gameEngine.GameBoard.PlaceGamePiece(gamePiece);                    
-                }
-            }
+        {         
 
             //Update square content
             foreach (KeyValuePair<string, int> square in gameBoard2D)
@@ -349,7 +340,7 @@ namespace LudoGUI
             //Mark current player
             foreach (Label label in menuGamePanel.Children.OfType<Label>())
             {
-                if (label.Content.ToString() == gameEngine.CurrentPlayerTurn().UserName)
+                if (label.Content.ToString() == gameEngine.CurrentPlayer().UserName)
                 {
                     label.BorderBrush = Brushes.Black;
                     label.BorderThickness = new Thickness(3);

@@ -107,14 +107,14 @@ namespace EngineClasses
                 if (nextSquareNumber >= this.Board.Count)
                 {
                     nextSquareNumber = 0;
-                }               
+                }
             }
 
             return Board[nextSquareNumber];
         }
 
         /// <summary>
-        /// Places gamePiece in squares' list of game pieces and sets all pieces of different colors to base.
+        /// Places gamePiece in squares' list of game pieces.
         /// </summary>
         /// <param name="gamePiece"></param>
         public void PlaceGamePiece(GamePiece gamePiece)

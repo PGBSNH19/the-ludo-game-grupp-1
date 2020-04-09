@@ -38,7 +38,7 @@ namespace Ludo
             while (IsRunning)
             {
                 //Find player whos turn it is
-                currentPlayer = gameEngine.CurrentPlayerTurn();
+                currentPlayer = gameEngine.CurrentPlayer();
 
 
                 diceResult = gameEngine.RollDice();
@@ -76,7 +76,7 @@ namespace Ludo
             Console.Clear();
             Console.WriteLine("\n\n\n");
 
-            Console.WriteLine($"Current Player: {gameEngine.CurrentPlayerTurn().UserName}");
+            Console.WriteLine($"Current Player: {gameEngine.CurrentPlayer().UserName}");
             Console.WriteLine($"Dice Roll: {diceResult}");
             Console.WriteLine();
 

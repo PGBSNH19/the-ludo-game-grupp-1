@@ -21,7 +21,6 @@ namespace EngineClasses
             this.GameLog = gameLog;
         }
 
-        
         /// <summary>
         /// Create a new player and add it to session.
         /// </summary>
@@ -42,12 +41,11 @@ namespace EngineClasses
             return Session.Player[index];
         }
 
-        
         /// <summary>
         /// Returns current player whos turn it is.
         /// </summary>
         /// <returns></returns>
-        public Player CurrentPlayerTurn()
+        public Player CurrentPlayer()
         {
             return Session.GetCurrentPlayer();
         }
@@ -128,32 +126,6 @@ namespace EngineClasses
             movablePieces.AddRange(player.GamePiece.Where(gp => !gp.IsAtBase && !gp.IsAtGoal));
 
             return movablePieces;
-        }
-
-        /// <summary>
-        /// Return a gamepiece from players list of gamepieces.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public GamePiece SelectGamePiece(Player player, int index)
-        {
-            return Session.SelectGamePiece(player, index);
-        }
-
-        /// <summary>
-        /// Returns all GamePieces in session
-        /// </summary>
-        /// <returns></returns>
-        public List<GamePiece> GetAllGamePieces()
-        {
-            List<GamePiece> gamePieces = new List<GamePiece>();
-            foreach (Player player in Session.Player)
-            {
-                gamePieces.AddRange(player.GamePiece);
-            }
-
-            return gamePieces;
         }
 
         public Session LoadSession()

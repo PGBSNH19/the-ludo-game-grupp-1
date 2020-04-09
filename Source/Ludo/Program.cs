@@ -21,13 +21,13 @@ namespace Ludo
             //gameEngine.Session.CreatePlayer("Ture", "Green");
             //gameEngine.Session.CreatePlayer("Berit", "Yellow");
 
-            //foreach (Player player in gameEngine.Session.Player)
-            //{
-            //    gameEngine.MoveGamePiece(gameEngine.MovableGamePieces(gameEngine.CurrentPlayerTurn(), 6)[0], 6);
-            //    gameEngine.MoveGamePiece(gameEngine.MovableGamePieces(gameEngine.CurrentPlayerTurn(), 2)[0], 2);
+            foreach (Player player in gameEngine.Session.Player)
+            {
+                gameEngine.MoveGamePiece(gameEngine.MovableGamePieces(gameEngine.CurrentPlayer(), 6)[0], 6);
+                gameEngine.MoveGamePiece(gameEngine.MovableGamePieces(gameEngine.CurrentPlayer(), 2)[0], 2);
 
             //    gameEngine.Session.Turns++;
-            //}
+            }
 
             GameLoop gameLoop = new GameLoop(gameEngine);
 

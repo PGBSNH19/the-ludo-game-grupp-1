@@ -19,7 +19,7 @@ namespace EngineClasses.Tests
 
             var result = board.GetStartingSquare(player);
 
-            Assert.AreEqual(board.Board.Where(s => s.Color == player.Color && s.StartingSquare).First(), result);
+            Assert.AreEqual(board.Board.Where(s => s.Color == player.Color && s.StartingSquare).First().Color, result.Color);
         }
 
         [TestMethod()]
@@ -27,11 +27,12 @@ namespace EngineClasses.Tests
         {
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
+            int boardNumber = 3;
 
-            player.GamePiece[1].BoardSquareNumber = 3;
+            player.GamePiece[1].BoardSquareNumber = boardNumber;
             var result = board.GetCurrentSquare(player.GamePiece[1]);
-            Assert.AreEqual(board.Board.Where(gp => gp.BoardSquareNumber == 3).First(), result);
 
+            Assert.AreEqual(board.Board[boardNumber], result);
         }
 
         [TestMethod()]
@@ -39,24 +40,14 @@ namespace EngineClasses.Tests
         {
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
+            int boardNumber = 3;
 
-            player.GamePiece[1].BoardSquareNumber = 3;
+            player.GamePiece[1].BoardSquareNumber = boardNumber;
             var result = board.GetNextSquare(player.GamePiece[1]);
-            Assert.AreEqual(board.Board.Where(gp => gp.BoardSquareNumber == 3 + 1).First(), result);
+
+            Assert.AreEqual(board.Board[boardNumber + 1], result);
         }
 
-        [TestMethod()]
-        public void FindNextValidSquareTest_AddPositionToGamePieceAndFindNextValidSquare_()
-        {
-            GameBoard board = new GameBoard();
-            Player player = new Player("Testman", "Red");
 
-            player.GamePiece[1].BoardSquareNumber = 0;
-            
-            var result = board.FindNextValidSquare(player.GamePiece[1]);
-            Debug.WriteLine(result);
-            
-            
-        }
     }
 }

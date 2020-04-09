@@ -9,7 +9,7 @@ namespace LudoGUI
     {
         public static void StartRound(GameEngine gameEngine)
         {
-            Player currentPlayer = gameEngine.CurrentPlayerTurn();
+            Player currentPlayer = gameEngine.CurrentPlayer();
 
 
 
