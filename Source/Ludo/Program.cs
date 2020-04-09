@@ -30,11 +30,26 @@ namespace Ludo
             }
 
             GameLoop gameLoop = new GameLoop(gameEngine);
-            gameLoop.StartLoop();
-            
-            
-        }
-        
-        
+            gameLoop.StartLoopThread();
+
+            ConsoleKeyInfo keyPress = new ConsoleKeyInfo();
+
+            while (keyPress.Key != ConsoleKey.Escape)
+            {
+                keyPress = Console.ReadKey();
+
+                if (keyPress.Key == ConsoleKey.Spacebar)
+                {
+                    if (gameLoop.IsRunning)
+                    {
+                        gameLoop.StopLoopThread();
+                    }
+                    else
+                    {
+                        gameLoop.StartLoopThread();
+                    }
+                }
+            }
+        }       
     }
 }

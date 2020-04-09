@@ -12,7 +12,7 @@ namespace Ludo
         private GameEngine gameEngine;
         private int diceResult;
         private Player currentPlayer;
-        public bool IsRunning { get; set; }
+        public bool IsRunning { get; private set; }
 
         public GameLoop(GameEngine gameEngine)
         {
@@ -20,7 +20,18 @@ namespace Ludo
             this.IsRunning = false;
         }
 
-        public void StartLoop()
+        public void StartLoopThread()
+        {
+            Thread Loop = new Thread(StartLoop);
+            Loop.Start();
+        }
+
+        public void StopLoopThread()
+        {
+            this.IsRunning = false;
+        }
+
+        private void StartLoop()
         {
             IsRunning = true;
             while (IsRunning)
@@ -54,10 +65,10 @@ namespace Ludo
         private static void UpdateConsole(GameEngine gameEngine, int diceResult)
         {
             Console.Clear();
-            Console.WriteLine("\n\n\n ");
+            Console.WriteLine("\n\n\n");
 
             Console.WriteLine($"Current Player: {gameEngine.CurrentPlayerTurn().UserName}");
-            Console.WriteLine($"Dice roll: {diceResult}");
+            Console.WriteLine($"Dice Roll: {diceResult}");
             Console.WriteLine();
 
             foreach (BoardSquare square in gameEngine.GameBoard.Board)
