@@ -89,22 +89,28 @@ namespace EngineClasses
         /// <returns></returns>
         public BoardSquare FindNextValidSquare(GamePiece gamePiece)
         {
-            int i = 1;
-
-            // Behöver kunna validera början av listan om nästa BoardSquare är null
-            
-            while (this.Board[gamePiece.BoardSquareNumber.Value + i].Color != gamePiece.Player.Color &&
-                    this.Board[gamePiece.BoardSquareNumber.Value + i].Color != "White")
+            int nextSquareNumber;
+            if (gamePiece.BoardSquareNumber >= this.Board.Count - 1)
             {
-                if (this.Board[gamePiece.BoardSquareNumber.Value + i] == null)
+                nextSquareNumber = 0;
+            }
+            else
+            {
+                nextSquareNumber = gamePiece.BoardSquareNumber.Value + 1;
+            }        
+            
+            while (this.Board[nextSquareNumber].Color != gamePiece.Player.Color &&
+                    this.Board[nextSquareNumber].Color != "White")
+            {
+                nextSquareNumber++;
+
+                if (nextSquareNumber >= this.Board.Count)
                 {
-                    i = 1;
-                    gamePiece.BoardSquareNumber = -1;
-                }
-                i++;
+                    nextSquareNumber = 0;
+                }               
             }
 
-            return Board[gamePiece.BoardSquareNumber.Value + i];
+            return Board[nextSquareNumber];
         }
 
         /// <summary>

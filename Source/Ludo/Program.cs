@@ -41,7 +41,6 @@ namespace Ludo
 
                 gameEngine.Session.Turns++;
                 Thread.Sleep(500);
-                Console.ReadKey();
             }
         }
         
@@ -105,6 +104,9 @@ namespace Ludo
                 {
                     Console.Write("-");
                 }
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
         }
     }
