@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using EngineClasses;
 
 namespace Ludo
@@ -31,22 +32,19 @@ namespace Ludo
         private void MainMenu()
         {
             string menuChoice = "";
-            while (menuChoice != "exit")
-            {
-                menuChoice = menu.ShowMainMenu();
+            menuChoice = menu.ShowMainMenu();
 
-                switch (menuChoice)
-                {
-                    case "new game":
-                        RunNewGame();
-                        break;
-                    case "load game":
-                        LoadGame();
-                        StartLoopThread();
-                        break;
-                    case "exit":
-                        break;
-                }
+            switch (menuChoice)
+            {
+                case "new game":
+                    RunNewGame();
+                    break;
+                case "load game":
+                    LoadGame();
+                    StartLoopThread();
+                    break;
+                case "exit":
+                    break;
             }
         }
 
@@ -75,16 +73,19 @@ namespace Ludo
         }
 
         private void StartLoopThread()
-        {
-            isRunning = true;
-            Thread gameLoop = new Thread(StartLoop);
-            gameLoop.Start();
+        {            
+            Task gameLoop = Task.Run(() => StartLoop());
+            ToggleGameLoopRunning();
+            gameLoop.Wait();
+            menu.ShowMainMenu();
         }
 
         private void StopLoopThread() => this.isRunning = false;
 
-        private void RunGameLoop(ConsoleKeyInfo keyPress)
+        private void ToggleGameLoopRunning()
         {
+            ConsoleKeyInfo keyPress = new ConsoleKeyInfo();
+
             while (keyPress.Key != ConsoleKey.Escape)
             {
                 keyPress = Console.ReadKey();
@@ -99,6 +100,10 @@ namespace Ludo
                     {
                         StartLoopThread();
                     }
+                }
+                if (keyPress.Key == ConsoleKey.Escape)
+                {
+                    StopLoopThread();
                 }
             }
         }        
@@ -162,6 +167,9 @@ namespace Ludo
             Console.WriteLine();
 
             PrintConsoleBoard(gameEngine.GameBoard.Board);
+            Console.WriteLine("\n\n\n");
+            Console.WriteLine("Press [Spacebar] to toggle game running. \n" +
+                "Press [ESC] to return to main menu.");
 
         }
 

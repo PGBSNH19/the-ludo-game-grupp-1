@@ -7,8 +7,8 @@ namespace Ludo
 {
     public class Menu
     {
-        public readonly string[] MainMenu = { "new game", "load game", "exit" };
-        public readonly string[] EnterPlayersMenu = { "2", "3", "4" };
+        private readonly string[] MainMenu = { "new game", "load game", "exit" };
+        private readonly string[] EnterPlayersMenu = { "2", "3", "4" };
 
         public string ShowMainMenu()
         {
