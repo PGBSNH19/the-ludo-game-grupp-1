@@ -27,9 +27,11 @@ namespace EngineClasses.Tests
         {
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
+            player.AddGamePieces();
             int boardNumber = 3;
 
             player.GamePiece[1].BoardSquareNumber = boardNumber;
+            board.PlaceGamePiece(player.GamePiece[1]);
             var result = board.GetCurrentSquare(player.GamePiece[1]);
 
             Assert.AreEqual(board.Board[boardNumber], result);
@@ -40,6 +42,7 @@ namespace EngineClasses.Tests
         {
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
+            player.AddGamePieces();
             int boardNumber = 3;
 
             player.GamePiece[1].BoardSquareNumber = boardNumber;

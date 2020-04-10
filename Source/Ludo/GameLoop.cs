@@ -12,16 +12,50 @@ namespace Ludo
         private GameEngine gameEngine;
         private int diceResult;
         private Player currentPlayer;
-        public bool IsRunning { get; private set; }
-        private string[] colors = { "Red", "Blue", "Green", "Yellow" };
+        private Menu menu;
 
-        public GameLoop(GameEngine gameEngine)
+        public bool IsRunning { get; private set; }
+        private string[] playerColors = { "Red", "Blue", "Green", "Yellow" };
+
+        public GameLoop(GameEngine gameEngine, Menu menu)
         {
             this.gameEngine = gameEngine;
+            this.menu = menu;
             this.IsRunning = false;
         }
 
-        public bool StartLoopThread()
+        public void MainMenu()
+        {
+            string menuChoice = "";
+            bool menuIsRunning = true;
+            while (menuIsRunning)
+            {
+                menuChoice = menu.ShowMainMenu();
+
+                switch (menuChoice)
+                {
+                    case "new game":
+                        int players = int.Parse(menu.ShowNewGameMenu());
+                        PlayerSelect(players);
+                        StartLoopThread();
+                        menuIsRunning = false;
+                        break;
+                    case "load game":
+                        LoadGame();
+                        StartLoopThread();
+                        menuIsRunning = false;
+                        break;
+                    case "exit":
+                        break;
+                }
+            }
+            if (PauseGame(new ConsoleKeyInfo()))
+            {
+
+            }
+        }
+
+        private bool StartLoopThread()
         {
             IsRunning = true;
             Thread gameLoop = new Thread(StartLoop);
@@ -29,7 +63,28 @@ namespace Ludo
             return IsRunning;
         }
 
-        public bool StopLoopThread()
+        private bool PauseGame(ConsoleKeyInfo keyPress)
+        {
+            while (keyPress.Key != ConsoleKey.Escape)
+            {
+                keyPress = Console.ReadKey();
+
+                if (keyPress.Key == ConsoleKey.Spacebar)
+                {
+                    if (IsRunning)
+                    {
+                        return StopLoopThread();
+                    }
+                    else
+                    {
+                        return StartLoopThread();
+                    }
+                }
+            }
+            return IsRunning;
+        }
+
+        private bool StopLoopThread()
         {
             return this.IsRunning = false;
         }
@@ -66,19 +121,21 @@ namespace Ludo
             }
         }
 
-        public void PlayerSelect(int players)
+        private void PlayerSelect(int players)
         {
             int i = 0;
             while(i < players)
             {
                 Console.WriteLine("Add username to player" + (i + 1));
-                gameEngine.CreatePlayer(Console.ReadLine(), colors[i]);
+                gameEngine.CreatePlayer(Console.ReadLine(), playerColors[i]);
                 i++;
             }
             
         }
+
         private static void UpdateConsole(GameEngine gameEngine, int diceResult)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Clear();
             Console.WriteLine("\n\n\n");
 
@@ -99,8 +156,7 @@ namespace Ludo
             }
 
             Console.WriteLine();
-            PrintConsoleBoard(gameEngine.GameBoard.Board);
-            
+            PrintConsoleBoard(gameEngine.GameBoard.Board);           
         }
 
         private static void PrintConsoleBoard(List<BoardSquare> board)
@@ -152,118 +208,15 @@ namespace Ludo
         {
 
         }
-        
-        public void MainMenu()
-        {
-            string[] menuOptions = { "new game", "load game", "exit" };
-            string[] numberOfPlayers = { "2", "3", "4" };
-            string menuChoice = "";
-            bool menuIsRunning = true;
-            while (menuIsRunning)
-            {
-                menuChoice = ShowMenu("LudoGame", menuOptions);
 
-                switch (menuChoice)
-                {
-                    case "new game":
-                        int players = int.Parse(ShowMenu("PlayerSelect", numberOfPlayers));
-                        PlayerSelect(players);
-                        StartLoopThread();
-                        menuIsRunning = false;
-                        break;
-                    case "load game":
-                        LoadGame();
-                        StartLoopThread();
-                        menuIsRunning = false;
-                        break;
-                    case "exit":
-                        break;
-                }
-            }
-            if(PauseGame(new ConsoleKeyInfo()))
-            {
-                
-            }
-        }
-
-        public bool PauseGame(ConsoleKeyInfo keyPress)
-        {
-            while (keyPress.Key != ConsoleKey.Escape)
-            {
-                keyPress = Console.ReadKey();
-
-                if (keyPress.Key == ConsoleKey.Spacebar)
-                {
-                    if (IsRunning)
-                    {
-                        return StopLoopThread();
-                    }
-                    else
-                    {
-                        return StartLoopThread();
-                    }
-                }
-            }
-            return IsRunning;
-        }
-    
-        public void SaveGame()
+        private void SaveGame()
         {
             gameEngine.SaveSession();
         }
 
-        public void LoadGame()
+        private void LoadGame()
         {
             gameEngine.PlayCurrentSession();
-        }
-
-        private static string ShowMenu(string prompt, string[] options)
-        {
-            Console.Clear();
-            Console.WriteLine(prompt);
-
-            int selected = 0;
-
-            // Hide the cursor that will blink after calling ReadKey.
-            Console.CursorVisible = false;
-
-            ConsoleKey? key = null;
-            while (key != ConsoleKey.Enter)
-            {
-                // If this is not the first iteration, move the cursor to the first line of the menu.
-                if (key != null)
-                {
-                    Console.CursorLeft = 0;
-                    Console.CursorTop = Console.CursorTop - options.Length;
-                }
-
-                // Print all the options, highlighting the selected one.
-                for (int i = 0; i < options.Length; i++)
-                {
-                    var option = options[i];
-                    if (i == selected)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Blue;
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    Console.WriteLine("- " + option);
-                    Console.ResetColor();
-                }
-
-                // Read another key and adjust the selected value before looping to repeat all of this.
-                key = Console.ReadKey().Key;
-                if (key == ConsoleKey.DownArrow)
-                {
-                    selected = Math.Min(selected + 1, options.Length - 1);
-                }
-                else if (key == ConsoleKey.UpArrow)
-                {
-                    selected = Math.Max(selected - 1, 0);
-                }
-            }
-
-            Console.CursorVisible = true;
-            return options[selected];
         }
     }
 }

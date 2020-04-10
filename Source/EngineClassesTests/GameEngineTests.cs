@@ -14,7 +14,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void CreatePlayerTest_CreateNewPlayer_OneNewPlayerWithFourGamePieces()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             string userName = "Testman";
             string color = "Red";
 
@@ -26,7 +26,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void CreatePlayerTest_CreateNewPlayer_OneNewPlayerWithCorrectUserName()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             string userName = "Testman";
             string color = "Red";
 
@@ -38,7 +38,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void PlayerSelectTest_SelectFirstPlayerOfTwo_ReturnPlayerAtIndexZero()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             string p1 = "Testman";
             string p1Color = "Red";
             string p2 = "Humberto";
@@ -55,7 +55,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void PlayerSelectTest_SelectFirstPlayerOfTwo_ReturnPlayerAtIndexOne()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             string p1 = "Testman";
             string p1Color = "Red";
             string p2 = "Humberto";
@@ -72,7 +72,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void CurrentPlayerTest_ReturnPlayerWhosTurnItIs_ResultFirstPlayer()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             string p1 = "Testman";
             string p1Color = "Red";
             string p2 = "Humberto";
@@ -89,7 +89,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void MovableGamePiecesTest_ReturnAListContainingAllPiecesAtBase_ReturnFourGamePieces()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             string p1 = "Testman";
             string p1Color = "Red";
             string p2 = "Humberto";

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,8 +124,11 @@ namespace EngineClasses
         }
 
         public Session LoadSession() => Session.LoadSessionAsync(context).Result;
+
         public async void SaveSession() => await Session.AddToDbAsync(context);
+
         public async void RemoveSession() => await Session.RemoveFromDbAsync(context);
+
         public void PlayCurrentSession()
         {
             this.Session = LoadSession();
