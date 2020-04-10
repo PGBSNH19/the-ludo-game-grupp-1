@@ -85,7 +85,7 @@ namespace EngineClasses
 
         }
 
-        public async Task RemoveFromDbAsync(LudoContext context)
+        public void RemoveFromDbAsync(LudoContext context)
         {
             context = new LudoContext();
 
@@ -94,7 +94,7 @@ namespace EngineClasses
                 context.Session.Remove(this);
             }
 
-            await context.SaveChangesAsync();
+            context.SaveChanges();
         }
     }
 }

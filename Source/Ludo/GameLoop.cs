@@ -109,6 +109,7 @@ namespace Ludo
                 }
 
                 UpdateConsole(gameEngine, diceResult);
+
                 if (gameEngine.IsWinner(currentPlayer))
                 {
                     Console.WriteLine(currentPlayer.UserName + " is winner!!");
@@ -120,6 +121,7 @@ namespace Ludo
                 {
                     SaveGame();
                 }
+
                 gameEngine.Session.Turns++;
                 Thread.Sleep(100);
             }
