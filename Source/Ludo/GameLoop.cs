@@ -57,10 +57,10 @@ namespace Ludo
 
         private bool StartLoopThread()
         {
-            IsRunning = true;
+            this.IsRunning = true;
             Thread gameLoop = new Thread(StartLoop);
             gameLoop.Start();
-            return IsRunning;
+            return this.IsRunning;
         }
 
         private bool PauseGame(ConsoleKeyInfo keyPress)
@@ -86,7 +86,8 @@ namespace Ludo
 
         private bool StopLoopThread()
         {
-            return this.IsRunning = false;
+            this.IsRunning = false;
+            return this.IsRunning;
         }
 
         private void StartLoop()
@@ -94,7 +95,8 @@ namespace Ludo
             IsRunning = true;
             while (IsRunning)
             {
-                
+
+
                 //Find player whos turn it is
                 currentPlayer = gameEngine.CurrentPlayer();
 
@@ -107,15 +109,17 @@ namespace Ludo
                 }
 
                 UpdateConsole(gameEngine, diceResult);
-                if(gameEngine.IsWinner(currentPlayer))
+                if (gameEngine.IsWinner(currentPlayer))
                 {
                     Console.WriteLine(currentPlayer.UserName + " is winner!!");
                     IsRunning = false;
                     gameEngine.CreateGameLog(currentPlayer.UserName);
                     gameEngine.RemoveSession();
-                    Environment.Exit(0);
                 }
-                SaveGame();
+                else
+                {
+                    SaveGame();
+                }
                 gameEngine.Session.Turns++;
                 Thread.Sleep(100);
             }
@@ -124,13 +128,13 @@ namespace Ludo
         private void PlayerSelect(int players)
         {
             int i = 0;
-            while(i < players)
+            while (i < players)
             {
                 Console.WriteLine("Add username to player" + (i + 1));
                 gameEngine.CreatePlayer(Console.ReadLine(), playerColors[i]);
                 i++;
             }
-            
+
         }
 
         private static void UpdateConsole(GameEngine gameEngine, int diceResult)
@@ -156,7 +160,9 @@ namespace Ludo
             }
 
             Console.WriteLine();
-            PrintConsoleBoard(gameEngine.GameBoard.Board);           
+
+            PrintConsoleBoard(gameEngine.GameBoard.Board);
+
         }
 
         private static void PrintConsoleBoard(List<BoardSquare> board)
@@ -206,7 +212,12 @@ namespace Ludo
 
         private void PrintStatistics(List<Player> players)
         {
-
+            Console.Clear();
+            foreach (var p in players)
+            {
+                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtBase).Count()} gamepieces who is at base!");
+                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtGoal).Count()} gamepieces who is at GOAL!");
+            }
         }
 
         private void SaveGame()
