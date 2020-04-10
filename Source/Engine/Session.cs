@@ -36,13 +36,13 @@ namespace EngineClasses
             {
                 throw new ArgumentOutOfRangeException("You cant add more than 4 players.");
             }
-        }        
+        }
+
 
 
         public Player GetCurrentPlayer() => Player.ToList()[(Turns % Player.Count)];
-        
+
         public GamePiece SelectGamePiece(Player player, int index) => player.SelectGamePiece(index);
-        
 
         public int RollDice()
         {

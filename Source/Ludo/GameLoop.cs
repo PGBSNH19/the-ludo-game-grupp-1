@@ -53,6 +53,8 @@ namespace Ludo
                 {
                     Console.WriteLine(currentPlayer.UserName + " is winner!!");
                     IsRunning = false;
+                    gameEngine.CreateGameLog(currentPlayer.UserName);
+                    gameEngine.GameLog.AddToDb();
                 }
                 gameEngine.Session.Turns++;
                 Thread.Sleep(100);

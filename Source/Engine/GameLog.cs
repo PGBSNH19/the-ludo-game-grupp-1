@@ -25,6 +25,10 @@ namespace EngineClasses
 
         }
 
+        public void CreateNewGameLog(string userName)
+        {
+            this.WinnerPlayer = userName;
+        }
         public void AddToDb()
         {
             using (var context = new LudoContext())
@@ -37,19 +41,6 @@ namespace EngineClasses
                 else
                 {
                     context.GameLog.Add(this);
-                }
-
-                context.SaveChanges();
-            }
-        }
-
-        public void RemoveFromDb()
-        {
-            using (var context = new LudoContext())
-            {
-                if (context.GameLog.Any(gl => gl.GameLogId == this.GameLogId))
-                {
-                    context.GameLog.Remove(this);
                 }
 
                 context.SaveChanges();

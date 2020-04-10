@@ -326,7 +326,7 @@ namespace LudoGUI
         }
 
         private void UpdateGameBoard()
-        {         
+        {
 
             //Update square content
             foreach (KeyValuePair<string, int> square in gameBoard2D)
@@ -334,7 +334,7 @@ namespace LudoGUI
                 if (gameEngine.GameBoard.Board[square.Value].GamePieces.Any())
                 {
                     gameBoardGrid.Children.OfType<Button>().Where(b => b.Tag.ToString() == square.Key).First().Content = gameEngine.GameBoard.Board[square.Value].GamePieces[0].Player.UserName;
-                }                
+                }
             }
 
             //Mark current player

@@ -15,7 +15,6 @@ namespace EngineClasses
 
         public GameEngine(Session session, GameBoard gameBoard, GameLog gameLog)
         {
-
             this.Session = session;
             this.GameBoard = gameBoard;
             this.GameLog = gameLog;
@@ -71,7 +70,7 @@ namespace EngineClasses
                     GameBoard.GetCurrentSquare(gamePiece).GamePieces.Remove(gamePiece);
 
                     for (int i = 0; i < steps; i++)
-                    {                        
+                    {
                         gamePiece.BoardSquareNumber = GameBoard.FindNextValidSquare(gamePiece).BoardSquareNumber;
 
                         if (GameBoard.Board[gamePiece.BoardSquareNumber.Value].EndSquare)
@@ -84,7 +83,7 @@ namespace EngineClasses
                     {
                         BoardSquare currentSquare = GameBoard.GetCurrentSquare(gamePiece);
                         currentSquare.PlaceGamePiece(gamePiece);
-                    }                    
+                    }
                 }
             }
         }
@@ -97,8 +96,12 @@ namespace EngineClasses
         public bool IsWinner(Player player)
         {
             return player.GamePiece.All(gp => gp.IsAtGoal == true);
-        } 
-       
+        }
+
+        public void CreateGameLog(string userName)
+        {
+            GameLog.CreateNewGameLog(userName);
+        }
 
         /// <summary>
         /// Randomize a number between 1 - 6.
@@ -130,7 +133,6 @@ namespace EngineClasses
 
         public Session LoadSession()
         {
-            
             return Session.LoadSessionAsync().Result;
         }
 

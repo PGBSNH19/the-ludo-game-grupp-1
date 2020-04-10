@@ -26,7 +26,7 @@ namespace Ludo
                 gameEngine.MoveGamePiece(gameEngine.MovableGamePieces(gameEngine.CurrentPlayer(), 6)[0], 6);
                 gameEngine.MoveGamePiece(gameEngine.MovableGamePieces(gameEngine.CurrentPlayer(), 2)[0], 2);
 
-            //    gameEngine.Session.Turns++;
+            //gameEngine.Session.Turns++;
             }
 
             GameLoop gameLoop = new GameLoop(gameEngine);
@@ -35,13 +35,12 @@ namespace Ludo
             bool menuIsRunning = true;
             while (menuIsRunning)
             {
-                
                 menuChoice = ShowMenu("LudoGame", menuOptions);
 
                 switch (menuChoice)
                 {
                     case "new game":
-                        int players = int.Parse(ShowMenu("PlayerSelect", numberOfPlayers));  
+                        int players = int.Parse(ShowMenu("PlayerSelect", numberOfPlayers));
                         gameLoop.PlayerSelect(players);
                         gameLoop.StartLoopThread();
                         menuIsRunning = false;
@@ -57,9 +56,8 @@ namespace Ludo
                         break; 
                 }
             }
-            
             ConsoleKeyInfo keyPress = new ConsoleKeyInfo();
-            
+
             while (keyPress.Key != ConsoleKey.Escape)
             {
                 keyPress = Console.ReadKey();
@@ -77,7 +75,6 @@ namespace Ludo
                 }
             }
         }
-        
 
         private static string ShowMenu(string prompt, string[] options)
         {

@@ -99,7 +99,7 @@ namespace EngineClasses.Tests
             engine.Session.CreatePlayer("Testman1", "Red");
             engine.Session.CreatePlayer("Testman2", "Yellow");
 
-            GamePiece gamePiece = engine.Session.SelectPlayerGamePiece(engine.Session.Player[0], 1);
+            GamePiece gamePiece = engine.Session.SelectGamePiece(engine.Session.Player[0], 1);
 
             Assert.AreEqual(engine.Session.Player[0].GamePiece[1], gamePiece);
         }
