@@ -127,15 +127,17 @@ namespace EngineClasses
 
         public async void SaveSession() => await Session.AddToDbAsync(context);
 
-        public void RemoveSession() => Session.RemoveFromDbAsync(context);
+        public void RemoveSession() => Session.RemoveFromDb(context);
 
         public void PlayCurrentSession()
         {
-            if(LoadSession() != null)
+            if (LoadSession() != null)
             {
                 this.Session = LoadSession();
                 PlaceGamePieces(Session.Player);
             }
+            else
+                return;
         }
 
         public void PlaceGamePieces(List<Player> players)

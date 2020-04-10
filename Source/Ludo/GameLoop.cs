@@ -68,7 +68,7 @@ namespace Ludo
             int i = 0;
             while (i < players)
             {
-                Console.WriteLine("Add username to player" + (i + 1));
+                Console.WriteLine("Add username to Player: " + (i + 1));
                 gameEngine.CreatePlayer(Console.ReadLine(), playerColors[i]);
                 i++;
             }
@@ -108,6 +108,7 @@ namespace Ludo
             isRunning = true;
             while (isRunning)
             {
+                gameEngine.Session.Turns++;
                 currentPlayer = gameEngine.CurrentPlayer();
                 diceResult = gameEngine.RollDice();
 
@@ -120,7 +121,8 @@ namespace Ludo
 
                 if (gameEngine.IsWinner(currentPlayer))
                 {
-                    Console.WriteLine(currentPlayer.UserName + " is winner!!");
+                    PrintWinner(currentPlayer);
+                    PrintStatistics(gameEngine.Session.Player);
                     isRunning = false;
                     gameEngine.CreateGameLog(currentPlayer.UserName);
                     gameEngine.RemoveSession();
@@ -129,22 +131,10 @@ namespace Ludo
                 {
                     SaveGame();
                 }
-
-                gameEngine.Session.Turns++;
                 Thread.Sleep(100);
+                
+                //RunGameLoop(new ConsoleKeyInfo(), gameEngine.Session.Player);
             }
-        }
-
-        private void PlayerSelect(int players)
-        {
-            int i = 0;
-            while (i < players)
-            {
-                Console.WriteLine("Add username to player" + (i + 1));
-                gameEngine.CreatePlayer(Console.ReadLine(), playerColors[i]);
-                i++;
-            }
-
         }
 
         private static void UpdateConsole(GameEngine gameEngine, int diceResult)
@@ -222,22 +212,22 @@ namespace Ludo
 
         private void PrintStatistics(List<Player> players)
         {
-            Console.Clear();
-            foreach (var p in players)
+            foreach (var p in players.OrderByDescending(p => p.GamePiece.Where(gp => gp.IsAtGoal).Count()))
             {
-                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtBase).Count()} gamepieces who is at base!");
                 Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtGoal).Count()} gamepieces who is at GOAL!");
+                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtBase).Count()} gamepieces who is at BASE!");
             }
         }
 
-        private void SaveGame()
+        private void PrintWinner(Player player)
         {
-            gameEngine.SaveSession();
+            Console.Clear();
+            Console.WriteLine("");
+            Console.WriteLine("The WINNER IS " + player.UserName + "\n");
         }
 
-        private void LoadGame()
-        {
-            gameEngine.PlayCurrentSession();
-        }
+        private void SaveGame() => gameEngine.SaveSession();
+
+        private void LoadGame() => gameEngine.PlayCurrentSession();
     }
 }

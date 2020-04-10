@@ -85,7 +85,7 @@ namespace EngineClasses
 
         }
 
-        public void RemoveFromDbAsync(LudoContext context)
+        public void RemoveFromDb(LudoContext context)
         {
             context = new LudoContext();
 
