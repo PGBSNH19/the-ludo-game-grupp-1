@@ -14,7 +14,7 @@ namespace Ludo
         {
             GameEngine gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             GameLoop gameLoop = new GameLoop(gameEngine, new Menu());
-            gameLoop.MainMenu();
+            gameLoop.Run();
         }
     }
 }

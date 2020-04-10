@@ -13,57 +13,77 @@ namespace Ludo
         private int diceResult;
         private Player currentPlayer;
         private Menu menu;
-
-        public bool IsRunning { get; private set; }
+        private bool isRunning;
         private string[] playerColors = { "Red", "Blue", "Green", "Yellow" };
 
         public GameLoop(GameEngine gameEngine, Menu menu)
         {
             this.gameEngine = gameEngine;
             this.menu = menu;
-            this.IsRunning = false;
+            this.isRunning = false;
         }
 
-        public void MainMenu()
+        public void Run()
+        {
+            MainMenu();
+        }
+
+        private void MainMenu()
         {
             string menuChoice = "";
-            bool menuIsRunning = true;
-            while (menuIsRunning)
+            while (menuChoice != "exit")
             {
                 menuChoice = menu.ShowMainMenu();
 
                 switch (menuChoice)
                 {
                     case "new game":
-                        int players = int.Parse(menu.ShowNewGameMenu());
-                        PlayerSelect(players);
-                        StartLoopThread();
-                        menuIsRunning = false;
+                        RunNewGame();
                         break;
                     case "load game":
                         LoadGame();
                         StartLoopThread();
-                        menuIsRunning = false;
                         break;
                     case "exit":
                         break;
                 }
             }
-            if (PauseGame(new ConsoleKeyInfo()))
-            {
+        }
 
+        private void RunNewGame()
+        {
+            ConsoleKeyInfo KeyPress = new ConsoleKeyInfo();
+            int players = int.Parse(menu.ShowNewGameMenu());
+            AddPlayers(players);
+            StartLoopThread();
+
+            while (KeyPress.Key != ConsoleKey.Escape)
+            {
+                KeyPress = Console.ReadKey();
             }
         }
 
-        private bool StartLoopThread()
+        private void AddPlayers(int players)
         {
-            this.IsRunning = true;
-            Thread gameLoop = new Thread(StartLoop);
-            gameLoop.Start();
-            return this.IsRunning;
+            int i = 0;
+            while (i < players)
+            {
+                Console.WriteLine("Add username to player" + (i + 1));
+                gameEngine.CreatePlayer(Console.ReadLine(), playerColors[i]);
+                i++;
+            }
         }
 
-        private bool PauseGame(ConsoleKeyInfo keyPress)
+        private void StartLoopThread()
+        {
+            isRunning = true;
+            Thread gameLoop = new Thread(StartLoop);
+            gameLoop.Start();
+        }
+
+        private void StopLoopThread() => this.isRunning = false;
+
+        private void RunGameLoop(ConsoleKeyInfo keyPress)
         {
             while (keyPress.Key != ConsoleKey.Escape)
             {
@@ -71,38 +91,26 @@ namespace Ludo
 
                 if (keyPress.Key == ConsoleKey.Spacebar)
                 {
-                    if (IsRunning)
+                    if (isRunning)
                     {
-                        return StopLoopThread();
+                        StopLoopThread();
                     }
                     else
                     {
-                        return StartLoopThread();
+                        StartLoopThread();
                     }
                 }
             }
-            return IsRunning;
-        }
-
-        private bool StopLoopThread()
-        {
-            this.IsRunning = false;
-            return this.IsRunning;
-        }
+        }        
 
         private void StartLoop()
         {
-            IsRunning = true;
-            while (IsRunning)
+            isRunning = true;
+            while (isRunning)
             {
-
-
-                //Find player whos turn it is
                 currentPlayer = gameEngine.CurrentPlayer();
-
-
                 diceResult = gameEngine.RollDice();
-                //Get moveable gamepieces and move first piece in list
+
                 if (gameEngine.MovableGamePieces(currentPlayer, diceResult).Any())
                 {
                     gameEngine.MoveGamePiece(gameEngine.MovableGamePieces(currentPlayer, diceResult)[0], diceResult);
@@ -113,7 +121,7 @@ namespace Ludo
                 if (gameEngine.IsWinner(currentPlayer))
                 {
                     Console.WriteLine(currentPlayer.UserName + " is winner!!");
-                    IsRunning = false;
+                    isRunning = false;
                     gameEngine.CreateGameLog(currentPlayer.UserName);
                     gameEngine.RemoveSession();
                 }
