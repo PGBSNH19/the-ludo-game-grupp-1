@@ -131,13 +131,8 @@ namespace EngineClasses
 
         public void PlayCurrentSession()
         {
-            if (LoadSession() != null)
-            {
                 this.Session = LoadSession();
                 PlaceGamePieces(Session.Player);
-            }
-            else
-                return;
         }
 
         public void PlaceGamePieces(List<Player> players)

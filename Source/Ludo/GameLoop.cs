@@ -41,7 +41,6 @@ namespace Ludo
                     break;
                 case "load game":
                     LoadGame();
-                    StartLoopThread();
                     break;
                 case "exit":
                     break;
@@ -73,7 +72,7 @@ namespace Ludo
         }
 
         private void StartLoopThread()
-        {            
+        {
             Task gameLoop = Task.Run(() => StartLoop());
             ToggleGameLoopRunning();
             gameLoop.Wait();
@@ -106,7 +105,7 @@ namespace Ludo
                     StopLoopThread();
                 }
             }
-        }        
+        }
 
         private void StartLoop()
         {
@@ -123,7 +122,6 @@ namespace Ludo
                 }
 
                 UpdateConsole(gameEngine, diceResult);
-
                 if (gameEngine.IsWinner(currentPlayer))
                 {
                     PrintWinner(currentPlayer);
@@ -137,8 +135,7 @@ namespace Ludo
                     SaveGame();
                 }
                 Thread.Sleep(100);
-                
-                //RunGameLoop(new ConsoleKeyInfo(), gameEngine.Session.Player);
+
             }
         }
 
@@ -151,6 +148,7 @@ namespace Ludo
             Console.WriteLine($"Current Player: {gameEngine.CurrentPlayer().UserName}");
             Console.WriteLine($"Dice Roll: {diceResult}");
             Console.WriteLine();
+            PrintStatistics(gameEngine.Session.Player);
 
             foreach (BoardSquare square in gameEngine.GameBoard.Board)
             {
@@ -218,13 +216,14 @@ namespace Ludo
             }
         }
 
-        private void PrintStatistics(List<Player> players)
+        private static void PrintStatistics(List<Player> players)
         {
             foreach (var p in players.OrderByDescending(p => p.GamePiece.Where(gp => gp.IsAtGoal).Count()))
             {
-                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtGoal).Count()} gamepieces who is at GOAL!");
-                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtBase).Count()} gamepieces who is at BASE!");
+                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtGoal).Count()} gamepieces at GOAL!");
+                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtBase).Count()} gamepieces at BASE!");
             }
+            Console.WriteLine("");
         }
 
         private void PrintWinner(Player player)
@@ -236,6 +235,17 @@ namespace Ludo
 
         private void SaveGame() => gameEngine.SaveSession();
 
-        private void LoadGame() => gameEngine.PlayCurrentSession();
+        private void LoadGame()
+        {
+            if (gameEngine.LoadSession() != null)
+            {
+                gameEngine.PlayCurrentSession();
+                StartLoopThread();
+            }
+            else
+            {
+                Run();
+            }
+        }
     }
 }
