@@ -67,7 +67,7 @@ namespace EngineClasses
             return session;
         }
 
-        public void AddToDb(LudoContext context)
+        public async Task AddToDbAsync(LudoContext context)
         {
             context = new LudoContext();
 
@@ -81,11 +81,11 @@ namespace EngineClasses
                 context.Session.Add(this);
             }
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
         }
 
-        public void RemoveFromDb(LudoContext context)
+        public async Task RemoveFromDbAsync(LudoContext context)
         {
             context = new LudoContext();
 
@@ -94,7 +94,7 @@ namespace EngineClasses
                 context.Session.Remove(this);
             }
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -91,10 +91,10 @@ namespace EngineClasses
         /// <returns></returns>
         public bool IsWinner(Player player) => player.GamePiece.All(gp => gp.IsAtGoal == true);
 
-        public void CreateGameLog(string userName)
+        public async void CreateGameLog(string userName)
         {
             gameLog.CreateNewGameLog(userName);
-            gameLog.AddToDb(context);
+            await gameLog.AddToDb(context);
         }
 
         /// <summary>
@@ -123,7 +123,8 @@ namespace EngineClasses
         }
 
         public Session LoadSession() => Session.LoadSessionAsync(context).Result;
-        public void SaveSession() => Session.AddToDb(context);
+        public async void SaveSession() => await Session.AddToDbAsync(context);
+        public async void RemoveSession() => await Session.RemoveFromDbAsync(context);
         public void PlayCurrentSession()
         {
             this.Session = LoadSession();

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EngineClasses
 {
@@ -29,7 +30,7 @@ namespace EngineClasses
         {
             this.WinnerPlayer = userName;
         }
-        public void AddToDb(LudoContext context)
+        public async Task AddToDb(LudoContext context)
         {
             context = new LudoContext();
 
@@ -43,7 +44,7 @@ namespace EngineClasses
                 context.GameLog.Add(this);
             }
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
         }
     }
