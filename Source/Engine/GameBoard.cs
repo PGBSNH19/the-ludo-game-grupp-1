@@ -37,7 +37,6 @@ namespace EngineClasses
             section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
             section.Add(new BoardSquare(this.Board.Count + section.Count, color, true, false));
             
-
             return section;
         }
 
@@ -57,30 +56,23 @@ namespace EngineClasses
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public BoardSquare GetStartingSquare(Player player)
-        {
-            return Board.Where(b => b.Color == player.Color && b.StartingSquare).FirstOrDefault();
-        }
+        public BoardSquare GetStartingSquare(Player player) => Board.Where(b => b.Color == player.Color && b.StartingSquare).FirstOrDefault();
 
         /// <summary>
         /// Returns gamesquare based on game pieces position (int).
         /// </summary>
         /// <param name="gamePiece"></param>
         /// <returns></returns>
-        public BoardSquare GetCurrentSquare(GamePiece gamePiece)
-        {
-            return Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).FirstOrDefault();
-        }
+        public BoardSquare GetCurrentSquare(GamePiece gamePiece) => Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).FirstOrDefault();
+
 
         /// <summary>
         /// Returns the square after the square the game piece is currently at.
         /// </summary>
         /// <param name="gamePiece"></param>
         /// <returns></returns>
-        public BoardSquare GetNextSquare(GamePiece gamePiece)
-        {
-            return Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value + 1).FirstOrDefault();
-        }
+        public BoardSquare GetNextSquare(GamePiece gamePiece) => Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value + 1).FirstOrDefault();
+
 
         /// <summary>
         /// Returns the next square the game piece can legally stand on according to game rules.

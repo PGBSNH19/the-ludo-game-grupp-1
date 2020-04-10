@@ -45,7 +45,7 @@ namespace LudoGUI
             Width = 1200;
 
             //Set up new Game Engine
-            gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
 
             //Set up game board 2D translation
             gameBoard2D = GetGameBoard2DRepresentation(gameEngine.GameBoard);

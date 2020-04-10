@@ -23,9 +23,7 @@ namespace EngineClasses
         {
             this.UserName = userName;
             this.Color = color;
-
             this.GamePiece = new List<GamePiece>();
-            
         }
 
         public void AddGamePieces()
@@ -39,9 +37,6 @@ namespace EngineClasses
             }
         }
 
-        public GamePiece SelectGamePiece(int index)
-        {
-            return GamePiece[index];
-        }
+        public GamePiece SelectGamePiece(int index) => GamePiece[index];
     }
 }

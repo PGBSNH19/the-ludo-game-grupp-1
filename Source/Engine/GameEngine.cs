@@ -9,15 +9,17 @@ namespace EngineClasses
 {
     public class GameEngine
     {
+        private LudoContext context;
         public Session Session { get; private set; }
         public GameBoard GameBoard { get; private set; }
-        public GameLog GameLog { get; private set; }
+        private GameLog gameLog;
 
-        public GameEngine(Session session, GameBoard gameBoard, GameLog gameLog)
+        public GameEngine(Session session, GameBoard gameBoard, GameLog gameLog, LudoContext context)
         {
             this.Session = session;
             this.GameBoard = gameBoard;
-            this.GameLog = gameLog;
+            this.gameLog = gameLog;
+            this.context = context;
         }
 
         /// <summary>
@@ -25,29 +27,23 @@ namespace EngineClasses
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="color"></param>
-        public void CreatePlayer(string userName, string color)
-        {
-            Session.CreatePlayer(userName, color);
-        }
+        public void CreatePlayer(string userName, string color) => Session.CreatePlayer(userName, color);
+
 
         /// <summary>
         /// Select player based on index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public Player PlayerSelect(int index)
-        {
-            return Session.Player[index];
-        }
+        public Player PlayerSelect(int index) => Session.Player[index];
+
 
         /// <summary>
         /// Returns current player whos turn it is.
         /// </summary>
         /// <returns></returns>
-        public Player CurrentPlayer()
-        {
-            return Session.GetCurrentPlayer();
-        }
+        public Player CurrentPlayer() => Session.GetCurrentPlayer();
+
 
         /// <summary>
         /// Moves a gama piece n number of steps taking into account game rules of legal movement.
@@ -93,24 +89,19 @@ namespace EngineClasses
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public bool IsWinner(Player player)
-        {
-            return player.GamePiece.All(gp => gp.IsAtGoal == true);
-        }
+        public bool IsWinner(Player player) => player.GamePiece.All(gp => gp.IsAtGoal == true);
 
         public void CreateGameLog(string userName)
         {
-            GameLog.CreateNewGameLog(userName);
+            gameLog.CreateNewGameLog(userName);
+            gameLog.AddToDb(context);
         }
 
         /// <summary>
         /// Randomize a number between 1 - 6.
         /// </summary>
         /// <returns></returns>
-        public int RollDice()
-        {
-            return Session.RollDice();
-        }
+        public int RollDice() => Session.RollDice();
 
         /// <summary>
         /// Return a list specifying wich game pieces a player have that can legally move.
@@ -131,11 +122,8 @@ namespace EngineClasses
             return movablePieces;
         }
 
-        public Session LoadSession()
-        {
-            return Session.LoadSessionAsync().Result;
-        }
-
+        public Session LoadSession() => Session.LoadSessionAsync(context).Result;
+        public void SaveSession() => Session.AddToDb(context);
         public void PlayCurrentSession()
         {
             this.Session = LoadSession();
@@ -144,9 +132,9 @@ namespace EngineClasses
 
         public void PlaceGamePieces(List<Player> players)
         {
-            for(int i = 0; i < players.Count; i++)
+            for (int i = 0; i < players.Count; i++)
             {
-                for(int j = 0; j < players[i].GamePiece.Count; j++)
+                for (int j = 0; j < players[i].GamePiece.Count; j++)
                 {
                     GameBoard.PlaceGamePiece(players[i].GamePiece[j]);
                 }

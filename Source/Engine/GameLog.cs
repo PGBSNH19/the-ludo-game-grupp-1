@@ -11,8 +11,8 @@ namespace EngineClasses
     {
         [Key]
         public int GameLogId { get; private set; }
-        public string WinnerPlayer{ get; private set; }
-        public DateTime Created { get; private set; }
+        public string WinnerPlayer { get; private set; }
+        public DateTime Created { get; set; }
 
         public GameLog(string winnerPlayer)
         {
@@ -22,29 +22,29 @@ namespace EngineClasses
 
         public GameLog()
         {
-
+            this.Created = DateTime.UtcNow;
         }
 
         public void CreateNewGameLog(string userName)
         {
             this.WinnerPlayer = userName;
         }
-        public void AddToDb()
+        public void AddToDb(LudoContext context)
         {
-            using (var context = new LudoContext())
-            {
-                //If exists do update instead
-                if (context.GameLog.Any(gl => gl.GameLogId == this.GameLogId))
-                {
-                    context.GameLog.Update(this);
-                }
-                else
-                {
-                    context.GameLog.Add(this);
-                }
+            context = new LudoContext();
 
-                context.SaveChanges();
+            //If exists do update instead
+            if (context.GameLog.Any(gl => gl.GameLogId == this.GameLogId))
+            {
+                context.GameLog.Update(this);
             }
+            else
+            {
+                context.GameLog.Add(this);
+            }
+
+            context.SaveChanges();
+
         }
     }
 }

@@ -53,50 +53,48 @@ namespace EngineClasses
             return result;
         }
 
-        public void AddToDb()
-        {
-            using (var context = new LudoContext())
-            {
-                //If exists do update instead
-                if (context.Session.Any(s => s.SessionId == this.SessionId))
-                {
-                    context.Session.Update(this);
-                }
-                else
-                {
-                    context.Session.Add(this);
-                }
-
-                context.SaveChanges();
-            }
-        }
-        public async Task<Session> LoadSessionAsync()
+        public async Task<Session> LoadSessionAsync(LudoContext context)
         {
             Session session = null;
-            using (var context = new LudoContext())
-            {
+            context = new LudoContext();
 
-                session = await context.Session
-                        .Include(s => s.Player)
-                        .ThenInclude(p => p.GamePiece)
-                        .FirstOrDefaultAsync();
-                context.SaveChanges();
-            }
+            session = await context.Session
+                    .Include(s => s.Player)
+                    .ThenInclude(p => p.GamePiece)
+                    .FirstOrDefaultAsync();
+            context.SaveChanges();
 
             return session;
         }
 
-        public void RemoveFromDb()
+        public void AddToDb(LudoContext context)
         {
-            using (var context = new LudoContext())
-            {
-                if (context.Session.Any(s => s.SessionId == this.SessionId))
-                {
-                    context.Session.Remove(this);
-                }
+            context = new LudoContext();
 
-                context.SaveChanges();
+            //If exists do update instead
+            if (context.Session.Any(s => s.SessionId == this.SessionId))
+            {
+                context.Session.Update(this);
             }
+            else
+            {
+                context.Session.Add(this);
+            }
+
+            context.SaveChanges();
+
+        }
+
+        public void RemoveFromDb(LudoContext context)
+        {
+            context = new LudoContext();
+
+            if (context.Session.Any(s => s.SessionId == this.SessionId))
+            {
+                context.Session.Remove(this);
+            }
+
+            context.SaveChanges();
         }
     }
 }

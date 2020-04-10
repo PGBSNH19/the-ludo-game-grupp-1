@@ -35,7 +35,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void GetCurrentPlayerTest_WithFourPlayersCheckWhosTurnItIs_ReturnPlayerAtIndex0()
         {
-            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             engine.Session.CreatePlayer("Testman1", "Red");
             engine.Session.CreatePlayer("Testman2", "Yellow");
             engine.Session.CreatePlayer("Testman3", "Green");
@@ -50,7 +50,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void GetCurrentPlayerTest_WithFourPlayersCheckWhosTurnItIsAfterTurnHasIncreasedByFive_ReturnPlayerAtIndex1()
         {
-            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             engine.Session.CreatePlayer("Testman1", "Red");
             engine.Session.CreatePlayer("Testman2", "Yellow");
             engine.Session.CreatePlayer("Testman3", "Green");
@@ -66,7 +66,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void GetCurrentPlayerTest_WithThreePlayersCheckWhosTurnItIsAfterTurnHasIncreasedByFour_ReturnPlayerAtIndex1()
         {
-            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             engine.Session.CreatePlayer("Testman1", "Red");
             engine.Session.CreatePlayer("Testman2", "Yellow");
             engine.Session.CreatePlayer("Testman3", "Green");
@@ -81,7 +81,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void GetCurrentPlayerTest_WithTwoPlayersCheckWhosTurnItIsAfterTurnHasIncreasedByThree_ReturnPlayerAtIndex1()
         {
-            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             engine.Session.CreatePlayer("Testman1", "Red");
             engine.Session.CreatePlayer("Testman2", "Yellow");
 
@@ -95,7 +95,7 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void SelectPlayerGamePieceTest_WithCorrectIndex_ReturnIndex1()
         {
-            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine engine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             engine.Session.CreatePlayer("Testman1", "Red");
             engine.Session.CreatePlayer("Testman2", "Yellow");
 
