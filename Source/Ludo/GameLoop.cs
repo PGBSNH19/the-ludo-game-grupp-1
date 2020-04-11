@@ -26,31 +26,45 @@ namespace Ludo
             this.gameOver = false;
         }
 
-        public void Run()
+        private void ConstructNewEmptySession()
         {
-            MainMenu();
+            gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
         }
 
-        private void MainMenu()
+        public void Run()
         {
+            bool exitGame = false;
+            while (!exitGame)
+            {
+                exitGame = MainMenu();
+            }           
+        }
+
+        private bool MainMenu()
+        {
+            bool exit = false;
             string menuChoice = "";
             menuChoice = menu.ShowMainMenu();
             switch (menuChoice)
             {
                 case "new game":
                     RunNewGame();
+                    exit = false;
                     break;
                 case "load game":
                     LoadGame();
+                    exit = false;
                     break;
                 case "exit":
+                    exit = true;
                     break;
             }
+            return exit;
         }
 
         private void RunNewGame()
         {
-            gameEngine.RemoveSession();
+            ConstructNewEmptySession();
             int players = int.Parse(menu.ShowNewGameMenu());
             AddPlayers(players);
             StartLoopThread();
@@ -72,7 +86,6 @@ namespace Ludo
             Task gameLoop = Task.Run(() => StartLoop());
             ToggleGameLoopRunning();
             gameLoop.Wait();
-            MainMenu();
         }
 
         private void StopLoopThread() => this.isRunning = false;
@@ -83,7 +96,7 @@ namespace Ludo
 
             while (keyPress.Key != ConsoleKey.Escape && !gameOver)
             {
-                keyPress = Console.ReadKey();
+                    keyPress = Console.ReadKey();             
 
                 if (keyPress.Key == ConsoleKey.Spacebar)
                 {
@@ -127,16 +140,14 @@ namespace Ludo
                     gameOver = true;
                     gameEngine.CreateGameLog(currentPlayer.UserName);
                     DBTasks = Task.Run(() => gameEngine.RemoveSession());
-                    DBTasks.Wait();
-                    gameEngine.RemoveSession();
                     Console.ReadKey();
-                    MainMenu();
+                    DBTasks.Wait();                                
                 }
                 else
                 {
                     DBTasks = Task.Run(() => SaveGame());
-                    DBTasks.Wait();
                     Thread.Sleep(100);
+                    DBTasks.Wait();                    
                 }                
             }
         }
@@ -239,12 +250,10 @@ namespace Ludo
 
         private void LoadGame()
         {
-            Task DBTasks;
             if (gameEngine.LoadSession() != null)
             {
-                gameEngine.RemoveSession();
-                DBTasks = Task.Run(() => gameEngine.PlayCurrentSession());
-                DBTasks.Wait();
+                ConstructNewEmptySession();
+                gameEngine.PlayCurrentSession();
                 StartLoopThread();
             }
             else
@@ -253,7 +262,6 @@ namespace Ludo
                 Console.WriteLine("Cannot find any saved sessions. \n" +
                                   "Press any key to return to main menu.");
                 Console.ReadKey();
-                MainMenu();
             }
         }
     }

@@ -37,15 +37,6 @@ namespace EngineClasses
             }
         }
 
-<<<<<<< HEAD
         public GamePiece SelectGamePiece(int index) => GamePieces[index];
-=======
-        public void RemoveGamePieces()
-        {
-            this.GamePiece = new List<GamePiece>();
-        }
-
-        public GamePiece SelectGamePiece(int index) => GamePiece[index];
->>>>>>> @Gerglamesh, started working on bugfixes where ending a running session and either loading a new session or creating a new session results in Players not being added correctly to session.
     }
 }
