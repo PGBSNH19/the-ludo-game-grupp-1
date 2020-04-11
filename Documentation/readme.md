@@ -6,7 +6,7 @@ Project description : [The ludo game - avslutande projekt](https://pgbsnh19.gith
 
 Första dagen arbetade vi med att planlägga projekt genom att göra: 
 
-####**CRC-kort:** 
+**CRC-kort:** 
 
 ![CRC-GameEngine](CRC-GameEngine.png)
 *GameEngine*
@@ -23,7 +23,7 @@ Första dagen arbetade vi med att planlägga projekt genom att göra:
 ![CRC-GameLog](CRC-GameLog.png)
 *GameLog*
 
-####Relationsdiagram:
+**Relationsdiagram:**
 
 ![Databasrelationer](Databasrelationer.png)
 *Databasrelationer*
