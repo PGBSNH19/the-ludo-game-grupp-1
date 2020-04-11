@@ -8,43 +8,46 @@ Första dagen arbetade vi med att planlägga projekt genom att göra:
 
 **CRC-kort:** 
 
-![CRC-GameEngine.png](CRC-GameEngine)
+![CRC-GameEngine](CRC-GameEngine.png)
 
-![CRC-Session.png](CRC-Session)
+![CRC-Session](CRC-Session.png)
 
-![CRC-Player.png](CRC-Player)
+![CRC-Player](CRC-Player.png)
 
-![CRC-GamePiece.png](CRC-GamePiece)
+![CRC-GamePiece](CRC-GamePiece.png)
 
-![CRC-GameBoard.png](CRC-GameBoard)
+![CRC-GameBoard](CRC-GameBoard.png)
 
-![CRC-BoardSquare.png](CRC-BoardSquare)
+![CRC-BoardSquare](CRC-BoardSquare.png)
 
-![CRC-GameLog.png](CRC-GameLog)
+![CRC-GameLog](CRC-GameLog.png)
 
 **Relationsdiagram:**
 
-![Databasrelationer.png](Databasrelationer)
+![Databasrelationer](Databasrelationer.png)
 
-![DbDiagram.png](DbDiagram)
+![DbDiagram](DbDiagram.png)
 
 ![EngineClass-RelationerUnderArbete.png](EngineClass-RelationerUnderArbete)
 
+
 **User-stories:**
 
-[UserStories.docx](UserStories)
+[UserStories](UserStories.docx)
 
 Vi skapade också levande dokument för regelbestämmelser för projektet:
 
+
 **Regler:**
 
-[Regler.docx](Regler)
+[Regler](Regler.docx)
 
 Vi hade även dokument för milstolpar för att kunna få en överblick över hur projektet ska fortskrida härnäst:
 
+
 **Milstolpar**
 
-[Milstolpar.docx](Milstolpar)
+[Milstolpar](Milstolpar.docx)
 
 Detta övergavs senare till förmån för att använda GitHubs "Projects".
 
@@ -52,16 +55,16 @@ Lite senare i projektet ritade vi även upp skisser över hur vi skulle visualis
 Denna process ledde till att vi övergav en tvådimensionell representation 
 till förmån för en endimensionell:
 
-![Ludo-Spelplan.png](Ludo-Spelplan)
+![Ludo-Spelplan](Ludo-Spelplan.png)
 
-![LudoGameBoard1DStyle.png](LudoGameBoard1DStyle)
+![LudoGameBoard1DStyle](LudoGameBoard1DStyle.png)
 
 Löpande under projektet skrev vi dagbok över vad som gjorts den dagen:
 
+
 **Dagbok:**
 
-[Dagboken.docx](Dagboken)
-
+[Dagboken](Dagboken.docx)
 
 Vi försökte under projektet få till ett WPF dokument som ett slags frontend-
 projekt för att kunna visa spelet. Detta blev för tidskrävande och vi fick överge det projektet.
