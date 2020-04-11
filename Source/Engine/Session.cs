@@ -38,7 +38,7 @@ namespace EngineClasses
             }
         }
 
-
+        public void RemovePlayers() => this.Player = new List<Player>();
 
         public Player GetCurrentPlayer() => Player.ToList()[(Turns % Player.Count)];
 

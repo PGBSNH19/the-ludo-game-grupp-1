@@ -23,6 +23,8 @@ namespace EngineClasses
             this.context = context;
         }
 
+        public void ClearSession() => Session.RemovePlayers();
+
         /// <summary>
         /// Add gamepieces to board when sessions is loaded from database.
         /// </summary>
