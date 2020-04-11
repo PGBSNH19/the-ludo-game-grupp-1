@@ -34,6 +34,7 @@ namespace Ludo
         public void Run()
         {
             bool exitGame = false;
+            Console.CursorVisible = false;
             while (!exitGame)
             {
                 exitGame = MainMenu();
@@ -72,6 +73,8 @@ namespace Ludo
 
         private void AddPlayers(int players)
         {
+            Console.CursorVisible = true;
+
             int i = 0;
             while (i < players)
             {
@@ -79,6 +82,8 @@ namespace Ludo
                 gameEngine.CreatePlayer(Console.ReadLine(), playerColors[i]);
                 i++;
             }
+
+            Console.CursorVisible = false;
         }
 
         private void StartLoopThread()
@@ -134,14 +139,22 @@ namespace Ludo
                 UpdateConsole(gameEngine, diceResult);
                 if (gameEngine.IsWinner(currentPlayer))
                 {
-                    PrintWinner(currentPlayer);
-                    PrintStatistics(gameEngine.Session.Player);
                     isRunning = false;
                     gameOver = true;
-                    gameEngine.CreateGameLog(currentPlayer.UserName);
+
+                    PrintWinner(currentPlayer);
+                    PrintStatistics(gameEngine.Session.Player);
+
+                    DBTasks = Task.Run(() => gameEngine.CreateGameLog(currentPlayer.UserName));
+                    Console.WriteLine("Logging game...");
+                    DBTasks.Wait();
+
                     DBTasks = Task.Run(() => gameEngine.RemoveSession());
+                    Console.WriteLine("Removing session from database...");
+                    DBTasks.Wait();
+
+                    Console.WriteLine("All done! Press any key to continue...");
                     Console.ReadKey();
-                    DBTasks.Wait();                                
                 }
                 else
                 {
@@ -154,6 +167,7 @@ namespace Ludo
 
         private static void UpdateConsole(GameEngine gameEngine, int diceResult)
         {
+            
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Clear();
             Console.WriteLine("\n\n\n");
@@ -181,7 +195,6 @@ namespace Ludo
             Console.WriteLine("\n\n\n");
             Console.WriteLine("Press [Spacebar] to toggle game running. \n" +
                 "Press [ESC] to return to main menu.");
-
         }
 
         private static void PrintConsoleBoard(List<BoardSquare> board)
@@ -242,8 +255,7 @@ namespace Ludo
         private void PrintWinner(Player player)
         {
             Console.Clear();
-            Console.WriteLine("");
-            Console.WriteLine("The WINNER IS " + player.UserName + "\n");
+            Console.WriteLine("\nTHE WINNER IS " + player.UserName + "!!! =D\n");
         }
 
         private void SaveGame() => gameEngine.SaveSession();
