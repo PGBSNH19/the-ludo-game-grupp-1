@@ -28,6 +28,7 @@ namespace Ludo
 
         private void ConstructNewEmptySession()
         {
+            gameOver = false;
             gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
         }
 
@@ -64,7 +65,7 @@ namespace Ludo
         }
 
         private void RunNewGame()
-        {
+        {            
             ConstructNewEmptySession();
             int players = int.Parse(menu.ShowNewGameMenu());
             AddPlayers(players);
@@ -89,7 +90,8 @@ namespace Ludo
         private void StartLoopThread()
         {
             Task gameLoop = Task.Run(() => StartLoop());
-            ToggleGameLoopRunning();
+            Task toggleLoop = Task.Run(() => ToggleGameLoopRunning());
+            toggleLoop.Wait();
             gameLoop.Wait();
         }
 
@@ -99,11 +101,11 @@ namespace Ludo
         {
             ConsoleKeyInfo keyPress = new ConsoleKeyInfo();
 
-            while (keyPress.Key != ConsoleKey.Escape && !gameOver)
+            while (keyPress.Key != ConsoleKey.Escape)
             {
                     keyPress = Console.ReadKey();             
 
-                if (keyPress.Key == ConsoleKey.Spacebar)
+                if (keyPress.Key == ConsoleKey.Spacebar && !gameOver)
                 {
                     if (isRunning)
                     {
@@ -140,8 +142,7 @@ namespace Ludo
                 if (gameEngine.IsWinner(currentPlayer))
                 {
                     isRunning = false;
-                    gameOver = true;
-
+                    
                     PrintWinner(currentPlayer);
                     PrintStatistics(gameEngine.Session.Player);
 
@@ -153,8 +154,9 @@ namespace Ludo
                     Console.WriteLine("Removing session from database...");
                     DBTasks.Wait();
 
-                    Console.WriteLine("All done! Press any key to continue...");
-                    Console.ReadKey();
+                    Console.WriteLine("All done!");
+                    gameOver = true;
+                    //Console.ReadKey();
                 }
                 else
                 {
