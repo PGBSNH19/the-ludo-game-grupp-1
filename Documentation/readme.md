@@ -6,46 +6,47 @@ Project description : [The ludo game - avslutande projekt](https://pgbsnh19.gith
 
 Första dagen arbetade vi med att planlägga projekt genom att göra: 
 
-**CRC-kort:** 
+####**CRC-kort:** 
 
 ![CRC-GameEngine](CRC-GameEngine.png)
-
+*GameEngine*
 ![CRC-Session](CRC-Session.png)
-
+*Session*
 ![CRC-Player](CRC-Player.png)
-
+*Player*
 ![CRC-GamePiece](CRC-GamePiece.png)
-
+*GamePiece*
 ![CRC-GameBoard](CRC-GameBoard.png)
-
+*GameBoard*
 ![CRC-BoardSquare](CRC-BoardSquare.png)
-
+*BoardSquare*
 ![CRC-GameLog](CRC-GameLog.png)
+*GameLog*
 
-**Relationsdiagram:**
+####**Relationsdiagram:**
 
 ![Databasrelationer](Databasrelationer.png)
-
+*Databasrelationer*
 ![DbDiagram](DbDiagram.png)
+*Databasdiagram*
+![EngineClass-RelationerUnderArbete](EngineClass-RelationerUnderArbete.png)
+*Objektrelationer - ej fullständig och endast påbörjad*
 
-![EngineClass-RelationerUnderArbete.png](EngineClass-RelationerUnderArbete)
-
-
-**User-stories:**
+####**User-stories:**
 
 [UserStories](UserStories.docx)
 
 Vi skapade också levande dokument för regelbestämmelser för projektet:
 
 
-**Regler:**
+####**Regler:**
 
 [Regler](Regler.docx)
 
 Vi hade även dokument för milstolpar för att kunna få en överblick över hur projektet ska fortskrida härnäst:
 
 
-**Milstolpar**
+####**Milstolpar**
 
 [Milstolpar](Milstolpar.docx)
 
@@ -56,13 +57,14 @@ Denna process ledde till att vi övergav en tvådimensionell representation
 till förmån för en endimensionell:
 
 ![Ludo-Spelplan](Ludo-Spelplan.png)
-
+*2D-representation*
 ![LudoGameBoard1DStyle](LudoGameBoard1DStyle.png)
+*1D-representation*
 
 Löpande under projektet skrev vi dagbok över vad som gjorts den dagen:
 
 
-**Dagbok:**
+####**Dagbok:**
 
 [Dagboken](Dagboken.docx)
 
@@ -73,8 +75,11 @@ vi kände att vi hade viktigare saker att fokusera på rationaliserades detta bo
 
 Så långt som vi kom i WPF-projektet kan beskådes i en separat branch i projektet för den som är nyfiken.
 
-
- 
+På slutet föll vi i fällan att vår tidsbrist gjorde att dokumentationen blev lidande. 
+En lärdom är att man som utvecklare återigen hela tiden måste tänka på att planera
+sina projekt på ett bra sätt. Hade vi underhållit dokumentation lite bättre under 
+projektets gång generellt så hade det nog varit lättare att få in dokumentation även 
+när vi fick tidsbrist.
 
 
 
