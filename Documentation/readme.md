@@ -23,7 +23,7 @@ Första dagen arbetade vi med att planlägga projekt genom att göra:
 ![CRC-GameLog](CRC-GameLog.png)
 *GameLog*
 
-####**Relationsdiagram:**
+####Relationsdiagram:
 
 ![Databasrelationer](Databasrelationer.png)
 *Databasrelationer*
@@ -32,21 +32,21 @@ Första dagen arbetade vi med att planlägga projekt genom att göra:
 ![EngineClass-RelationerUnderArbete](EngineClass-RelationerUnderArbete.png)
 *Objektrelationer - ej fullständig och endast påbörjad*
 
-####**User-stories:**
+**User-stories:**
 
 [UserStories](UserStories.docx)
 
 Vi skapade också levande dokument för regelbestämmelser för projektet:
 
 
-####**Regler:**
+**Regler:**
 
 [Regler](Regler.docx)
 
 Vi hade även dokument för milstolpar för att kunna få en överblick över hur projektet ska fortskrida härnäst:
 
 
-####**Milstolpar**
+**Milstolpar**
 
 [Milstolpar](Milstolpar.docx)
 
@@ -61,10 +61,10 @@ till förmån för en endimensionell:
 ![LudoGameBoard1DStyle](LudoGameBoard1DStyle.png)
 *1D-representation*
 
+
 Löpande under projektet skrev vi dagbok över vad som gjorts den dagen:
 
-
-####**Dagbok:**
+**Dagbok:**
 
 [Dagboken](Dagboken.docx)
 
