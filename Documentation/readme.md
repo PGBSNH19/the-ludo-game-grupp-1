@@ -5,25 +5,25 @@
 Project description : [The ludo game - avslutande projekt](https://pgbsnh19.github.io/dataatkomst/project4.html)
 
 Första dagen arbetade vi med att planlägga projekt genom att göra: 
-**bold**CRC-kort: 
-![CRC-GameEngine.jpg](Game Engine)
-![CRC-Session.jpg](Session)
-![CRC-Player.jpg](Player)
-![CRC-GamePiece.jpg](Game Piece)
-![CRC-GameBoard.jpg](Game Board)
-![CRC-BoardSquare.jpg](Board Square)
-![CRC-GameLog.jpb](Game Log)
+**RC-kort:** 
+![CRC-GameEngine.png](Game Engine)
+![CRC-Session.png](Session)
+![CRC-Player.png](Player)
+![CRC-GamePiece.png](Game Piece)
+![CRC-GameBoard.png](Game Board)
+![CRC-BoardSquare.png](Board Square)
+![CRC-GameLog.png](Game Log)
 
-**bold**Relationsdiagram:
-![Databasrelationer.jpg](Databasrelationer)
-![DbDiagram.jpg](Databasdiagram)
-![EngineClass-RelationerUnderArbete.jpg](Engine Class relationer - Ofullständig)
+**Relationsdiagram:**
+![Databasrelationer.png](Databasrelationer)
+![DbDiagram.png](Databasdiagram)
+![EngineClass-RelationerUnderArbete.png](Engine Class relationer - Ofullständig)
 
-**bold**User-stories:
+**User-stories:**
 [User stories.docx](User stories)
 
 Vi skapade också levande dokument för regelbestämmelser för projektet:
-**bold**Regler:
+**Regler:**
 [Regler.docx](Regelbestämmelser)
 
 Vi hade även dokument för milstolpar för att kunna få en överblick över hur projektet ska fortskrida härnäst:
@@ -39,8 +39,9 @@ till förmån för en endimensionell:
 ![LudoGameBoard1DStyle.png](1D spelplan)
 
 Löpande under projektet skrev vi dagbok över vad som gjorts den dagen:
-**Bold**Dagbok:
+**Dagbok:**
 [Dagboken.docx](Dagboken)
+
 
 Vi försökte under projektet få till ett WPF dokument som ett slags frontend-
 projekt för att kunna visa spelet. Detta blev för tidskrävande och vi fick överge det projektet.
