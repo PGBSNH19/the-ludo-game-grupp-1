@@ -17,7 +17,7 @@ namespace EngineClasses.Tests
 
             s1.CreatePlayer("Testman", "Green");
 
-            Assert.AreEqual(4, s1.Player.ToList().First().GamePiece.Count());
+            Assert.AreEqual(4, s1.Player.ToList().First().GamePieces.Count());
         }
 
         [TestMethod()]
@@ -101,7 +101,7 @@ namespace EngineClasses.Tests
 
             GamePiece gamePiece = engine.Session.SelectGamePiece(engine.Session.Player[0], 1);
 
-            Assert.AreEqual(engine.Session.Player[0].GamePiece[1], gamePiece);
+            Assert.AreEqual(engine.Session.Player[0].GamePieces[1], gamePiece);
         }
     }
 }

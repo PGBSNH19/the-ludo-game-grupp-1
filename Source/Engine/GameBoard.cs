@@ -7,7 +7,6 @@ namespace EngineClasses
 {
     public class GameBoard
     {
-        public Dictionary<string, int> Bases { get; private set; }
         public List<BoardSquare> Board { get; set; }
         public GameBoard()
         {
@@ -29,14 +28,14 @@ namespace EngineClasses
         private List<BoardSquare> AddPlayerSection(string color)
         {
             List<BoardSquare> section = new List<BoardSquare>();
-            
+
             for (int i = 0; i < 4; i++)
             {
                 section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, false));
             }
             section.Add(new BoardSquare(this.Board.Count + section.Count, color, false, true));
             section.Add(new BoardSquare(this.Board.Count + section.Count, color, true, false));
-            
+
             return section;
         }
 
@@ -49,6 +48,61 @@ namespace EngineClasses
             }
 
             return section;
+        }
+
+        /// <summary>
+        /// Places gamePiece in squares' list of game pieces.
+        /// </summary>
+        /// <param name="gamePiece"></param>
+        public void AddGamePiecesToBoard(GamePiece gamePiece)
+        {
+            if (Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber).Any())
+            {
+                BoardSquare boardSquare = Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).FirstOrDefault();
+                boardSquare.GamePieces.Add(gamePiece);
+            }
+        }
+
+        /// <summary>
+        /// Returns the next square the game piece can legally stand on according to game rules.
+        /// </summary>
+        /// <param name="gamePiece"></param>
+        /// <returns></returns>
+        public BoardSquare FindNextValidSquare(GamePiece gamePiece)
+        {
+            int nextSquareNumber;
+            if (gamePiece.BoardSquareNumber >= this.Board.Count - 1)
+            {
+                nextSquareNumber = 0;
+            }
+            else
+            {
+                nextSquareNumber = gamePiece.BoardSquareNumber.Value + 1;
+            }
+
+            int nextValidSquareNumber = FindNextValidBoardSquareNumber(gamePiece, nextSquareNumber);
+
+            return Board[nextValidSquareNumber];
+        }
+        /// <summary>
+        /// Loops through board and returns next valid squareNumber.
+        /// </summary>
+        /// <param name="gamePiece"></param>
+        /// <param name="nextSquareNumber"></param>
+        /// <returns></returns>
+        public int FindNextValidBoardSquareNumber(GamePiece gamePiece, int nextSquareNumber)
+        {
+            while (this.Board[nextSquareNumber].Color != gamePiece.Player.Color &&
+                    this.Board[nextSquareNumber].Color != "White")
+            {
+                nextSquareNumber++;
+
+                if (nextSquareNumber >= this.Board.Count)
+                {
+                    nextSquareNumber = 0;
+                }
+            }
+            return nextSquareNumber;
         }
 
         /// <summary>
@@ -73,49 +127,10 @@ namespace EngineClasses
         /// <returns></returns>
         public BoardSquare GetNextSquare(GamePiece gamePiece) => Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value + 1).FirstOrDefault();
 
-
-        /// <summary>
-        /// Returns the next square the game piece can legally stand on according to game rules.
-        /// </summary>
-        /// <param name="gamePiece"></param>
-        /// <returns></returns>
-        public BoardSquare FindNextValidSquare(GamePiece gamePiece)
+        public void PlaceGamePiece(GamePiece gamePiece, BoardSquare boardSquare)
         {
-            int nextSquareNumber;
-            if (gamePiece.BoardSquareNumber >= this.Board.Count - 1)
-            {
-                nextSquareNumber = 0;
-            }
-            else
-            {
-                nextSquareNumber = gamePiece.BoardSquareNumber.Value + 1;
-            }        
-            
-            while (this.Board[nextSquareNumber].Color != gamePiece.Player.Color &&
-                    this.Board[nextSquareNumber].Color != "White")
-            {
-                nextSquareNumber++;
-
-                if (nextSquareNumber >= this.Board.Count)
-                {
-                    nextSquareNumber = 0;
-                }
-            }
-
-            return Board[nextSquareNumber];
-        }
-
-        /// <summary>
-        /// Places gamePiece in squares' list of game pieces.
-        /// </summary>
-        /// <param name="gamePiece"></param>
-        public void PlaceGamePiece(GamePiece gamePiece)
-        {
-            if(Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber).Any())
-            {
-                BoardSquare boardSquare = Board.Where(bs => bs.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).FirstOrDefault();
-                boardSquare.GamePieces.Add(gamePiece);
-            }
+            BoardSquare currentSquare = this.Board.Where(bs => bs == boardSquare).FirstOrDefault();
+            currentSquare.PlaceGamePiece(gamePiece);
         }
     }
 }

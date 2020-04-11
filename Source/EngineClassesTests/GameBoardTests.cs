@@ -30,9 +30,9 @@ namespace EngineClasses.Tests
             player.AddGamePieces();
             int boardNumber = 3;
 
-            player.GamePiece[1].BoardSquareNumber = boardNumber;
-            board.PlaceGamePiece(player.GamePiece[1]);
-            var result = board.GetCurrentSquare(player.GamePiece[1]);
+            player.GamePieces[1].BoardSquareNumber = boardNumber;
+            board.AddGamePiecesToBoard(player.GamePieces[1]);
+            var result = board.GetCurrentSquare(player.GamePieces[1]);
 
             Assert.AreEqual(board.Board[boardNumber], result);
         }
@@ -45,8 +45,8 @@ namespace EngineClasses.Tests
             player.AddGamePieces();
             int boardNumber = 3;
 
-            player.GamePiece[1].BoardSquareNumber = boardNumber;
-            var result = board.GetNextSquare(player.GamePiece[1]);
+            player.GamePieces[1].BoardSquareNumber = boardNumber;
+            var result = board.GetNextSquare(player.GamePieces[1]);
 
             Assert.AreEqual(board.Board[boardNumber + 1], result);
         }

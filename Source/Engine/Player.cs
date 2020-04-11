@@ -16,27 +16,27 @@ namespace EngineClasses
         //Relationships
         public int SessionId { get; private set; }
         public Session Session { get; private set; }
-        public List<GamePiece> GamePiece { get; private set; }
+        public List<GamePiece> GamePieces { get; private set; }
 
 
         public Player(string userName, string color)
         {
             this.UserName = userName;
             this.Color = color;
-            this.GamePiece = new List<GamePiece>();
+            this.GamePieces = new List<GamePiece>();
         }
 
         public void AddGamePieces()
         {
-            if (GamePiece.Count <= 4)
+            if (GamePieces.Count <= 4)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    this.GamePiece.Add(new GamePiece(this, i + 1));
+                    this.GamePieces.Add(new GamePiece(this, i + 1));
                 }
             }
         }
 
-        public GamePiece SelectGamePiece(int index) => GamePiece[index];
+        public GamePiece SelectGamePiece(int index) => GamePieces[index];
     }
 }

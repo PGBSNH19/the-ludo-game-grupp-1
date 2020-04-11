@@ -20,7 +20,7 @@ namespace EngineClasses.Tests
 
             g1.CreatePlayer(userName, color);
 
-            Assert.AreEqual(4, g1.Session.Player.ToList().First().GamePiece.Count());
+            Assert.AreEqual(4, g1.Session.Player.ToList().First().GamePieces.Count());
         }
 
         [TestMethod()]

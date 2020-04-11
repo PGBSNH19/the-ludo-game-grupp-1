@@ -232,7 +232,7 @@ namespace LudoGUI
                 List<GamePiece> piecesOnSquare =
                 gameEngine
                 .CurrentPlayer()
-                .GamePiece
+                .GamePieces
                 .Where(gp => gp.BoardSquareNumber != null && gp.BoardSquareNumber.Value == squareTranslation)
                 .ToList();
 

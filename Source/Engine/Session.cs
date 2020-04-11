@@ -60,7 +60,7 @@ namespace EngineClasses
 
             session = await context.Session
                     .Include(s => s.Player)
-                    .ThenInclude(p => p.GamePiece)
+                    .ThenInclude(p => p.GamePieces)
                     .FirstOrDefaultAsync();
             context.SaveChanges();
 

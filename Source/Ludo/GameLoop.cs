@@ -218,10 +218,10 @@ namespace Ludo
 
         private static void PrintStatistics(List<Player> players)
         {
-            foreach (var p in players.OrderByDescending(p => p.GamePiece.Where(gp => gp.IsAtGoal).Count()))
+            foreach (var p in players.OrderByDescending(p => p.GamePieces.Where(gp => gp.IsAtGoal).Count()))
             {
-                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtGoal).Count()} gamepieces at GOAL!");
-                Console.WriteLine($"{p.UserName} has {p.GamePiece.Where(gp => gp.IsAtBase).Count()} gamepieces at BASE!");
+                Console.WriteLine($"{p.UserName} has {p.GamePieces.Where(gp => gp.IsAtGoal).Count()} gamepieces at GOAL!");
+                Console.WriteLine($"{p.UserName} has {p.GamePieces.Where(gp => gp.IsAtBase).Count()} gamepieces at BASE!");
             }
             Console.WriteLine("");
         }
