@@ -77,7 +77,7 @@ Så långt som vi kom i WPF-projektet kan beskådas i en separat branch i projek
 
 På slutet föll vi i fällan att vår tidsbrist gjorde att dokumentationen blev något lidande. 
 En lärdom är att man som utvecklare återigen hela tiden måste tänka på att planera
-sina projekt på ett bra sätt. Dte är ganska lätt hänt att man gör dokumentation i början som 
+sina projekt på ett bra sätt. Det är ganska lätt hänt att man gör dokumentation i början som 
 man sedan ogärna återvänder till och redigerar senare i projektet, även om det kanske hade behövts
 att man gjorde det. Hade vi underhållit dokumentationen lite bättre under projektets gång generellt 
 så hade det nog varit lättare att få in dokumentation även när vi fick tidsbrist.
