@@ -41,9 +41,6 @@ hålla reda på funktionaliteten (se milstolpar och GitHub.projekt).
 ![EngineClass-RelationerUnderArbete](EngineClass-RelationerUnderArbete.png)
 *Objektrelationer - ej fullständig och endast påbörjad*
 
-**User-stories:**
-
-[UserStories](UserStories.docx)
 
 Vi skapade också levande dokument för regelbestämmelser för projektet:
 
@@ -61,6 +58,8 @@ Vi hade även dokument för milstolpar för att kunna få en överblick över hu
 
 Detta övergavs senare till förmån för att använda GitHubs "Projects".
 
+**Bilder/Skisser**
+
 Lite senare i projektet ritade vi även upp skisser över hur vi skulle visualisera vår spelplan.
 Denna process ledde till att vi övergav en tvådimensionell representation 
 till förmån för en endimensionell:
@@ -69,6 +68,12 @@ till förmån för en endimensionell:
 *2D-representation*
 ![LudoGameBoard1DStyle](LudoGameBoard1DStyle.png)
 *1D-representation*
+![FlödesschemaAvEnGameLoop](FlödesschemaAvEnGameLoop.jpg)
+*Flödesschema över Game Loop*
+![Översättningstabell1DTill2D](Översättningstabell1DTill2D.jpg)
+*Översättningstabell 1D - 2D*
+![ByggaÖversättningAv1DTill2DMedHjälpAvLoopar](ByggaÖversättningAv1DTill2DMedHjälpAvLoopar.jpg)
+*Bygga bräde med hjälp av loopar*
 
 
 Löpande under projektet skrev vi dagbok över vad som gjorts den dagen:
