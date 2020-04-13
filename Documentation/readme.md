@@ -71,12 +71,15 @@ till förmån för en endimensionell:
 *1D-representation*
 
 ![FlödesschemaAvEnGameLoop](FlödesschemaAvEnGameLoop.jpg)
+
 *Flödesschema över Game Loop*
 
 ![Översättningstabell1DTill2D](Översättningstabell1DTill2D.jpg)
+
 *Översättningstabell 1D - 2D*
 
 ![ByggaÖversättningAv1DTill2DMedHjälpAvLoopar](ByggaÖversättningAv1DTill2DMedHjälpAvLoopar.jpg)
+
 *Bygga bräde med hjälp av loopar*
 
 
