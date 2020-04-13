@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading;
 using EngineClasses;
 using Microsoft.Extensions.Configuration;
 
@@ -9,25 +12,9 @@ namespace Ludo
     {
         static void Main(string[] args)
         {
-
-            var myString = ConnectionSetup.GetConnectionString();
-            Console.WriteLine(myString);
-
-            GameBoard gameBoard = new GameBoard();
-            int horizontal = gameBoard.Placements.GetUpperBound(0);
-            int vertical = gameBoard.Placements.GetUpperBound(0);
-
-            for (int i = 0; i <= horizontal; i++)
-            {
-                for (int j = 0; j <= vertical; j++)
-                {
-                    string res = gameBoard.Placements[i, j];
-                    Console.Write(res + " ");
-                }
-                Console.WriteLine();
-            }
-
-
+            GameEngine gameEngine = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
+            GameLoop gameLoop = new GameLoop(gameEngine, new Menu());
+            gameLoop.Run();
         }
     }
 }
