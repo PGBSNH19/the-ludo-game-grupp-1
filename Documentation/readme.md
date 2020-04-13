@@ -4,7 +4,7 @@
 
 Project description : [The ludo game - avslutande projekt](https://pgbsnh19.github.io/dataatkomst/project4.html)
 
-Första dagen arbetade vi med att planlägga projekt genom att göra: 
+Första dagen arbetade vi med att planlägga projekt genom att göra CRC-Kort och User Stories: 
 
 **CRC-kort:** 
 
@@ -22,6 +22,15 @@ Första dagen arbetade vi med att planlägga projekt genom att göra:
 *BoardSquare*
 ![CRC-GameLog](CRC-GameLog.png)
 *GameLog*
+
+
+**User-Stories**
+[UserStories](UserStories.docx)
+*UserStories*
+Vi gjortde user stories, vilket gjorde att vi fick en gemensam bild av funktionaliteten
+i projektet men dessa användas inte senare utan vi hade andra sätt att 
+hålla reda på funktionaliteten (se milstolpar och GitHub.projekt).
+
 
 **Relationsdiagram:**
 
