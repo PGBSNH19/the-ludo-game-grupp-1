@@ -110,7 +110,7 @@ namespace EngineClasses
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public BoardSquare GetStartingSquare(Player player) => Board.Where(b => b.Color == player.Color && b.StartingSquare).FirstOrDefault();
+        public BoardSquare GetStartingSquare(Player player) => Board.Where(b => b.Color == player.Color && b.IsStartingSquare).FirstOrDefault();
 
         /// <summary>
         /// Returns gamesquare based on game pieces position (int).
@@ -118,14 +118,6 @@ namespace EngineClasses
         /// <param name="gamePiece"></param>
         /// <returns></returns>
         public BoardSquare GetCurrentSquare(GamePiece gamePiece) => Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value).FirstOrDefault();
-
-
-        /// <summary>
-        /// Returns the square after the square the game piece is currently at.
-        /// </summary>
-        /// <param name="gamePiece"></param>
-        /// <returns></returns>
-        public BoardSquare GetNextSquare(GamePiece gamePiece) => Board.Where(b => b.BoardSquareNumber == gamePiece.BoardSquareNumber.Value + 1).FirstOrDefault();
 
         public void PlaceGamePiece(GamePiece gamePiece, BoardSquare boardSquare)
         {

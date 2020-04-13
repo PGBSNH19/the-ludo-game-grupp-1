@@ -22,6 +22,7 @@ namespace EngineClasses
         public int? BoardSquareNumber { get; set; }
 
         public GamePiece() { }
+
         public GamePiece(Player player, int gamePieceNumber)
         {
             this.Player = player;

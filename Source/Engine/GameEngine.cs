@@ -115,7 +115,7 @@ namespace EngineClasses
                     {
                         gamePiece.BoardSquareNumber = GameBoard.FindNextValidSquare(gamePiece).BoardSquareNumber;
 
-                        if (GameBoard.Board[gamePiece.BoardSquareNumber.Value].EndSquare)
+                        if (GameBoard.Board[gamePiece.BoardSquareNumber.Value].IsEndSquare)
                         {
                             gamePiece.IsAtGoal = true;
                         }

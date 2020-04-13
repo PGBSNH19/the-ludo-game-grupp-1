@@ -10,8 +10,8 @@ namespace EngineClasses
     {
         public int BoardSquareNumber { get; set; }
         public string Color { get; set; }
-        public bool StartingSquare { get; set; }
-        public bool EndSquare { get; set; }
+        public bool IsStartingSquare { get; set; }
+        public bool IsEndSquare { get; set; }
 
         public List<GamePiece> GamePieces { get; private set; }
 
@@ -19,8 +19,8 @@ namespace EngineClasses
         {
             this.BoardSquareNumber = boardSquareNumber;
             this.Color = color;
-            this.StartingSquare = startingSquare;
-            this.EndSquare = endSquare;
+            this.IsStartingSquare = startingSquare;
+            this.IsEndSquare = endSquare;
             this.GamePieces = new List<GamePiece>();
         }
 

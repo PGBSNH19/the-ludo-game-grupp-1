@@ -42,7 +42,7 @@ namespace EngineClasses
 
         public Player GetCurrentPlayer() => Player.ToList()[(Turns % Player.Count)];
 
-        public GamePiece SelectGamePiece(Player player, int index) => player.SelectGamePiece(index);
+        public GamePiece SelectGamePiece(Player player, int index) => player.GamePieces[index];
 
         public int RollDice()
         {

@@ -19,7 +19,7 @@ namespace EngineClasses.Tests
 
             var result = board.GetStartingSquare(player);
 
-            Assert.AreEqual(board.Board.Where(s => s.Color == player.Color && s.StartingSquare).First().Color, result.Color);
+            Assert.AreEqual(board.Board.Where(s => s.Color == player.Color && s.IsStartingSquare).First().Color, result.Color);
         }
 
         [TestMethod()]
@@ -35,20 +35,6 @@ namespace EngineClasses.Tests
             var result = board.GetCurrentSquare(player.GamePieces[1]);
 
             Assert.AreEqual(board.Board[boardNumber], result);
-        }
-
-        [TestMethod()]
-        public void GetNextSquareTest_CreateGamePieceAddPosition_CheckPositionIsPlusOne()
-        {
-            GameBoard board = new GameBoard();
-            Player player = new Player("Testman", "Red");
-            player.AddGamePieces();
-            int boardNumber = 3;
-
-            player.GamePieces[1].BoardSquareNumber = boardNumber;
-            var result = board.GetNextSquare(player.GamePieces[1]);
-
-            Assert.AreEqual(board.Board[boardNumber + 1], result);
         }
     }
 }

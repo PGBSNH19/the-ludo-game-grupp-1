@@ -68,18 +68,19 @@ Löpande under projektet skrev vi dagbok över vad som gjorts den dagen:
 
 [Dagboken](Dagboken.docx)
 
-Vi försökte under projektet få till ett WPF dokument som ett slags frontend-
+Vi försökte under projektet få till ett WPF projekt som ett slags frontend-
 projekt för att kunna visa spelet. Detta blev för tidskrävande och vi fick överge det projektet.
 Hade vi haft mer tid hade vi fått till det men eftersom det inte krävdes för projektet och
 vi kände att vi hade viktigare saker att fokusera på rationaliserades detta bort.
 
-Så långt som vi kom i WPF-projektet kan beskådes i en separat branch i projektet för den som är nyfiken.
+Så långt som vi kom i WPF-projektet kan beskådas i en separat branch i projektet för den som är nyfiken.
 
-På slutet föll vi i fällan att vår tidsbrist gjorde att dokumentationen blev lidande. 
+På slutet föll vi i fällan att vår tidsbrist gjorde att dokumentationen blev något lidande. 
 En lärdom är att man som utvecklare återigen hela tiden måste tänka på att planera
-sina projekt på ett bra sätt. Hade vi underhållit dokumentation lite bättre under 
-projektets gång generellt så hade det nog varit lättare att få in dokumentation även 
-när vi fick tidsbrist.
+sina projekt på ett bra sätt. Dte är ganska lätt hänt att man gör dokumentation i början som 
+man sedan ogärna återvänder till och redigerar senare i projektet, även om det kanske hade behövts
+att man gjorde det. Hade vi underhållit dokumentationen lite bättre under projektets gång generellt 
+så hade det nog varit lättare att få in dokumentation även när vi fick tidsbrist.
 
 
 

@@ -36,7 +36,5 @@ namespace EngineClasses
                 }
             }
         }
-
-        public GamePiece SelectGamePiece(int index) => GamePieces[index];
     }
 }

@@ -226,11 +226,11 @@ namespace Ludo
                     Console.BackgroundColor = ConsoleColor.Gray;
                 }
 
-                if (square.StartingSquare)
+                if (square.IsStartingSquare)
                 {
                     Console.Write("S");
                 }
-                else if (square.EndSquare)
+                else if (square.IsEndSquare)
                 {
                     Console.Write("E");
                 }
