@@ -5,21 +5,23 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EngineClasses
 {
     public class Session
     {
         [Key]
-        public int SessionId { get; private set; }        
+        public int SessionId { get; private set; }
         public int Turns { get; set; }
 
         //Relationships
-        public ICollection<Player> Player { get; private set; }
+        public List<Player> Player { get; private set; }
 
         public Session()
         {
-            Player = new List<Player>();
+            this.Player = new List<Player>();
+            this.Turns = 0;
         }
 
         public void CreatePlayer(string userName, string color)
@@ -27,61 +29,72 @@ namespace EngineClasses
             if (Player.Count < 4)
             {
                 Player player = new Player(userName, color);
-                CreateGamePieces(player);
+                player.AddGamePieces();
                 this.Player.Add(player);
             }
-        }
-
-        private void CreateGamePieces(Player player)
-        {
-            for (int i = 0; i < 4; i++)
+            else
             {
-                player.GamePiece.Add(new GamePiece(true, false));
+                throw new ArgumentOutOfRangeException("You cant add more than 4 players.");
             }
         }
 
-        public Player CurrentPlayerTurn()
+        public void RemovePlayers() => this.Player = new List<Player>();
+
+        public Player GetCurrentPlayer() => Player.ToList()[(Turns % Player.Count)];
+
+        public GamePiece SelectGamePiece(Player player, int index) => player.GamePieces[index];
+
+        public int RollDice()
         {
-            return Player.ToList()[(Turns % Player.Count)];
+            int result;
+            Random rnd = new Random();
+
+            result = rnd.Next(1, 6 + 1);
+            return result;
         }
 
-        public void MoveGamePiece(Player player, GamePiece gamePiece)
+        public async Task<Session> LoadSessionAsync(LudoContext context)
         {
-            
+            Session session = null;
+            context = new LudoContext();
+
+            session = await context.Session
+                    .Include(s => s.Player)
+                    .ThenInclude(p => p.GamePieces)
+                    .FirstOrDefaultAsync();
+            context.SaveChanges();
+
+            return session;
         }
 
-
-        public void AddToDb()
+        public async Task AddToDbAsync(LudoContext context)
         {
-            using (var context = new LudoContext())
+            context = new LudoContext();
+
+            //If exists do update instead
+            if (context.Session.Any(s => s.SessionId == this.SessionId))
             {
-                //If exists do update instead
-                if (context.Session.Any(s => s.SessionId == this.SessionId))
-                {
-                    context.Session.Update(this);
-                }
-                else
-                {
-                    context.Session.Add(this);
-                }
-
-                context.SaveChanges();
+                context.Session.Update(this);
             }
-        }
-
-        public void RemoveFromDb()
-        {
-            using (var context = new LudoContext())
+            else
             {
-                if (context.Session.Any(s => s.SessionId == this.SessionId))
-                {
-                    context.Session.Remove(this);
-                }
-
-                context.SaveChanges();
+                context.Session.Add(this);
             }
+
+            await context.SaveChangesAsync();
+
         }
 
-        
+        public void RemoveFromDb(LudoContext context)
+        {
+            context = new LudoContext();
+
+            if (context.Session.Any(s => s.SessionId == this.SessionId))
+            {
+                context.Session.Remove(this);
+            }
+
+            context.SaveChanges();
+        }
     }
 }

@@ -14,19 +14,19 @@ namespace EngineClasses.Tests
         [TestMethod()]
         public void CreatePlayerTest_CreateNewPlayer_OneNewPlayerWithFourGamePieces()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             string userName = "Testman";
             string color = "Red";
 
             g1.CreatePlayer(userName, color);
 
-            Assert.AreEqual(4, g1.Session.Player.ToList().First().GamePiece.Count());
+            Assert.AreEqual(4, g1.Session.Player.ToList().First().GamePieces.Count());
         }
 
         [TestMethod()]
         public void CreatePlayerTest_CreateNewPlayer_OneNewPlayerWithCorrectUserName()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
             string userName = "Testman";
             string color = "Red";
 
@@ -36,20 +36,71 @@ namespace EngineClasses.Tests
         }
 
         [TestMethod()]
-        public void CurrentPlayerTurnTest_CheckIfNextPlayerTurn_NextPlayerInTurn()
+        public void PlayerSelectTest_SelectFirstPlayerOfTwo_ReturnPlayerAtIndexZero()
         {
-            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog());
-            string p1 = "p1";
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
+            string p1 = "Testman";
             string p1Color = "Red";
-            string p2 = "p2";
+            string p2 = "Humberto";
             string p2Color = "Yellow";
 
             g1.CreatePlayer(p1, p1Color);
             g1.CreatePlayer(p2, p2Color);
-            g1.NextTurn(1);
-            Player result = g1.CurrentPlayerTurn();
 
-            Assert.AreEqual(p2, result.UserName);
+            var result = g1.PlayerSelect(0);
+
+            Assert.AreEqual("Testman", result.UserName);
+        }
+
+        [TestMethod()]
+        public void PlayerSelectTest_SelectFirstPlayerOfTwo_ReturnPlayerAtIndexOne()
+        {
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
+            string p1 = "Testman";
+            string p1Color = "Red";
+            string p2 = "Humberto";
+            string p2Color = "Yellow";
+
+            g1.CreatePlayer(p1, p1Color);
+            g1.CreatePlayer(p2, p2Color);
+
+            var result = g1.PlayerSelect(1);
+
+            Assert.AreEqual("Humberto", result.UserName);
+        }
+
+        [TestMethod()]
+        public void CurrentPlayerTest_ReturnPlayerWhosTurnItIs_ResultFirstPlayer()
+        {
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
+            string p1 = "Testman";
+            string p1Color = "Red";
+            string p2 = "Humberto";
+            string p2Color = "Yellow";
+
+            g1.CreatePlayer(p1, p1Color);
+            g1.CreatePlayer(p2, p2Color);
+
+            var result = g1.CurrentPlayer();
+
+            Assert.AreEqual("Testman", result.UserName);
+        }
+
+        [TestMethod()]
+        public void MovableGamePiecesTest_ReturnAListContainingAllPiecesAtBase_ReturnFourGamePieces()
+        {
+            GameEngine g1 = new GameEngine(new Session(), new GameBoard(), new GameLog(), new LudoContext());
+            string p1 = "Testman";
+            string p1Color = "Red";
+            string p2 = "Humberto";
+            string p2Color = "Yellow";
+
+            g1.CreatePlayer(p1, p1Color);
+            g1.CreatePlayer(p2, p2Color);
+
+            int result = g1.MovableGamePieces(g1.PlayerSelect(1), 6).Count;
+
+            Assert.AreEqual(4, result);
         }
     }
 }

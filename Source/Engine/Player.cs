@@ -16,59 +16,24 @@ namespace EngineClasses
         //Relationships
         public int SessionId { get; private set; }
         public Session Session { get; private set; }
-        public ICollection<GamePiece> GamePiece { get; private set; }
+        public List<GamePiece> GamePieces { get; private set; }
+
 
         public Player(string userName, string color)
         {
             this.UserName = userName;
             this.Color = color;
-            GamePiece = new List<GamePiece>();
+            this.GamePieces = new List<GamePiece>();
         }
 
-
-        public int RollDice()
+        public void AddGamePieces()
         {
-            int result;
-            Random rnd = new Random();
-
-            result = rnd.Next(1, 6 + 1);
-            return result;
-        }
-
-        public GamePiece SelectGamePiece(int index)
-        {
-            return GamePiece.ToList()[index];
-        }
-
-
-        public void AddToDb()
-        {
-            using (var context = new LudoContext())
+            if (GamePieces.Count <= 4)
             {
-                //If exists do update instead
-                if (context.Player.Any(p => p.PlayerId == this.PlayerId))
+                for (int i = 0; i < 4; i++)
                 {
-                    context.Player.Update(this);
+                    this.GamePieces.Add(new GamePiece(this, i + 1));
                 }
-                else
-                {
-                    context.Player.Add(this);
-                }
-
-                context.SaveChanges();
-            }
-        }
-
-        public void RemoveFromDb()
-        {
-            using (var context = new LudoContext())
-            {
-                if (context.Player.Any(p => p.PlayerId == this.PlayerId))
-                {
-                    context.Player.Remove(this);
-                }
-
-                context.SaveChanges();
             }
         }
     }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Diagnostics;
 
 namespace EngineClasses.Tests
 {
@@ -11,19 +12,29 @@ namespace EngineClasses.Tests
     public class GameBoardTests
     {
         [TestMethod()]
-        public void ValidateStartingSquareTest_CreateGamePiecesAndGetTheirStartingSquares_CheckThatStartingSquareColorMatchesGamePieceColor()
+        public void GetStartingSquareTest_CreateGamePiecesAndGetTheirStartingSquares_CheckThatStartingSquareColorMatchesPlayerColor()
         {
             GameBoard board = new GameBoard();
             Player player = new Player("Testman", "Red");
-            player.GamePiece.Add(new GamePiece(true, false));
-            player.GamePiece.Add(new GamePiece(true, false));
-            player.GamePiece.Add(new GamePiece(true, false));
-            player.GamePiece.Add(new GamePiece(true, false));
-            int gamePieceIndex = 0;
 
-            var result = board.ValidateStartingSquare(player.GamePiece.ToList()[gamePieceIndex]);
+            var result = board.GetStartingSquare(player);
 
-            Assert.Fail();
+            Assert.AreEqual(board.Board.Where(s => s.Color == player.Color && s.IsStartingSquare).First().Color, result.Color);
+        }
+
+        [TestMethod()]
+        public void GetCurrentSquareTest_CreatePieceAndMoveThenGetCurrentSquare_CheckThatPositionIs3()
+        {
+            GameBoard board = new GameBoard();
+            Player player = new Player("Testman", "Red");
+            player.AddGamePieces();
+            int boardNumber = 3;
+
+            player.GamePieces[1].BoardSquareNumber = boardNumber;
+            board.AddGamePiecesToBoard(player.GamePieces[1]);
+            var result = board.GetCurrentSquare(player.GamePieces[1]);
+
+            Assert.AreEqual(board.Board[boardNumber], result);
         }
     }
 }

@@ -44,7 +44,10 @@ namespace EngineClasses.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GameSquareId")
+                    b.Property<int?>("BoardSquareNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GamePieceNumber")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsAtBase")
@@ -58,32 +61,9 @@ namespace EngineClasses.Migrations
 
                     b.HasKey("GamePieceId");
 
-                    b.HasIndex("GameSquareId");
-
                     b.HasIndex("PlayerId");
 
                     b.ToTable("GamePiece");
-                });
-
-            modelBuilder.Entity("EngineClasses.GameSquare", b =>
-                {
-                    b.Property<int>("GameSquareId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EndSquare")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("StartingSquare")
-                        .HasColumnType("bit");
-
-                    b.HasKey("GameSquareId");
-
-                    b.ToTable("GameSquare");
                 });
 
             modelBuilder.Entity("EngineClasses.Player", b =>
@@ -126,10 +106,6 @@ namespace EngineClasses.Migrations
 
             modelBuilder.Entity("EngineClasses.GamePiece", b =>
                 {
-                    b.HasOne("EngineClasses.GameSquare", "GameSquare")
-                        .WithMany()
-                        .HasForeignKey("GameSquareId");
-
                     b.HasOne("EngineClasses.Player", "Player")
                         .WithMany("GamePiece")
                         .HasForeignKey("PlayerId")

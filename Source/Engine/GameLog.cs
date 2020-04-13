@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EngineClasses
 {
@@ -11,8 +12,8 @@ namespace EngineClasses
     {
         [Key]
         public int GameLogId { get; private set; }
-        public string WinnerPlayer{ get; private set; }
-        public DateTime Created { get; private set; }
+        public string WinnerPlayer { get; private set; }
+        public DateTime Created { get; set; }
 
         public GameLog(string winnerPlayer)
         {
@@ -22,38 +23,29 @@ namespace EngineClasses
 
         public GameLog()
         {
-
+            this.Created = DateTime.UtcNow;
         }
 
-        public void AddToDb()
+        public void CreateNewGameLog(string userName)
         {
-            using (var context = new LudoContext())
-            {
-                //If exists do update instead
-                if (context.GameLog.Any(gl => gl.GameLogId == this.GameLogId))
-                {
-                    context.GameLog.Update(this);
-                }
-                else
-                {
-                    context.GameLog.Add(this);
-                }
-
-                context.SaveChanges();
-            }
+            this.WinnerPlayer = userName;
         }
-
-        public void RemoveFromDb()
+        public async Task AddToDb(LudoContext context)
         {
-            using (var context = new LudoContext())
-            {
-                if (context.GameLog.Any(gl => gl.GameLogId == this.GameLogId))
-                {
-                    context.GameLog.Remove(this);
-                }
+            context = new LudoContext();
 
-                context.SaveChanges();
+            //If exists do update instead
+            if (context.GameLog.Any(gl => gl.GameLogId == this.GameLogId))
+            {
+                context.GameLog.Update(this);
             }
+            else
+            {
+                context.GameLog.Add(this);
+            }
+
+            await context.SaveChangesAsync();
+
         }
     }
 }

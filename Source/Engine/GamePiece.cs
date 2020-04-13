@@ -10,53 +10,32 @@ namespace EngineClasses
     public class GamePiece
     {
         [Key]
-        public int GamePieceId { get; private set; }        
+        public int GamePieceId { get; private set; }
+        public int GamePieceNumber { get; set; }
         public bool IsAtBase { get; set; }
         public bool IsAtGoal { get; set; }
-       
+        
 
         //Relationships
         public int PlayerId { get; private set; }
         public Player Player { get; private set; }
-        public int?  GameSquareId { get; set; }
-        public GameSquare GameSquare { get; set; }
+        public int? BoardSquareNumber { get; set; }
 
+        public GamePiece() { }
 
-        public GamePiece(bool isAtBase, bool isAtGoal)
+        public GamePiece(Player player, int gamePieceNumber)
         {
-            this.IsAtBase = isAtBase;
-            this.IsAtGoal = isAtGoal;
+            this.Player = player;
+            this.GamePieceNumber = gamePieceNumber;
+            this.IsAtBase = true;
+            this.IsAtGoal = false;
         }
 
-        public void AddToDb()
-        {
-            using (var context = new LudoContext())
-            {
-                //If exists do update instead
-                if (context.GamePiece.Any(gp => gp.GamePieceId == this.GamePieceId))
-                {
-                    context.GamePiece.Update(this);
-                }
-                else
-                {
-                    context.GamePiece.Add(this);
-                }
-                
-                context.SaveChanges();
-            }
-        }
 
-        public void RemoveFromDb()
+        public void SetAtBase()
         {
-            using (var context = new LudoContext())
-            {
-                if (context.GamePiece.Any(gp => gp.GamePieceId == this.GamePieceId))
-                {
-                    context.GamePiece.Remove(this);
-                }
-
-                context.SaveChanges();
-            }
+            this.IsAtBase = true;
+            this.BoardSquareNumber = null;
         }
     }
 }
