@@ -9,24 +9,40 @@ Första dagen arbetade vi med att planlägga projekt genom att göra CRC-Kort oc
 **CRC-kort:** 
 
 ![CRC-GameEngine](CRC-GameEngine.png)
+
 *GameEngine*
+
 ![CRC-Session](CRC-Session.png)
+
 *Session*
+
 ![CRC-Player](CRC-Player.png)
+
 *Player*
+
 ![CRC-GamePiece](CRC-GamePiece.png)
+
 *GamePiece*
+
 ![CRC-GameBoard](CRC-GameBoard.png)
+
 *GameBoard*
+
 ![CRC-BoardSquare](CRC-BoardSquare.png)
+
 *BoardSquare*
+
 ![CRC-GameLog](CRC-GameLog.png)
+
 *GameLog*
 
 
 **User-Stories**
+
 [UserStories](UserStories.docx)
+
 *UserStories*
+
 Vi gjortde user stories, vilket gjorde att vi fick en gemensam bild av funktionaliteten
 i projektet men dessa användas inte senare utan vi hade andra sätt att 
 hålla reda på funktionaliteten (se milstolpar och GitHub.projekt).
@@ -35,10 +51,15 @@ hålla reda på funktionaliteten (se milstolpar och GitHub.projekt).
 **Relationsdiagram:**
 
 ![Databasrelationer](Databasrelationer.png)
+
 *Databasrelationer*
+
 ![DbDiagram](DbDiagram.png)
+
 *Databasdiagram*
+
 ![EngineClass-RelationerUnderArbete](EngineClass-RelationerUnderArbete.png)
+
 *Objektrelationer - ej fullständig och endast påbörjad*
 
 
@@ -65,9 +86,11 @@ Denna process ledde till att vi övergav en tvådimensionell representation
 till förmån för en endimensionell:
 
 ![Ludo-Spelplan](Ludo-Spelplan.png)
+
 *2D-representation*
 
 ![LudoGameBoard1DStyle](LudoGameBoard1DStyle.png)
+
 *1D-representation*
 
 ![FlödesschemaAvEnGameLoop](FlödesschemaAvEnGameLoop.jpg)
