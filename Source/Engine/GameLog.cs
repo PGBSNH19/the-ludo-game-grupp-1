@@ -13,22 +13,13 @@ namespace EngineClasses
         [Key]
         public int GameLogId { get; private set; }
         public string WinnerPlayer { get; private set; }
-        public DateTime Created { get; set; }
-
-        public GameLog(string winnerPlayer)
-        {
-            this.WinnerPlayer = winnerPlayer;
-            this.Created = DateTime.UtcNow;
-        }
-
-        public GameLog()
-        {
-            this.Created = DateTime.UtcNow;
-        }
+        public DateTime Created { get; private set; }
 
         public void CreateNewGameLog(string userName)
         {
             this.WinnerPlayer = userName;
+            this.Created = DateTime.UtcNow;
+
         }
 
         public async Task AddToDb(LudoContext context)
