@@ -38,8 +38,6 @@ namespace EngineClasses
             }
         }
 
-        public void RemovePlayers() => this.Players = new List<Player>();
-
         public Player GetCurrentPlayer() => Players[(Turns % Players.Count)];
 
         public int RollDice()
