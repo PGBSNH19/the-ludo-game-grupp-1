@@ -16,21 +16,21 @@ namespace EngineClasses
         public int Turns { get; set; }
 
         //Relationships
-        public List<Player> Player { get; private set; }
+        public List<Player> Players { get; private set; }
 
         public Session()
         {
-            this.Player = new List<Player>();
+            this.Players = new List<Player>();
             this.Turns = 0;
         }
 
         public void CreatePlayer(string userName, string color)
         {
-            if (Player.Count < 4)
+            if (Players.Count < 4)
             {
                 Player player = new Player(userName, color);
                 player.AddGamePieces();
-                this.Player.Add(player);
+                this.Players.Add(player);
             }
             else
             {
@@ -38,11 +38,9 @@ namespace EngineClasses
             }
         }
 
-        public void RemovePlayers() => this.Player = new List<Player>();
+        public void RemovePlayers() => this.Players = new List<Player>();
 
-        public Player GetCurrentPlayer() => Player.ToList()[(Turns % Player.Count)];
-
-        public GamePiece SelectGamePiece(Player player, int index) => player.GamePieces[index];
+        public Player GetCurrentPlayer() => Players[(Turns % Players.Count)];
 
         public int RollDice()
         {
@@ -59,7 +57,7 @@ namespace EngineClasses
             context = new LudoContext();
 
             session = await context.Session
-                    .Include(s => s.Player)
+                    .Include(s => s.Players)
                     .ThenInclude(p => p.GamePieces)
                     .FirstOrDefaultAsync();
             context.SaveChanges();

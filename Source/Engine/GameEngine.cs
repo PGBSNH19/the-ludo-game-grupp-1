@@ -132,17 +132,9 @@ namespace EngineClasses
 
         public void PlayCurrentSession()
         {
-            this.Session = LoadSession();
-            AddGamePiecesToBoard(Session.Player);
+            Session = LoadSession();
+            AddGamePiecesToBoard(Session.Players);
         }
-
-        /// <summary>
-        /// Select player based on index.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        /// 
-        public Player PlayerSelect(int index) => Session.Player[index];
 
         public void RemoveSession() => Session.RemoveFromDb(context);
 

@@ -144,7 +144,7 @@ namespace Ludo
                     isRunning = false;
                     
                     PrintWinner(currentPlayer);
-                    PrintStatistics(gameEngine.Session.Player);
+                    PrintStatistics(gameEngine.Session.Players);
 
                     DBTasks = Task.Run(() => gameEngine.CreateGameLog(currentPlayer.UserName));
                     Console.WriteLine("Logging game...");
@@ -156,7 +156,6 @@ namespace Ludo
 
                     Console.WriteLine("All done!");
                     gameOver = true;
-                    //Console.ReadKey();
                 }
                 else
                 {
@@ -177,7 +176,7 @@ namespace Ludo
             Console.WriteLine($"Current Player: {gameEngine.CurrentPlayer().UserName}");
             Console.WriteLine($"Dice Roll: {diceResult}");
             Console.WriteLine();
-            PrintStatistics(gameEngine.Session.Player);
+            PrintStatistics(gameEngine.Session.Players);
 
             foreach (BoardSquare square in gameEngine.GameBoard.Board)
             {

@@ -30,12 +30,5 @@ namespace EngineClasses
             this.IsAtBase = true;
             this.IsAtGoal = false;
         }
-
-
-        public void SetAtBase()
-        {
-            this.IsAtBase = true;
-            this.BoardSquareNumber = null;
-        }
     }
 }

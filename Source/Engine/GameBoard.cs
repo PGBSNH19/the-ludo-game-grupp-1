@@ -90,7 +90,7 @@ namespace EngineClasses
         /// <param name="gamePiece"></param>
         /// <param name="nextSquareNumber"></param>
         /// <returns></returns>
-        public int FindNextValidBoardSquareNumber(GamePiece gamePiece, int nextSquareNumber)
+        private int FindNextValidBoardSquareNumber(GamePiece gamePiece, int nextSquareNumber)
         {
             while (this.Board[nextSquareNumber].Color != gamePiece.Player.Color &&
                     this.Board[nextSquareNumber].Color != "White")
